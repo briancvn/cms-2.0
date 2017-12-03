@@ -15,10 +15,10 @@ class RouterBootstrap implements BootstrapInterface
     public function run(Api $api, DiInterface $di, Config $config)
     {
         // Create the micro route annotation object, passing the micro app into the constructor
-        $routeAnnotations = new RouteAnnotations($api);
+        $routeAnnotations = new RouteAnnotations($api, $di);
 
         // Add a directory of "controllers" that are namespaced
-        $routeAnnotations->addControllerNamespace('CMS\Controllers', CONTROLLER_DIR);
+        $routeAnnotations->addControllerNamespace('CMS\Controllers', CONTROLLERS_DIR);
 
         // Add the rotues to our micro app
         $routeAnnotations->mount();

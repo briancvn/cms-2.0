@@ -14,10 +14,10 @@ try {
     define("ROOT_DIR", __DIR__.'/../..');
     define("APP_DIR", ROOT_DIR.'/app');
     define("VENDOR_DIR", ROOT_DIR.'/vendor');
-    define("CONFIG_DIR", APP_DIR.'/Configs');
-    define("DOMAIN_DIR", APP_DIR.'/Domains');
-    define("REPOSITORY_DIR", APP_DIR.'/Repositories');
-    define("CONTROLLER_DIR", APP_DIR.'/Controllers');
+    define("CONFIGS_DIR", APP_DIR.'/Configs');
+    define("DOMAINS_DIR", APP_DIR.'/Domains');
+    define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
+    define("CONTROLLERS_DIR", APP_DIR.'/Controllers');
     define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
     require VENDOR_DIR.'/autoload.php';
@@ -27,7 +27,7 @@ try {
     $loader->register();
 
     // Configs
-    $configPath = CONFIG_DIR.'/default.php';
+    $configPath = CONFIGS_DIR.'/default.php';
 
     if (!is_readable($configPath)) {
         throw new Exception('Unable to read config from '.$configPath);
@@ -35,7 +35,7 @@ try {
 
     $config = new Phalcon\Config(include_once $configPath);
 
-    $envConfigPath = CONFIG_DIR.'/server.'.APPLICATION_ENV.'.php';
+    $envConfigPath = CONFIGS_DIR.'/server.'.APPLICATION_ENV.'.php';
 
     if (!is_readable($envConfigPath)) {
         throw new Exception('Unable to read config from '.$envConfigPath);
@@ -48,9 +48,11 @@ try {
     $app = new CMS\Extensions\Api($di);
 
     $bootstrap = new CMS\Bootstrap(
-        new CMS\Bootstraps\RouterBootstrap,
+        new CMS\Bootstraps\AppServiceBootstrap,
+        new CMS\Bootstraps\MiddlewareBootstrap,
         new CMS\Bootstraps\ServiceBootstrap,
-        new CMS\Bootstraps\MiddlewareBootstrap
+        new CMS\Bootstraps\InjectionBootstrap,
+        new CMS\Bootstraps\RouterBootstrap
     );
     $bootstrap->run($app, $di, $config);
 
@@ -72,8 +74,8 @@ try {
     // Handle exceptions
     $di = $app && $app->di ? $app->di : new CMS\Extensions\FactoryDefault();
     $response = $di->getShared(CMS\Constants\Services::RESPONSE);
-    if(!$response || !$response instanceof CMS\Extensions\Response){
-        $response = new CMS\Extensions\Response();
+    if(!$response || !$response instanceof CMS\Extensions\Http\Response){
+        $response = new CMS\Extensions\Http\Response();
     }
 
     $debugMode = isset($config->debug) ? $config->debug : (APPLICATION_ENV == 'development');

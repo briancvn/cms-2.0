@@ -2,12 +2,14 @@
 
 namespace CMS\Controllers;
 
-use Phalcon\Mvc\Controller;
+//use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\DispatcherInterface;
 use Phalcon\Mvc\Model\CriteriaInterface;
 use Phalcon\Mvc\ModelInterface;
 use Phalcon\Mvc\View;
+
+use CMS\Extensions\Mvc\Controller;
 
 abstract class ApiController extends Controller
 {

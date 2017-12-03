@@ -4,25 +4,21 @@ namespace CMS\Extensions;
 use Phalcon\Exception;
 use Phalcon\Loader;
 use Phalcon\Mvc\Micro;
+use Phalcon\DiInterface;
 use Phalcon\Annotations\Adapter\Memory as MemoryAnnAdaptor;
 
-/**
- * Class MicroRouteAnnotations
- * Provides annotation based routing for a micro application
- */
+use CMS\Extensions\Api;
+
 class RouteAnnotations {
-    /** @var \Phalcon\Mvc\Micro */
     protected $app;
-    /** @var \Phalcon\DiInterface */
     protected $di;
-    /** @var Micro\Collection[] */
     protected $collections = array();
     protected $namespaces = array();
-    /** @var Loader */
     protected $ourLoader;
 
-    public function __construct(Micro $app) {
+    public function __construct(Api $app, DiInterface $di) {
         $this->app = $app;
+        $this->di = $di;
     }
 
     /**
@@ -251,7 +247,12 @@ class RouteAnnotations {
     protected function updateCollection($className, $classMethod, $uri, $httpMethod) {
         if (!isset($this->collections[$className])) {
             $this->collections[$className] = new Micro\Collection();
-            $this->collections[$className]->setHandler($className)->setLazy(true);
+            $handler = $this->di->get($className);
+            if ($handler) {
+                $this->collections[$className]->setHandler($handler);
+            } else {
+                $this->collections[$className]->setHandler($className)->setLazy(true);
+            }
         }
 
         // always remove trailing slash

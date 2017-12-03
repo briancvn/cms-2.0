@@ -2,15 +2,30 @@
 
 namespace CMS\Controllers;
 
+use CMS\Services\PeopleService;
+
 /**
  * @RoutePrefix("/people")
  */
 class PeopleController extends ApiController
 {
+    private $peopleService;
+
+    public function __construct(PeopleService $peopleService)
+    {
+        parent::__construct();
+        $this->peopleService = $peopleService;
+    }
+
+//    public function setPeopleService(PeopleService $peopleService)
+//    {
+//        $this->peopleService = $peopleService;
+//    }
+
     /**
      * @Get("/")
      */
-    public function getIndexAction()
+    public function index()
     {
         return 'TEST PeopleController 1';
     }
@@ -18,8 +33,8 @@ class PeopleController extends ApiController
     /**
      * @Get("/test")
      */
-    public function testAction()
+    public function test()
     {
-        return 'TEST PeopleController 2';
+        return $this->peopleService->test();
     }
 }
