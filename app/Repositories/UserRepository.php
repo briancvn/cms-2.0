@@ -3,10 +3,10 @@ namespace CMS\Repositories;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
-class PeopleRepository extends DocumentRepository
+class UserRepository extends DocumentRepository
 {
     public function test()
     {
-        return 'TEST PeopleRepository';
+        return 'TEST UserRepository';
     }
 }

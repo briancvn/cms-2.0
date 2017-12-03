@@ -9,13 +9,13 @@ use CMS\BootstrapInterface;
 use CMS\Extensions\Api;
 use CMS\Extensions\Util;
 
-class ServiceBootstrap implements BootstrapInterface
+class ControllerBootstrap implements BootstrapInterface
 {
     public function run(Api $api, DiInterface $di, Config $config)
     {
-        foreach (Util::scanNamespaces('CMS\Services', SERVICES_DIR) as $serviceName) {
+        foreach (Util::scanNamespaces('CMS\Controllers', CONTROLLERS_DIR) as $ctrlName) {
             $arguments = [];
-            $classRef = new \ReflectionClass($serviceName);
+            $classRef = new \ReflectionClass($ctrlName);
             $constructor = $classRef->getConstructor();
             if ($constructor) {
                 $parameters = $constructor->getParameters();
@@ -27,8 +27,8 @@ class ServiceBootstrap implements BootstrapInterface
                 }
             }
 
-            $di->set($serviceName, [
-                'className' => $serviceName,
+            $di->set($ctrlName, [
+                'className' => $ctrlName,
                 'arguments' => $arguments
             ]);
         }

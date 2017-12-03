@@ -16,6 +16,7 @@ try {
     define("VENDOR_DIR", ROOT_DIR.'/vendor');
     define("CONFIGS_DIR", APP_DIR.'/Configs');
     define("DOMAINS_DIR", APP_DIR.'/Domains');
+    define("SERVICES_DIR", APP_DIR.'/Services');
     define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
     define("CONTROLLERS_DIR", APP_DIR.'/Controllers');
     define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
@@ -50,8 +51,9 @@ try {
     $bootstrap = new CMS\Bootstrap(
         new CMS\Bootstraps\AppServiceBootstrap,
         new CMS\Bootstraps\MiddlewareBootstrap,
+        new CMS\Bootstraps\RepositoryBootstrap,
         new CMS\Bootstraps\ServiceBootstrap,
-        new CMS\Bootstraps\InjectionBootstrap,
+        new CMS\Bootstraps\ControllerBootstrap,
         new CMS\Bootstraps\RouterBootstrap
     );
     $bootstrap->run($app, $di, $config);

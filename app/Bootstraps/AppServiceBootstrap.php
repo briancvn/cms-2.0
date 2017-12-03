@@ -19,12 +19,13 @@ class AppServiceBootstrap implements BootstrapInterface
 {
     public function run(Api $api, DiInterface $di, Config $config)
     {
+        AnnotationDriver::registerAnnotationClasses();
+
         $di->setShared(Services::CONFIG, $config);
 
         $di->set(Services::DOCUMENT_MANAGER, function () use ($config) {
             $config = $config->get('database')->mongo;
 
-            AnnotationDriver::registerAnnotationClasses();
             $configuration = new Configuration();
             $configuration->setProxyDir(APP_DIR.'/Cache/Doctrine/Proxy');
             $configuration->setProxyNamespace('Proxies');
@@ -45,8 +46,8 @@ class AppServiceBootstrap implements BootstrapInterface
             return $url;
         });
 
-//        $di->setShared(Services::EVENTS_MANAGER, function () use ($di, $config) {
-//            return new EventsManager;
-//        });
+        $di->setShared(Services::EVENTS_MANAGER, function () use ($di, $config) {
+            return new EventsManager;
+        });
     }
 }
