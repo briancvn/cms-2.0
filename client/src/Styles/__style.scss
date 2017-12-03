@@ -1,0 +1,17 @@
+.app-loading-container {
+    color: $primary-text-dark-color;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    .wrapper {
+        position: relative;
+        left: -50%;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        .loading {
+            font-size: 20px;
+            font-weight: normal;
+        }
+    }
+}

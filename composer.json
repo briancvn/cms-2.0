@@ -1,0 +1,27 @@
+{
+    "name": "CMS",
+    "keywords": ["phalcon", "angular"],
+    "description": "Centralized Management Solutions",
+    "type": "project",
+    "license": "MIT",
+    "provide": {
+        "ext-mongo": "1.6.14"
+    }
+,    "require": {
+        "alcaeus/mongo-php-adapter": "^1.1",
+        "doctrine/mongodb": "^1.6",
+        "doctrine/mongodb-odm": "dev-master",
+        "doctrine/orm": "^2.5"
+    },
+    "require-dev": {
+		 "phalcon/devtools": "dev-master"
+    },
+    "authors": [{
+        "name": "Brian Nguyen",
+        "email": "briancvn@gmail.com"
+    }],
+    "support": {
+        "source": "https://github.com/briancvn/cms",
+        "issues": "https://github.com/briancvn/cms/issues"
+    }
+}

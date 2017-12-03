@@ -1,0 +1,30 @@
+html {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: $primary-text-dark-color;
+  height: 100%;
+  body {
+      margin: 0;
+      overflow: hidden;
+      height: inherit;
+      app {
+          display: block;
+          height: inherit;
+      }
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+

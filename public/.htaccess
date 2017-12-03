@@ -1,0 +1,16 @@
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-fi
+    RewriteCond %{REQUEST_URI} !/api/
+    RewriteRule !.(js|ico|gif|jpg|png|css)$ client/index.html [QSA,L]
+    RewriteRule (inline|main|polyfills|styles).([a-z0-9.]+).(js|ico|gif|jpg|png|css)$ client/$1.$2.$3 [QSA,L]
+
+    RewriteCond %{REQUEST_URI} /api/
+	RewriteRule ^api/(.*)$ api/index.php?_url=/$1 [QSA,L]
+</IfModule>
+
+#IMPORTANT TO GET JWT FROM HEADERS
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
