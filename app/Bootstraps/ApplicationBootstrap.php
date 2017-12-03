@@ -14,8 +14,9 @@ use Doctrine\MongoDB\Connection;
 use CMS\BootstrapInterface;
 use CMS\Constants\Services;
 use CMS\Extensions\Api;
+use CMS\Extensions\Mapper;
 
-class AppServiceBootstrap implements BootstrapInterface
+class ApplicationBootstrap implements BootstrapInterface
 {
     public function run(Api $api, DiInterface $di, Config $config)
     {
@@ -46,8 +47,12 @@ class AppServiceBootstrap implements BootstrapInterface
             return $url;
         });
 
-        $di->setShared(Services::EVENTS_MANAGER, function () use ($di, $config) {
+        $di->setShared(Services::EVENTS_MANAGER, function () {
             return new EventsManager;
+        });
+
+        $di->setShared(Services::MAPPER, function () {
+            return new Mapper();
         });
     }
 }

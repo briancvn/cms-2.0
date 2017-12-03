@@ -49,7 +49,7 @@ try {
     $app = new CMS\Extensions\Api($di);
 
     $bootstrap = new CMS\Bootstrap(
-        new CMS\Bootstraps\AppServiceBootstrap,
+        new CMS\Bootstraps\ApplicationBootstrap,
         new CMS\Bootstraps\MiddlewareBootstrap,
         new CMS\Bootstraps\RepositoryBootstrap,
         new CMS\Bootstraps\ServiceBootstrap,

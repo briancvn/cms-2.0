@@ -22,6 +22,6 @@ class PeopleService extends BaseService
     }
 
     private function testPrivate() {
-        return $this->peopleRepository->test().' - '.$this->userRepository->test();
+        return $this->peopleRepository->findAll();
     }
 }
