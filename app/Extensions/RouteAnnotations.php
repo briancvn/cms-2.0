@@ -8,6 +8,7 @@ use Phalcon\DiInterface;
 use Phalcon\Annotations\Adapter\Memory as MemoryAnnAdaptor;
 
 use CMS\Extensions\Api;
+use CMS\Constants\HttpMethods;
 
 class RouteAnnotations {
     protected $app;
@@ -104,135 +105,34 @@ class RouteAnnotations {
 
                 // OK, let's get the fully qualified class name
                 $className = $ns['ns'] . '\\' . substr($f, 0, -(strlen($info['extension']) + 1));
+
+                $classRef = new \ReflectionClass($className);
+                if ($classRef->isAbstract())
+                    continue;
+
                 $this->autoloadClass($className);
-
-                // Create the reflector to read the annotations
                 $reflector = $reader->get($className);
-                /** @var Annotation[] $annotations */
-                $classAnn = $reflector->getClassAnnotations();
-                // will store the prefix for all URLs here
-                $curPrefix = '';
-                // Will we setup default rest routes?
-                $doRest = false;
+                $methodsAnnotations = $reflector->getMethodsAnnotations();
 
-                // Check if we have a class annotation for this class
-                if ($classAnn) {
-                    // loop all annotations
-                    foreach ($classAnn as $ann) {
-                        // check if we have an annotation that we care about
-                        switch ($ann->getName())  {
-                            case 'RoutePrefix':
-                                $args = $ann->getArguments();
+                $curPrefix = '/'.str_replace('Controller','', $classRef->getShortName());
+                foreach ($classRef->getMethods() as $method) {
+                    if ($method->isConstructor() || !$method->isPublic())
+                        continue;
 
-                                // we need one argument, the prefix!
-                                if (count($args) >= 1) {
-                                    $curPrefix = $args[0];
-                                }
-
+                    $function = $method->getName();
+                    $uri = $curPrefix.'/'.$function;
+                    $httpMethod = HttpMethods::GET;
+                    if (in_array($function, $methodsAnnotations)) {
+                        foreach ($methodsAnnotations[$function] as $annotation) {
+                            if (in_array(strtoupper($annotation->getName()), HttpMethods::$ALL_METHODS)) {
+                                $httpMethod = strtoupper($annotation->getName());
                                 break;
-
-                            case 'RouteDefault':
-                                $args = $ann->getArguments();
-
-                                // we need one argument, the default type!
-                                if (count($args) >= 1 && $args[0] == 'Rest') {
-                                    $doRest = true;
-                                }
-                        }
-                    }
-                }
-
-                if ($doRest) {
-                    $this->setupRestRoutes($className, $curPrefix);
-                }
-
-                /** @var Annotation[] $annotations */
-                $methAnn = $reflector->getMethodsAnnotations();
-
-                // check if we have any method annotations for this class
-                if ($methAnn) {
-                    // lopp through the functions with annotations
-                    foreach ($methAnn as $function => $annotations) {
-                        // loop the annotations for the current function
-                        foreach ($annotations as $ann) {
-                            $args = $ann->getArguments();
-
-                            // handle the annotations we care about
-                            switch ($ann->getName()) {
-                                case 'Get':
-                                case 'Post':
-                                case 'Put':
-                                case 'Delete':
-                                    if (count($args) != 1) {
-                                        throw new \Exception('Invalid argument count for ' .
-                                            $className . '::' . $function . '() / @' . $ann->getName());
-                                    }
-
-                                    $this->updateCollection($className, $function, $curPrefix . $args[0], $ann->getName());
-                                    break;
-                                case 'Route':
-                                    if ($ann->getNamedArgument('methods')) {
-                                        $httpMethods = $ann->getNamedArgument('methods');
-                                    }
-                                    else {
-                                        $httpMethods = array('GET', 'PUT', 'POST', 'DELETE');
-                                    }
-
-                                    if (count($args) < 1) {
-                                        throw new \Exception('Invalid argument count for ' .
-                                            $className . '::' . $function . '() / @' . $ann->getName());
-                                    }
-
-                                    foreach ($httpMethods as $mtd) {
-                                        $this->updateCollection($className, $function, $curPrefix . $args[0], $mtd);
-                                    }
-                                    break;
                             }
                         }
-
                     }
+                    $this->updateCollection($className, $function, $uri, $httpMethod);
                 }
             }
-
-        }
-    }
-
-    protected function setupRestRoutes($className, $routePrefix) {
-        $restRoutes = array(
-            array(
-                'function' => 'indexAction',
-                'verb' => 'get',
-                'route' => '/',
-            ),
-            array(
-                'function' => 'getAction',
-                'verb' => 'get',
-                'route' => '/{id}',
-            ),
-            array(
-                'function' => 'putAction',
-                'verb' => 'put',
-                'route' => '/{id}',
-            ),
-            array(
-                'function' => 'postAction',
-                'verb' => 'post',
-                'route' => '/',
-            ),
-            array(
-                'function' => 'deleteAction',
-                'verb' => 'delete',
-                'route' => '/{id}',
-            ),
-        );
-
-        foreach ($restRoutes as $routeInfo) {
-            $this->updateCollection(
-                $className,
-                $routeInfo['function'],
-                $routePrefix . $routeInfo['route'],
-                $routeInfo['verb']
-            );
         }
     }
 

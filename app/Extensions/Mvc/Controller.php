@@ -2,10 +2,9 @@
 
 namespace CMS\Extensions\Mvc;
 
-use Phalcon\Di\Injectable;
 use Phalcon\Mvc\ControllerInterface;
 
-abstract class Controller extends Injectable implements ControllerInterface
+abstract class Controller implements ControllerInterface
 {
     public function __construct()
     {

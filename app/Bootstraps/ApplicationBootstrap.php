@@ -52,7 +52,7 @@ class ApplicationBootstrap implements BootstrapInterface
         });
 
         $di->setShared(Services::MAPPER, function () {
-            return new Mapper();
+            return new Mapper;
         });
     }
 }
