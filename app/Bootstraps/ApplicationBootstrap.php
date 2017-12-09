@@ -57,7 +57,7 @@ class ApplicationBootstrap implements BootstrapInterface
             return new EventsManager;
         });
 
-        $di->set(MapperManager::class, function () {
+        $di->setShared(MapperManager::class, function () {
             return MapperManager::initialize(function (AutoMapperConfig $config) {
                 MappingProfile::mappingConfig($config);
             });

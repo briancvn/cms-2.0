@@ -17,6 +17,7 @@ try {
     define("VENDOR_DIR", ROOT_DIR.'/vendor');
     define("CACHE_DIR", ROOT_DIR.'/Cache');
     define("CONFIGS_DIR", APP_DIR.'/Configs');
+    define("CONTRACTS_DIR", APP_DIR.'/Contracts');
     define("DOMAINS_DIR", APP_DIR.'/Domains');
     define("SERVICES_DIR", APP_DIR.'/Services');
     define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
