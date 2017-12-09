@@ -7,4 +7,4 @@
 
 **Documentations:**
 - Automapper: https://github.com/mark-gerarts/automapper-plus
-- Underscore: http://anahkiasen.github.io/underscore-php/#String-endsWith
+- Underscore: http://anahkiasen.github.io/underscore-php/
