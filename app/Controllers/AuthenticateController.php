@@ -3,7 +3,7 @@
 namespace CMS\Controllers;
 
 use CMS\Contracts\AuthRequestDto;
-use CMS\Contracts\UserDto;
+use CMS\Contracts\AuthenticateDto;
 use CMS\Services\UserService;
 
 class AuthenticateController extends ApiController
@@ -23,7 +23,7 @@ class AuthenticateController extends ApiController
     }
 
     /** @Post */
-    public function Login(AuthRequestDto $requestDto): UserDto
+    public function Login(AuthRequestDto $requestDto): AuthenticateDto
     {
         return $this->userService->login($requestDto);
     }

@@ -5,6 +5,7 @@ use CMS\Extensions\Auth\Manager as AuthManager;
 use CMS\Extensions\Mapper\Manager as Mapper;
 use CMS\Repositories\UserRepository;
 use CMS\Contracts\AuthRequestDto;
+use CMS\Contracts\AuthenticateDto;
 use CMS\Contracts\UserDto;
 
 class UserService extends BaseService
@@ -19,16 +20,15 @@ class UserService extends BaseService
         $this->userRepository = $userRepository;
     }
 
-    public function login(AuthRequestDto $requestDto): UserDto
+    public function login(AuthRequestDto $requestDto): AuthenticateDto
     {
         $user = $this->userRepository->findOneBy(['Username' => $requestDto->Username]);
         $session = $this->authManager->authenticate($user, $requestDto->Password);
-        return $this->mapper->map($user, UserDto::class);
-//        return [
-//            'token' => $session->getToken(),
-//            'expires' => $session->getExpirationTime(),
-//            'user' => $user
-//        ];
+        return new AuthenticateDto(
+            $session->getToken(),
+            $session->getExpirationTime(),
+            $this->mapper->map($user, UserDto::class)
+        );
     }
 
     public function logout()
