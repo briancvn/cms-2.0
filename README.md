@@ -6,4 +6,5 @@
 - Angular Material 2 (lastest version)
 
 **Documentations:**
-- https://github.com/mark-gerarts/automapper-plus
+- Automapper: https://github.com/mark-gerarts/automapper-plus
+- Underscore: http://anahkiasen.github.io/underscore-php/#String-endsWith

@@ -16,7 +16,6 @@ class AuthenticateController extends ApiController
         $this->userService = $userService;
     }
 
-    /** @Ignore */
     public function IsAuthenticated()
     {
         return 'TEST';
@@ -28,7 +27,6 @@ class AuthenticateController extends ApiController
         return $this->userService->login($requestDto);
     }
 
-    /** @Ignore */
     public function Logout()
     {
         return $this->userService->logout();

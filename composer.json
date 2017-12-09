@@ -13,10 +13,11 @@
         "doctrine/mongodb-odm": "dev-master",
         "doctrine/orm": "^2.5",
         "mark-gerarts/auto-mapper-plus": "^1.0",
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "anahkiasen/underscore-php": "dev-master"
     },
     "require-dev": {
-		 "phalcon/devtools": "dev-master"
+		"phalcon/devtools": "dev-master"
     },
     "authors": [{
         "name": "Brian Nguyen",

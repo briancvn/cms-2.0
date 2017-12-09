@@ -3,6 +3,7 @@ namespace CMS\Extensions\Mapper;
 
 use AutoMapperPlus\AutoMapperInterface;
 use AutoMapperPlus\AutoMapper;
+use Underscore\Types\Strings;
 
 use CMS\Extensions\Util;
 
@@ -13,7 +14,9 @@ class Manager extends AutoMapper {
         $mapper = parent::initialize($configurator);
         $configuration = $mapper->getConfiguration();
         foreach (Util::scanNamespaces('CMS\Contracts', CONTRACTS_DIR) as $dtoName) {
-            $configuration->registerMapping(\stdClass::class, $dtoName);
+            if (Strings::endsWith($dtoName, 'RequestDto')) {
+                $configuration->registerMapping(\stdClass::class, $dtoName);
+            }
         }
         return $mapper;
     }
