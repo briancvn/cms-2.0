@@ -8,6 +8,9 @@ use Phalcon\DiInterface;
 use CMS\BootstrapInterface;
 use CMS\Extensions\Api;
 use CMS\Extensions\Util;
+use CMS\Extensions\Mapper\Manager as MapperManager;
+use CMS\Extensions\Cache\Manager as CacheManager;
+use CMS\Constants\Services;
 
 class ControllerBootstrap implements BootstrapInterface
 {
@@ -29,7 +32,36 @@ class ControllerBootstrap implements BootstrapInterface
 
             $di->set($ctrlName, [
                 'className' => $ctrlName,
-                'arguments' => $arguments
+                'arguments' => $arguments,
+                "calls" => [
+                    [
+                        "method"    => "setDispatcher",
+                        "arguments" => [
+                            [
+                                "type"  => "service",
+                                "name" => Services::DISPATCHER
+                            ]
+                        ]
+                    ],
+                    [
+                        "method"    => "setCache",
+                        "arguments" => [
+                            [
+                                "type"  => "service",
+                                "name" => CacheManager::class
+                            ]
+                        ]
+                    ],
+                    [
+                        "method"    => "setMapper",
+                        "arguments" => [
+                            [
+                                "type"  => "service",
+                                "name" => MapperManager::class
+                            ]
+                        ]
+                    ]
+                ]
             ]);
         }
     }

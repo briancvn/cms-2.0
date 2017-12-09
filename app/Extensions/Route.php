@@ -9,10 +9,16 @@ use Phalcon\Annotations\Adapter\Memory as MemoryAnnAdaptor;
 
 use CMS\Extensions\Api;
 use CMS\Constants\HttpMethods;
+use CMS\Constants\AnnotationConstants;
+use CMS\Constants\Services;
+use CMS\Extensions\Cache\ActionCache;
+use CMS\Extensions\Cache\ControllerCache;
+use CMS\Extensions\Cache\Manager as CacheManager;
 
-class RouteAnnotations {
+class Route {
     protected $app;
     protected $di;
+    protected $cache;
     protected $collections = array();
     protected $namespaces = array();
     protected $ourLoader;
@@ -20,6 +26,7 @@ class RouteAnnotations {
     public function __construct(Api $app, DiInterface $di) {
         $this->app = $app;
         $this->di = $di;
+        $this->cache = $di->get(CacheManager::class);
     }
 
     /**
@@ -115,23 +122,38 @@ class RouteAnnotations {
                 $methodsAnnotations = $reflector->getMethodsAnnotations();
 
                 $curPrefix = '/'.str_replace('Controller','', $classRef->getShortName());
-                foreach ($classRef->getMethods() as $method) {
-                    if ($method->isConstructor() || !$method->isPublic())
+
+                $controllerCache = new ControllerCache($classRef->getName());
+                foreach ($classRef->getMethods() as $methodRef) {
+                    if ($methodRef->isConstructor() || !$methodRef->isPublic())
                         continue;
 
-                    $function = $method->getName();
+                    $function = $methodRef->getName();
                     $uri = $curPrefix.'/'.$function;
                     $httpMethod = HttpMethods::GET;
-                    if (in_array($function, $methodsAnnotations)) {
+                    $ignore = false;
+                    if ($methodsAnnotations && !empty($methodsAnnotations[$function])) {
                         foreach ($methodsAnnotations[$function] as $annotation) {
+                            if (strtolower($annotation->getName()) === AnnotationConstants::CONTROLLER_ACTION_IGNORE) {
+                                $ignore = true;
+                                break;
+                            }
+
                             if (in_array(strtoupper($annotation->getName()), HttpMethods::$ALL_METHODS)) {
                                 $httpMethod = strtoupper($annotation->getName());
                                 break;
                             }
                         }
                     }
-                    $this->updateCollection($className, $function, $uri, $httpMethod);
+
+                    if (!$ignore) {
+                        $this->updateCollection($className, $function, $uri, $httpMethod);
+                        $parameters = $methodRef->getParameters();
+                        $paramType = empty($parameters) ? null : $parameters[0]->getType()->getName();
+                        $controllerCache->addAction(new ActionCache($function, $paramType));
+                    }
                 }
+                $this->cache->addController($controllerCache);
             }
         }
     }
@@ -161,7 +183,7 @@ class RouteAnnotations {
         }
 
         $verb = strtolower($httpMethod);
-        $this->collections[$className]->$verb($uri, $classMethod);
+        $this->collections[$className]->$verb($uri, 'callAction', $classMethod);
     }
 
     /**

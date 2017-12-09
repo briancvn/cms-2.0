@@ -7,11 +7,23 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class User
 {
     /** @ODM\Id */
-    private $Id;
+    public $Id;
 
     /** @ODM\Field(type="string") */
-    private $FirstName;
+    public $Role;
 
     /** @ODM\Field(type="string") */
-    private $LastName;
+    public $Email;
+
+    /** @ODM\Field(type="string") */
+    public $Username;
+
+    /** @ODM\Field(type="string") */
+    public $Password;
+
+    /** @ODM\Field(type="string") */
+    public $FirstName;
+
+    /** @ODM\Field(type="string") */
+    public $LastName;
 }

@@ -7,7 +7,7 @@ class Services
     const CONFIG = 'config';
     const DB = 'MongoDB';
     const DOCUMENT_MANAGER = 'dm';
-    const MAPPER = 'mapper';
+    const CACHE_MANAGER = 'cacheManager';
 
     // Phalcon
     const APPLICATION = "application";

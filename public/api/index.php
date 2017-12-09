@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_NOTICE);
 
 /** @var \Phalcon\Config $config */
 $config = null;
@@ -10,10 +10,12 @@ $app = null;
 /** @var \PhalconApi\Http\Response $response */
 $response = null;
 
+session_start();
 try {
     define("ROOT_DIR", __DIR__.'/../..');
     define("APP_DIR", ROOT_DIR.'/app');
     define("VENDOR_DIR", ROOT_DIR.'/vendor');
+    define("CACHE_DIR", ROOT_DIR.'/Cache');
     define("CONFIGS_DIR", APP_DIR.'/Configs');
     define("DOMAINS_DIR", APP_DIR.'/Domains');
     define("SERVICES_DIR", APP_DIR.'/Services');

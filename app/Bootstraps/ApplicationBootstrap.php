@@ -11,10 +11,16 @@ use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\MongoDB\Connection;
 
+use AutoMapperPlus\Configuration\AutoMapperConfig;
+
+use CMS\Domains\MappingProfile;
 use CMS\BootstrapInterface;
 use CMS\Constants\Services;
 use CMS\Extensions\Api;
-use CMS\Extensions\Mapper;
+use CMS\Extensions\Mapper\Manager as MapperManager;
+use CMS\Extensions\Auth\TokenParsers\JWTTokenParser;
+use CMS\Extensions\Manager as AuthManager;
+use CMS\Extensions\Cache\Manager as CacheManager;
 
 class ApplicationBootstrap implements BootstrapInterface
 {
@@ -51,8 +57,23 @@ class ApplicationBootstrap implements BootstrapInterface
             return new EventsManager;
         });
 
-        $di->setShared(Services::MAPPER, function () {
-            return new Mapper;
+        $di->set(MapperManager::class, function () {
+            return MapperManager::initialize(function (AutoMapperConfig $config) {
+                MappingProfile::mappingConfig($config);
+            });
+        });
+
+        $di->setShared(Services::TOKEN_PARSER, function () use ($di, $config) {
+            return new JWTTokenParser($config->get('authentication')->secret, JWTTokenParser::ALGORITHM_HS256);
+        });
+
+        $di->setShared(AuthManager::class, function () use ($di, $config) {
+            $authManager = new AuthManager($config->get('authentication')->expirationTime);
+            return $authManager;
+        });
+
+        $di->setShared(CacheManager::class, function () {
+            return new CacheManager;
         });
     }
 }
