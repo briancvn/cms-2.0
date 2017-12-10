@@ -1,5 +1,4 @@
 <?php
-ini_set('memory_limit', '1024M');
 error_reporting(E_ALL & ~E_NOTICE);
 
 /** @var \Phalcon\Config $config */

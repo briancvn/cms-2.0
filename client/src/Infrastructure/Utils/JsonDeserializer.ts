@@ -3,9 +3,8 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 
 import { Response } from '../Models';
-import { ReflectionService } from './../Services/ReflectionService';
-import { ArrayDataType } from './ArrayDataType';
-import { DataType } from './DataType';
+import { ReflectionService } from '../Services/ReflectionService';
+import { ArrayDataType, DataType } from '../Decorators';
 
 export class JsonDeserializer {
     constructor(private reflectionService: ReflectionService, private deserializedType: Type<any>) {}

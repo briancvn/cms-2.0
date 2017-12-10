@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { PlatformReflectionCapabilities } from './PlatformReflectionCapabilities';
+import { IPlatformReflectionCapabilities } from './IPlatformReflectionCapabilities';
 
 /**
  * Provides access to reflection data about symbols. Used internally by Angular
@@ -9,9 +9,9 @@ import { ReflectorReader } from './ReflectionReader';
 import { GetterFn, SetterFn, MethodFn } from './Types';
 
 export class Reflector extends ReflectorReader {
-  constructor(public reflectionCapabilities: PlatformReflectionCapabilities) { super(); }
+  constructor(public reflectionCapabilities: IPlatformReflectionCapabilities) { super(); }
 
-  updateCapabilities(caps: PlatformReflectionCapabilities): void { this.reflectionCapabilities = caps; }
+  updateCapabilities(caps: IPlatformReflectionCapabilities): void { this.reflectionCapabilities = caps; }
 
   // tslint:disable-next-line:no-any
   factory(type: Type<any>): Function { return this.reflectionCapabilities.factory(type); }

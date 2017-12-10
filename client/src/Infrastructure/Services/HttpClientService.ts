@@ -7,7 +7,7 @@ import { Subject } from 'rxjs/Rx';
 import { CommonConstants } from '../Constants';
 import { EResponseErrorKind } from '../Enums';
 import { Response as ApiResponse, ResponseError } from '../Models';
-import { JsonDeserializer } from '../Reflection/JsonDeserializer';
+import { JsonDeserializer } from '../Utils/JsonDeserializer';
 import { InfrastructureContext } from './InfrastructureContext';
 import { LogService } from './LogService';
 import { ModalService } from './ModalService';

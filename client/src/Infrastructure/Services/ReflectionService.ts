@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 
-import { DataType, ArrayDataType } from './../Reflection';
-import { ReflectorReader } from './Reflection/ReflectionReader';
+import { DataType, ArrayDataType } from '../Decorators';
+import { ReflectorReader } from '../Utils/Reflection/ReflectionReader';
 
 @Injectable()
 export class ReflectionService {

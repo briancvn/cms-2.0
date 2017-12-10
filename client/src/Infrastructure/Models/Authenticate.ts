@@ -1,5 +1,5 @@
 import { User } from '../Models/User';
-import { DataType } from '../Reflection';
+import { DataType } from '../Decorators';
 
 export class Authenticate {
     public Token: string;

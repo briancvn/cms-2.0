@@ -15,8 +15,10 @@ import { RouterModule } from '@angular/router';
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
 import { INFRASTRUCTURE_DIRECTIVES } from './Directives';
 import { INFRASTRUCTURE_PIPES } from './Pipes';
-import { Reflector, ReflectorReader, TokenInterceptor } from './Services';
-import { reflector } from './Services/Reflection/Reflection';
+import { TokenInterceptor } from './Services/TokenInterceptor';
+import { Reflector } from './Utils/Reflection/Reflector';
+import { ReflectorReader } from './Utils/Reflection/ReflectionReader';
+import { reflector } from './Utils/Reflection/Reflection';
 
 const MATERIAL_MODULES = [
     MatToolbarModule,

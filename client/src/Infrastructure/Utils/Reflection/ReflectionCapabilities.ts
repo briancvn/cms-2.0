@@ -1,9 +1,9 @@
 import { Type } from '@angular/core';
 import { isType, GetterFn, SetterFn, MethodFn } from './Types';
-import { PlatformReflectionCapabilities } from './PlatformReflectionCapabilities';
+import { IPlatformReflectionCapabilities } from './IPlatformReflectionCapabilities';
+
 declare var global;
 
-// tslint:disable-next-line:no-any
 export function stringify(token: any): string {
     if (typeof token === 'string') {
         return token;
@@ -36,7 +36,7 @@ export function stringify(token: any): string {
  */
 export const DELEGATE_CTOR = /^function\s+\S+\(\)\s*{[\s\S]+\.apply\(this,\s*arguments\)/;
 
-export class ReflectionCapabilities implements PlatformReflectionCapabilities {
+export class ReflectionCapabilities implements IPlatformReflectionCapabilities {
     // tslint:disable-next-line:no-any
     private _reflect: any;
 

@@ -22,4 +22,3 @@ export * from './HttpClientService';
 export * from './LogService';
 export * from './ModalService';
 export * from './ReflectionService';
-export * from './Reflection';
