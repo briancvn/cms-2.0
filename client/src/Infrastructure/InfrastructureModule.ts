@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
+import { INFRASTRUCTURE_MODALS_COMPONENTS } from './Components/Modals';
 import { INFRASTRUCTURE_DIRECTIVES } from './Directives';
 import { INFRASTRUCTURE_PIPES } from './Pipes';
 import { TokenInterceptor } from './Services/TokenInterceptor';
@@ -33,10 +34,13 @@ const INFRASTRUCTURE_EXTERNAL_MODULES = [
     FlexLayoutModule
 ];
 
-export const INFRASTRUCTURE_ENTRY_COMPONENTS: Type<any>[] = [];
+export const INFRASTRUCTURE_ENTRY_COMPONENTS: Type<any>[] = [
+    ...INFRASTRUCTURE_MODALS_COMPONENTS
+];
 
 export const INFRASTRUCTURE_COMPONENTS_DIRECTIVES: Type<any>[] = [
     ...INFRASTRUCTURE_COMPONENTS,
+    ...INFRASTRUCTURE_ENTRY_COMPONENTS,
     ...INFRASTRUCTURE_DIRECTIVES
 ];
 

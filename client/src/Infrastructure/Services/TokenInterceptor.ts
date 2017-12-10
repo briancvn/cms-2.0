@@ -5,6 +5,7 @@ import * as _ from 'underscore';
 import * as s from 'underscore.string';
 
 import { CommonConstants } from '../Constants/CommonConstants';
+import { ModalService } from './ModalService';
 
 declare var RTCPeerConnection;
 
@@ -32,7 +33,7 @@ export class TokenInterceptor implements HttpInterceptor {
         sessionStorage.setItem('local-ip', value);
     }
 
-    constructor() {
+    constructor(private modalService: ModalService) {
         if (!_.isEmpty(this.localIp)) {
             this.getLocalIp().then(ip => this.localIp = ip);
         }
@@ -52,16 +53,18 @@ export class TokenInterceptor implements HttpInterceptor {
                   this.collectFailedRequest(request);
                 }
             }
+            this.handlResponseError(err);
         });
+    }
+
+    private handlResponseError(err): void {
+        if (err.error) {
+          this.modalService.showReponseError(err.error.text);
+        }
     }
 
     private collectFailedRequest(request): void {
         this.cachedRequests.push(request);
-    }
-
-    private retryFailedRequests(): void {
-        // retry the requests. this method can
-        // be called after the token is refreshed
     }
 
     private getLocalIp(): Promise<string> {

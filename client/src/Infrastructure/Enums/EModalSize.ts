@@ -1,5 +1,6 @@
 export enum EModalSize {
-  LARGE = 1400,
-  MEDIUM = 800,
-  SMALL = 400
+    LARGE = 1280,
+    MEDIUM = 960,
+    SMALL = 600,
+    EXTRA_SMALL = 599
 }
