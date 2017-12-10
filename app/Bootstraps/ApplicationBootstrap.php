@@ -6,6 +6,7 @@ use Phalcon\Config;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Events\Manager as EventsManager;
+use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
 use Doctrine\ODM\MongoDB\DocumentManager;
@@ -19,7 +20,8 @@ use CMS\Constants\Services;
 use CMS\Extensions\Api;
 use CMS\Extensions\Mapper\Manager as MapperManager;
 use CMS\Extensions\Auth\TokenParsers\JWTTokenParser;
-use CMS\Extensions\Manager as AuthManager;
+use CMS\Extensions\Auth\Session;
+use CMS\Extensions\Auth\Manager as AuthManager;
 use CMS\Extensions\Cache\Manager as CacheManager;
 
 class ApplicationBootstrap implements BootstrapInterface
@@ -68,12 +70,23 @@ class ApplicationBootstrap implements BootstrapInterface
         });
 
         $di->setShared(AuthManager::class, function () use ($di, $config) {
-            $authManager = new AuthManager($config->get('authentication')->expirationTime);
-            return $authManager;
+            $sessionAdapter = $di->get(Services::SESSION);
+            $session = unserialize($sessionAdapter->get(Services::AUTH_MANAGER));
+            return new AuthManager(
+                $config->get('authentication')->expirationTime,
+                $session ? $session : null
+            );
         });
 
         $di->setShared(CacheManager::class, function () {
             return new CacheManager;
+        });
+
+        $di->setShared(Services::SESSION, function () {
+            $session = new SessionAdapter();
+            $session->start();
+
+            return $session;
         });
     }
 }

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
-import { Authenticate, AuthenticateService, IUserContext, ERole } from '../../../Infrastructure';
+import { AuthRequest, AuthenticateService, Authenticate, ERole } from '../../../Infrastructure';
 
-declare var userContext: IUserContext;
+declare var userContext: Authenticate;
 
 @Component({
     selector: 'header',
@@ -11,13 +11,13 @@ declare var userContext: IUserContext;
 })
 export class HeaderComponent {
     get userInfo(): string {
-        return userContext && userContext.Profile
-            ? `${userContext.Profile.FirstName} ${userContext.Profile.LastName}`
+        return userContext && userContext.User
+            ? `${userContext.User.FirstName} ${userContext.User.LastName}`
             : null;
     }
 
     get userIcon(): string {
-        let role = userContext && userContext.Profile &&  userContext.Profile.Role;
+        let role = userContext && userContext.User &&  userContext.User.Role;
         switch(role) {
             case ERole[ERole.Administrator]:
                 return 'fa-tachometer';
@@ -37,10 +37,10 @@ export class HeaderComponent {
     }
 
     login(): void {
-        let request = new Authenticate();
+        let request = new AuthRequest();
         request.Username = 'admin';
         request.Password = 'test123';
-        this.authService.authenticate(request);
+        this.authService.login(request);
     }
 
     logout(): void {

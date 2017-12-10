@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import * as _ from 'underscore';
 
-import { IUserContext } from '../Interfaces/IUserContext';
+import { AuthRequest } from '../Models/AuthRequest';
 import { Authenticate } from '../Models/Authenticate';
-import { AuthenticateResponse } from '../Models/AuthenticateResponse';
 import { BaseBackendService } from './BaseBackendService';
 import { TokenInterceptor } from './TokenInterceptor';
 
-declare var userContext: IUserContext;
+declare var userContext: Authenticate;
 
 @Injectable()
 export class AuthenticateService extends BaseBackendService {
@@ -18,20 +17,18 @@ export class AuthenticateService extends BaseBackendService {
     onUserContextChanged = this.onUserContextChangedSubject.asObservable();
 
     get isAuthenticated(): boolean {
-        return Boolean(userContext && userContext.Profile);
+        return Boolean(userContext && userContext.User);
     }
 
     constructor(http: HttpClient, private tokenInterceptor: TokenInterceptor) {
-        super(http, 'users');
+        super(http, 'Authenticate');
     }
 
-    authenticate(request: Authenticate): Promise<any> {
-        return this.post<any>('authenticate', request)
-          .then(response => {
-              this.tokenInterceptor.token = response.data.token;
-              userContext.Token = response.data.token;
-              userContext.Expires = response.data.expires;
-              userContext.Profile = response.data.user;
+    login(request: AuthRequest): void {
+        this.post<Authenticate>('Login', request)
+          .then(auth => {
+              userContext = auth;
+              this.tokenInterceptor.token = auth.Token;
               this.onUserContextChangedSubject.next();
           });
     }
@@ -40,17 +37,23 @@ export class AuthenticateService extends BaseBackendService {
         if (_.isEmpty(this.tokenInterceptor.token)) {
             return;
         }
-        this.get<AuthenticateResponse>('getUserContext')
-            .then(response => {
-                userContext.Profile = response.user;
+        this.get<Authenticate>('IsAuthenticated')
+            .then(auth => {
+                if (auth) {
+                    userContext = auth;
+                } else {
+                    userContext = new Authenticate();
+                    this.tokenInterceptor.token = null;
+                }
+
                 this.onUserContextChangedSubject.next();
             });
     }
 
     logout(): void {
-        this.get<void>('logout')
+        this.get<void>('Logout')
             .then(() => {
-                userContext = <IUserContext>{};
+                userContext = new Authenticate();
                 this.tokenInterceptor.token = null;
                 this.onUserContextChangedSubject.next();
             });

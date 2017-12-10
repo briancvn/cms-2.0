@@ -6,6 +6,7 @@ use AutoMapperPlus\AutoMapper;
 use Underscore\Types\Strings;
 
 use CMS\Extensions\Util;
+use CMS\Extensions\Auth\Session;
 
 class Manager extends AutoMapper {
 

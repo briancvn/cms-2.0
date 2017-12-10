@@ -1,4 +1,7 @@
+import { User } from '../Models/User';
+
 export class Authenticate {
-    public Username: string;
-    public Password: string;
+    public Token: string;
+    public Expires: Date;
+    public User: User;
 }

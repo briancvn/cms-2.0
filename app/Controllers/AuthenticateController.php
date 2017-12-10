@@ -16,9 +16,9 @@ class AuthenticateController extends ApiController
         $this->userService = $userService;
     }
 
-    public function IsAuthenticated()
+    public function IsAuthenticated(): AuthenticateDto
     {
-        return 'TEST';
+        return $this->userService->isAuthenticated();
     }
 
     /** @Post */

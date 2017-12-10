@@ -2,9 +2,9 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as _ from 'underscore';
+import * as s from 'underscore.string';
 
 import { CommonConstants } from '../Constants/CommonConstants';
-import { Authenticate } from '../Models/Authenticate';
 
 declare var RTCPeerConnection;
 
@@ -39,12 +39,11 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let header = { Authorization: `Bearer ${this.token}` }
-        if (request.body instanceof Authenticate) {
-            header.Authorization = `Basic ${btoa(`${request.body.Username}:${request.body.Password}`)}`;
+        if (!s.startsWith(request.url, 'api/Authenticate/')) {
+          let header = { Authorization: `Bearer ${this.token}` }
+          request = request.clone({ setHeaders: header });
         }
 
-        request = request.clone({ setHeaders: header });
         return next.handle(request).do((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {}
         }, (err: any) => {
