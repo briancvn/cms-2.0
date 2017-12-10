@@ -1,14 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Type } from '@angular/core';
+
+import { HttpClientService } from './HttpClientService';
 
 export abstract class BaseBackendService {
-    constructor(protected http: HttpClient, private apiUrl: string) {}
+    constructor(protected http: HttpClientService, private apiUrl: string) {}
 
-    public get<T>(method: string): Promise<T> {
-        return this.http.get<T>(`api/${this.apiUrl}/${method}?XDEBUG_SESSION_START=PHPSTORM`).toPromise();
+    public get<T>(method: string, deserializedType: Type<any> = null): Promise<T> {
+        return this.http.getJson<T>(`api/${this.apiUrl}/${method}`, deserializedType);
     }
 
-    public post<T>(method: string, body: any): Promise<T> {
-        return this.http.post<T>(`api/${this.apiUrl}/${method}?XDEBUG_SESSION_START=PHPSTORM`, body).toPromise();
+    public post<T>(method: string, body: any, deserializedType: Type<any> = null): Promise<T> {
+        return this.http.postJson<T>(`api/${this.apiUrl}/${method}`, body, deserializedType);
     }
 }

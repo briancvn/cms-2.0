@@ -1,7 +1,8 @@
 import { User } from '../Models/User';
+import { DataType } from '../Reflection';
 
 export class Authenticate {
     public Token: string;
     public Expires: Date;
-    public User: User;
+    @DataType(User) public User: User;
 }

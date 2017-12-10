@@ -1,0 +1,24 @@
+{ 
+    "_id" : ObjectId("5a1d729e89287b0578bacd19"), 
+    "Id" : 1.0, 
+    "Role" : "Administrator", 
+    "Email" : "briancvn@gmail.com", 
+    "Username" : "admin", 
+    "Password" : "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC", 
+    "FirstName" : "Brian", 
+    "LastName" : "Nguyen", 
+    "CreatedAt" : "2017-11-26 13:51:02", 
+    "UpdatedAt" : null
+}
+{ 
+    "_id" : ObjectId("5a1d729e89287b0578bacd20"), 
+    "Id" : 2.0, 
+    "Role" : "User", 
+    "Email" : "test@example.com", 
+    "Username" : "demo", 
+    "Password" : "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC", 
+    "FirstName" : "Demo", 
+    "LastName" : "Account", 
+    "CreatedAt" : "2015-12-28 16:20:58", 
+    "UpdatedAt" : null
+}

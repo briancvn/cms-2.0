@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import * as _ from 'underscore';
@@ -7,6 +6,7 @@ import { AuthRequest } from '../Models/AuthRequest';
 import { Authenticate } from '../Models/Authenticate';
 import { BaseBackendService } from './BaseBackendService';
 import { TokenInterceptor } from './TokenInterceptor';
+import { HttpClientService } from './HttpClientService';
 
 declare var userContext: Authenticate;
 
@@ -20,12 +20,12 @@ export class AuthenticateService extends BaseBackendService {
         return Boolean(userContext && userContext.User);
     }
 
-    constructor(http: HttpClient, private tokenInterceptor: TokenInterceptor) {
+    constructor(http: HttpClientService, private tokenInterceptor: TokenInterceptor) {
         super(http, 'Authenticate');
     }
 
     login(request: AuthRequest): void {
-        this.post<Authenticate>('Login', request)
+        this.post<Authenticate>('Login', request, Authenticate)
           .then(auth => {
               userContext = auth;
               this.tokenInterceptor.token = auth.Token;
@@ -37,7 +37,7 @@ export class AuthenticateService extends BaseBackendService {
         if (_.isEmpty(this.tokenInterceptor.token)) {
             return;
         }
-        this.get<Authenticate>('IsAuthenticated')
+        this.get<Authenticate>('IsAuthenticated', Authenticate)
             .then(auth => {
                 if (auth) {
                     userContext = auth;

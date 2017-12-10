@@ -16,4 +16,8 @@ export class ModalService {
         config.width = `${(<any>component).size}px`;
         return this.dialog.open(component, config);
     }
+
+    alert(title: string, message: string | string[]): void {
+        alert(`${title} ${message}`);
+    }
 }

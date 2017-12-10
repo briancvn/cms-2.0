@@ -11,9 +11,7 @@ declare var userContext: Authenticate;
 })
 export class HeaderComponent {
     get userInfo(): string {
-        return userContext && userContext.User
-            ? `${userContext.User.FirstName} ${userContext.User.LastName}`
-            : null;
+        return userContext.User && userContext.User.DisplayName;
     }
 
     get userIcon(): string {

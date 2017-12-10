@@ -1,24 +1,22 @@
-// tslint:disable:no-any
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Type } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-import { HttpModule, Http, RequestOptions } from '@angular/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
 import { INFRASTRUCTURE_DIRECTIVES } from './Directives';
 import { INFRASTRUCTURE_PIPES } from './Pipes';
-import { INFRASTRUCTURE_SERVICES, TokenInterceptor } from './Services';
+import { Reflector, ReflectorReader, TokenInterceptor } from './Services';
+import { reflector } from './Services/Reflection/Reflection';
 
 const MATERIAL_MODULES = [
     MatToolbarModule,
@@ -58,6 +56,8 @@ export const INFRASTRUCTURE_COMPONENTS_DIRECTIVES: Type<any>[] = [
     ],
     providers: [
         TokenInterceptor,
+        { provide: Reflector, useValue: reflector },
+        { provide: ReflectorReader, useValue: reflector },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

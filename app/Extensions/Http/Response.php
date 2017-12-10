@@ -3,6 +3,7 @@
 namespace CMS\Extensions\Http;
 
 use CMS\Constants\Services;
+use CMS\Contracts\ResponseDto;
 
 class Response extends \Phalcon\Http\Response
 {
@@ -59,7 +60,8 @@ class Response extends \Phalcon\Http\Response
 
     public function setJsonContent($content, $jsonOptions = 0, $depth = 512)
     {
-        parent::setJsonContent($content, $jsonOptions, $depth);
+        $response = new ResponseDto($content);
+        parent::setJsonContent($response, $jsonOptions, $depth);
 
         $this->setContentType('application/json', 'UTF-8');
         $this->setHeader('E-Tag', md5($this->getContent()));
