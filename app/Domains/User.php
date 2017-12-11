@@ -2,28 +2,26 @@
 namespace CMS\Domains;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceOne;
 
-/** @ODM\Document (repositoryClass="CMS\Repositories\UserRepository") */
-class User
+/** @ODM\Document(repositoryClass="CMS\Repositories\UserRepository") */
+class User extends BaseEntity
 {
-    /** @ODM\Id */
-    public $Id;
-
     /** @ODM\Field(type="string") */
-    public $Role;
+    public $Username;
 
     /** @ODM\Field(type="string") */
     public $Email;
 
     /** @ODM\Field(type="string") */
-    public $Username;
+    public $Phone;
 
     /** @ODM\Field(type="string") */
     public $Password;
 
     /** @ODM\Field(type="string") */
-    public $FirstName;
+    public $Role;
 
-    /** @ODM\Field(type="string") */
-    public $LastName;
+    /** @ReferenceOne(targetDocument="CMS\Domains\Profile") */
+    public $Profile;
 }

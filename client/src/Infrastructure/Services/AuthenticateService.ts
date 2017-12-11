@@ -17,7 +17,7 @@ export class AuthenticateService extends BaseBackendService {
     onUserContextChanged = this.onUserContextChangedSubject.asObservable();
 
     get isAuthenticated(): boolean {
-        return Boolean(userContext && userContext.User);
+        return Boolean(userContext && userContext.Profile);
     }
 
     constructor(http: HttpClientService, private tokenInterceptor: TokenInterceptor) {

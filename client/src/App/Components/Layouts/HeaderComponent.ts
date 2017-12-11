@@ -11,11 +11,11 @@ declare var userContext: Authenticate;
 })
 export class HeaderComponent {
     get userInfo(): string {
-        return userContext.User && userContext.User.DisplayName;
+        return userContext.Profile && userContext.Profile.DisplayName;
     }
 
     get userIcon(): string {
-        let role = userContext && userContext.User &&  userContext.User.Role;
+        let role = userContext && userContext.Role;
         switch(role) {
             case ERole[ERole.Administrator]:
                 return 'fa-tachometer';

@@ -6,7 +6,7 @@ use CMS\Extensions\Mapper\Manager as Mapper;
 use CMS\Repositories\UserRepository;
 use CMS\Contracts\AuthRequestDto;
 use CMS\Contracts\AuthenticateDto;
-use CMS\Contracts\UserDto;
+use CMS\Contracts\ProfileDto;
 use CMS\Constants\ErrorCodes;
 
 class UserService extends BaseService
@@ -29,7 +29,7 @@ class UserService extends BaseService
             return new AuthenticateDto(
                 $session->getToken(),
                 $session->getExpirationTime(),
-                $this->mapper->map($user, UserDto::class)
+                $this->mapper->map($user, ProfileDto::class)
             );
         }
 
@@ -43,7 +43,8 @@ class UserService extends BaseService
         return new AuthenticateDto(
             $session->getToken(),
             $session->getExpirationTime(),
-            $this->mapper->map($user, UserDto::class)
+            $user->Role,
+            $this->mapper->map($user->Profile, ProfileDto::class)
         );
     }
 

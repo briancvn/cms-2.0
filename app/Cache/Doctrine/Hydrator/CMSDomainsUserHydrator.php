@@ -29,30 +29,17 @@ class CMSDomainsUserHydrator implements HydratorInterface
     {
         $hydratedData = array();
 
-        /** @Field(type="id") */
-        if (isset($data['_id']) || (! empty($this->class->fieldMappings['Id']['nullable']) && array_key_exists('_id', $data))) {
-            $value = $data['_id'];
-            if ($value !== null) {
-                $typeIdentifier = $this->class->fieldMappings['Id']['type'];
-                $return = $value instanceof \MongoId ? (string) $value : $value;
-            } else {
-                $return = null;
-            }
-            $this->class->reflFields['Id']->setValue($document, $return);
-            $hydratedData['Id'] = $return;
-        }
-
         /** @Field(type="string") */
-        if (isset($data['Role']) || (! empty($this->class->fieldMappings['Role']['nullable']) && array_key_exists('Role', $data))) {
-            $value = $data['Role'];
+        if (isset($data['Username']) || (! empty($this->class->fieldMappings['Username']['nullable']) && array_key_exists('Username', $data))) {
+            $value = $data['Username'];
             if ($value !== null) {
-                $typeIdentifier = $this->class->fieldMappings['Role']['type'];
+                $typeIdentifier = $this->class->fieldMappings['Username']['type'];
                 $return = (string) $value;
             } else {
                 $return = null;
             }
-            $this->class->reflFields['Role']->setValue($document, $return);
-            $hydratedData['Role'] = $return;
+            $this->class->reflFields['Username']->setValue($document, $return);
+            $hydratedData['Username'] = $return;
         }
 
         /** @Field(type="string") */
@@ -69,16 +56,16 @@ class CMSDomainsUserHydrator implements HydratorInterface
         }
 
         /** @Field(type="string") */
-        if (isset($data['Username']) || (! empty($this->class->fieldMappings['Username']['nullable']) && array_key_exists('Username', $data))) {
-            $value = $data['Username'];
+        if (isset($data['Phone']) || (! empty($this->class->fieldMappings['Phone']['nullable']) && array_key_exists('Phone', $data))) {
+            $value = $data['Phone'];
             if ($value !== null) {
-                $typeIdentifier = $this->class->fieldMappings['Username']['type'];
+                $typeIdentifier = $this->class->fieldMappings['Phone']['type'];
                 $return = (string) $value;
             } else {
                 $return = null;
             }
-            $this->class->reflFields['Username']->setValue($document, $return);
-            $hydratedData['Username'] = $return;
+            $this->class->reflFields['Phone']->setValue($document, $return);
+            $hydratedData['Phone'] = $return;
         }
 
         /** @Field(type="string") */
@@ -95,29 +82,41 @@ class CMSDomainsUserHydrator implements HydratorInterface
         }
 
         /** @Field(type="string") */
-        if (isset($data['FirstName']) || (! empty($this->class->fieldMappings['FirstName']['nullable']) && array_key_exists('FirstName', $data))) {
-            $value = $data['FirstName'];
+        if (isset($data['Role']) || (! empty($this->class->fieldMappings['Role']['nullable']) && array_key_exists('Role', $data))) {
+            $value = $data['Role'];
             if ($value !== null) {
-                $typeIdentifier = $this->class->fieldMappings['FirstName']['type'];
+                $typeIdentifier = $this->class->fieldMappings['Role']['type'];
                 $return = (string) $value;
             } else {
                 $return = null;
             }
-            $this->class->reflFields['FirstName']->setValue($document, $return);
-            $hydratedData['FirstName'] = $return;
+            $this->class->reflFields['Role']->setValue($document, $return);
+            $hydratedData['Role'] = $return;
         }
 
-        /** @Field(type="string") */
-        if (isset($data['LastName']) || (! empty($this->class->fieldMappings['LastName']['nullable']) && array_key_exists('LastName', $data))) {
-            $value = $data['LastName'];
+        /** @ReferenceOne */
+        if (isset($data['Profile'])) {
+            $reference = $data['Profile'];
+            $className = $this->unitOfWork->getClassNameForAssociation($this->class->fieldMappings['Profile'], $reference);
+            $mongoId = ClassMetadataInfo::getReferenceId($reference, $this->class->fieldMappings['Profile']['storeAs']);
+            $targetMetadata = $this->dm->getClassMetadata($className);
+            $id = $targetMetadata->getPHPIdentifierValue($mongoId);
+            $return = $this->dm->getReference($className, $id);
+            $this->class->reflFields['Profile']->setValue($document, $return);
+            $hydratedData['Profile'] = $return;
+        }
+
+        /** @Field(type="id") */
+        if (isset($data['_id']) || (! empty($this->class->fieldMappings['Id']['nullable']) && array_key_exists('_id', $data))) {
+            $value = $data['_id'];
             if ($value !== null) {
-                $typeIdentifier = $this->class->fieldMappings['LastName']['type'];
-                $return = (string) $value;
+                $typeIdentifier = $this->class->fieldMappings['Id']['type'];
+                $return = $value instanceof \MongoId ? (string) $value : $value;
             } else {
                 $return = null;
             }
-            $this->class->reflFields['LastName']->setValue($document, $return);
-            $hydratedData['LastName'] = $return;
+            $this->class->reflFields['Id']->setValue($document, $return);
+            $hydratedData['Id'] = $return;
         }
         return $hydratedData;
     }

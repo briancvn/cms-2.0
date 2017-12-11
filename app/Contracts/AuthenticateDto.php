@@ -1,17 +1,19 @@
 <?php
 namespace CMS\Contracts;
 
-use CMS\Contracts\UserDto;
+use CMS\Contracts\ProfileDto;
 
 class AuthenticateDto
 {
     public $Token;
     public $Expires;
-    public $User;
+    public $Role;
+    public $Profile;
 
-    public function __construct(string $token, $expires, UserDto $user) {
+    public function __construct(string $token, $expires, string $role, ProfileDto $profile) {
         $this->Token = $token;
         $this->Expires = $expires;
-        $this->User = $user;
+        $this->Role= $role;
+        $this->Profile = $profile;
     }
 }
