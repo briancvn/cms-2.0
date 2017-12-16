@@ -1,25 +1,13 @@
-import { TokenInterceptor } from './TokenInterceptor';
-import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable, Type } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 
 import { environment } from '../../Environments/Environment';
 import { CommonConstants } from '../Constants';
+import { IRequestOptions } from '../Interfaces/IRequestOptions';
 import { Response } from '../Models';
 import { JsonDeserializer } from './JsonDeserializer';
-
-interface IRequestOptions {
-    headers?: HttpHeaders | {
-        [header: string]: string | string[];
-    };
-    observe?: 'body';
-    params?: HttpParams | {
-        [param: string]: string | string[];
-    };
-    reportProgress?: boolean;
-    responseType?: 'json';
-    withCredentials?: boolean;
-}
+import { TokenInterceptor } from './TokenInterceptor';
 
 interface IRequest {
     Url: string;

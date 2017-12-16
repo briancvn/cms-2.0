@@ -2,7 +2,6 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as _ from 'underscore';
-import * as s from 'underscore.string';
 
 import { CommonConstants } from '../Constants/CommonConstants';
 import { JsonDeserializer } from './JsonDeserializer';
