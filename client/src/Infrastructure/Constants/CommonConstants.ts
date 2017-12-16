@@ -6,6 +6,7 @@ export class CommonConstants {
 
     public static Empty = '';
     public static AUTH_TOKEN = 'x-auth-token';
+    public static AUTH_HEADER = 'Authorization';
     public static LOCAL_IP = 'local-ip';
     public static XDEBUG_PARAM = 'XDEBUG_SESSION_START';
     public static XDEBUG_TYPE = 'PHPSTORM';

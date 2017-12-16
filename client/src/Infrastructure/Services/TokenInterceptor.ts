@@ -47,11 +47,6 @@ export class TokenInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        if (!s.startsWith(request.url, 'api/Authenticate/')) {
-            let header = { Authorization: `Bearer ${this.token}` };
-            request = request.clone({ setHeaders: header });
-        }
-
         return next.handle(request).do(
             (event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {}

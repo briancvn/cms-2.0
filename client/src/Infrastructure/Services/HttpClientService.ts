@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './TokenInterceptor';
 import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, Type } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
@@ -31,30 +32,33 @@ export class HttpClientService extends HttpClient {
     public beforeRequest = new Subject<any>();
     public afterRequest = new Subject<Response>();
 
-    constructor(handler: HttpHandler, private jsonDeserializer: JsonDeserializer) {
+    constructor(handler: HttpHandler, private jsonDeserializer: JsonDeserializer, private tokenInterceptor: TokenInterceptor) {
         super(handler);
     }
 
-    public httpGet<T>(url: string, deserializedType?: Type<any>): Promise<T> {
-        return this.hanldeRequest(url)
+    public httpGet<T>(url: string, deserializedType?: Type<any>, authenticate = true): Promise<T> {
+        return this.hanldeRequest(authenticate, url)
             .then(request => this.get<T>(request.Url, request.Options).toPromise())
             .then(this.hanldeResponse.bind(this, deserializedType));
     }
 
-    public httpPost<T>(url: string, body: any, deserializedType?: Type<any>): Promise<T> {
-        return this.hanldeRequest(url, body)
+    public httpPost<T>(url: string, body: any, deserializedType?: Type<any>, authenticate = true): Promise<T> {
+        return this.hanldeRequest(authenticate, url, body)
             .then(request => this.post<T>(request.Url, request.Body, request.Options).toPromise())
             .then(this.hanldeResponse.bind(this, deserializedType));
     }
 
-    private hanldeRequest(url: string, body?: any): Promise<IRequest> {
+    private hanldeRequest(authenticate: boolean, url: string, body?: any): Promise<IRequest> {
         return new Promise<IRequest>(resolve => {
             this.beforeRequest.asObservable().take(1).last().toPromise()
                 .then(() => {
                     resolve({
                         Url: `${CommonConstants.API_PREFIX}${url}`,
                         Body: body,
-                        Options: { params: !environment.production ? {[CommonConstants.XDEBUG_PARAM]: CommonConstants.XDEBUG_TYPE} : null }
+                        Options: {
+                            headers: authenticate ? {[CommonConstants.AUTH_HEADER]: `Bearer ${this.tokenInterceptor.token}` } : null
+                            params: !environment.production ? {[CommonConstants.XDEBUG_PARAM]: CommonConstants.XDEBUG_TYPE} : null
+                        }
                     });
                 });
             this.beforeRequest.next(body);

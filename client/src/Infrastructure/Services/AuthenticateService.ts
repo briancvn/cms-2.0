@@ -21,7 +21,7 @@ export class AuthenticateService extends BaseBackendService {
     }
 
     constructor(http: HttpClientService, private tokenInterceptor: TokenInterceptor) {
-        super(http, 'Authenticate');
+        super(http, 'Authenticate', false);
     }
 
     login(request: AuthRequest): void {
