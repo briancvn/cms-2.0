@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import * as _ from 'underscore';
 
 import { CommonConstants } from '../Constants/CommonConstants';
+import { HttpStatusCodeConstants } from '../Constants/HttpStatusCodeConstants';
 import { JsonDeserializer } from './JsonDeserializer';
 import { ModalService } from './ModalService';
+import { SnackBarService } from './SnackBarService';
 
 declare var RTCPeerConnection;
 
@@ -35,6 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     constructor(
         private modalService: ModalService,
+        private snackBarService: SnackBarService,
         private jsonDeserializer: JsonDeserializer
     ) {
         if (!_.isEmpty(this.localIp)) {
@@ -50,20 +53,29 @@ export class TokenInterceptor implements HttpInterceptor {
             (event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {}
             },
-            (err: any) => {
-                if (err instanceof HttpErrorResponse) {
-                    if (err.status === 401) {
+            (response: any) => {
+                if (response instanceof HttpErrorResponse) {
+                    if (response.status === 401) {
                         this.collectFailedRequest(request);
+                    } else if (_.contains(HttpStatusCodeConstants.WARNING_CODE, response.status)) {
+                        this.handlResponseWarning(response);
+                        return;
                     }
                 }
-                this.handlResponseError(err);
+                this.handlResponseError(response);
             }
         );
     }
 
-    private handlResponseError(err): void {
-        if (err.error) {
-            this.modalService.showReponseError(err.error.text);
+    private handlResponseError(response): void {
+        if (response.error) {
+            this.modalService.showReponseError(response.error.text);
+        }
+    }
+
+    private handlResponseWarning(response): void {
+        if (response.error) {
+            this.snackBarService.warning(response.error);
         }
     }
 

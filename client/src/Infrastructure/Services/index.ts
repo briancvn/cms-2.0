@@ -4,6 +4,8 @@ import { JsonDeserializer } from './JsonDeserializer';
 import { LogService } from './LogService';
 import { ModalService } from './ModalService';
 import { ReflectionService } from './ReflectionService';
+import { TokenInterceptor } from './TokenInterceptor';
+import { SnackBarService } from './SnackBarService';
 
 export const INFRASTRUCTURE_SERVICES = [
     AuthenticateService,
@@ -11,7 +13,9 @@ export const INFRASTRUCTURE_SERVICES = [
     ModalService,
     ReflectionService,
     JsonDeserializer,
-    HttpClientService
+    HttpClientService,
+    TokenInterceptor,
+    SnackBarService
 ];
 
 export * from './BaseBackendService';
@@ -20,5 +24,4 @@ export * from './AuthenticateService';
 export * from './HttpClientService';
 export * from './LogService';
 export * from './ModalService';
-export * from './ReflectionService';
-export * from './TokenInterceptor';
+export * from './SnackBarService';

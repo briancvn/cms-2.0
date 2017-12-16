@@ -1,4 +1,5 @@
 import * as _ from 'underscore';
+
 export class Profile {
     public Pin: number;
     public FirstName: string;

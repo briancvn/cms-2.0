@@ -1,3 +1,4 @@
 export * from './EModalSize';
 export * from './EResponseErrorKind';
-export * from './ERole';
+export * from './ERoleGroup';
+export * from './ESnackBarType';

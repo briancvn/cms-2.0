@@ -41,24 +41,14 @@ class JWTTokenParser implements TokenParserInterface
 
     public function getToken(Session $session, $expirationTime = null)
     {
-        $tokenData = $this->create($session->getAccountTypeName(), $session->getIdentity(), $session->getStartTime(),
-            $session->getExpirationTime());
+        $tokenData = $this->create($session->getUser()->Id, $session->getStartTime(), $session->getExpirationTime());
 
         return $this->encode($tokenData);
     }
 
-    protected function create($issuer, $user, $iat, $exp)
+    protected function create($user, $iat, $exp)
     {
         return [
-            /*
-            The iss (issuer) claim identifies the principal
-            that issued the JWT. The processing of this claim
-            is generally application specific.
-            The iss value is a case-sensitive string containing
-            a StringOrURI value. Use of this claim is OPTIONAL.
-            ------------------------------------------------*/
-            "iss" => $issuer,
-
             /*
             The sub (subject) claim identifies the principal
             that is the subject of the JWT. The Claims in a

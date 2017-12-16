@@ -10,9 +10,8 @@ return [
         'description' => 'Centralized Management Solutions',
         'baseUri' => '/'
     ],
-
     'authentication' => [
         'secret' => 'Centralized_Management_Solutions',
-        'expirationTime' => 86400 * 7, // One week till token expires
+        'expirationTime' => 86400 * 7 // One week
     ]
 ];

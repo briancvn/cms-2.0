@@ -7,22 +7,29 @@ use Phalcon\Di;
 use CMS\Domains\User;
 use CMS\Constants\ErrorCodes;
 use CMS\Constants\Services;
+use CMS\Constants\RoleGroupConstants;
 use CMS\Extensions\Exception;
 use CMS\Extensions\Mvc\Plugin;
 use CMS\Extensions\Auth\Session;
+use CMS\Extensions\Cache\Manager as CacheManager;
 
 class Manager extends Plugin
 {
-    protected $accountTypes;
+    /** @var MapperManager */
+    protected $cache;
+
+    /** @var Session */
     protected $session;
+
     protected $sessionDuration;
 
-    public function __construct($sessionDuration = 86400, Session $session = null)
+    public function __construct(CacheManager $cache, $sessionDuration = 86400, Session $session = null)
     {
+        $this->cache = $cache;
         $this->sessionDuration = $sessionDuration;
         if ($session && $session->getExpirationTime() > time()) {
             $this->session = new Session(
-                $session->getIdentity(),
+                $session->getUser(),
                 $session->getStartTime(),
                 $session->getExpirationTime(),
                 $session->getToken()
@@ -87,7 +94,11 @@ class Manager extends Plugin
         }
 
         $startTime = time();
-        $session = new Session($user->Id, $startTime, $startTime + $this->sessionDuration);
+        $session = new Session(
+            $user,
+            $startTime,
+            $startTime + $this->sessionDuration
+        );
         $token = $this->tokenParser->getToken($session);
         $session->setToken($token);
 
@@ -99,5 +110,16 @@ class Manager extends Plugin
     public function logout()
     {
         $this->session = null;
+    }
+
+    public function isValidBusinessItems(array $businessItems): bool
+    {
+        if ($this->loggedIn()) {
+            $businessRoleGroups = $this->session->getUser()->RoleGroups;
+            array_push($businessRoleGroups, RoleGroupConstants::AUTHORIZED);
+            return $this->cache->isBusinessRoleGroupsValid($businessRoleGroups, $businessItems);
+        }
+
+        return empty($businessItems);
     }
 }

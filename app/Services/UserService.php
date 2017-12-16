@@ -1,56 +1,47 @@
 <?php
 namespace CMS\Services;
 
-use CMS\Extensions\Auth\Manager as AuthManager;
-use CMS\Extensions\Mapper\Manager as Mapper;
+use CMS\Extensions\Auth\Session;
 use CMS\Repositories\UserRepository;
 use CMS\Contracts\AuthRequestDto;
 use CMS\Contracts\AuthenticateDto;
 use CMS\Contracts\ProfileDto;
-use CMS\Constants\ErrorCodes;
 
 class UserService extends BaseService
 {
-    private $mapper;
-    private $authManager;
     private $userRepository;
 
-    public function __construct(Mapper $mapper, AuthManager $authManager, UserRepository $userRepository) {
-        $this->mapper = $mapper;
-        $this->authManager = $authManager;
+    public function __construct(UserRepository $userRepository) {
         $this->userRepository = $userRepository;
     }
 
-    public function IsAuthenticated(): AuthenticateDto
+    public function IsAuthenticated(): ?AuthenticateDto
     {
         $session = $this->authManager->getSession();
-        if ($session) {
-            $user = $this->userRepository->findOneBy(['Id' => $session->getIdentity()]);
+        return $this->responseAuthenticateDto($session);
+    }
+
+    public function login(AuthRequestDto $requestDto): ?AuthenticateDto
+    {
+        $user = $this->userRepository->findOneBy(['Username' => $requestDto->Username]);
+        return $this->responseAuthenticateDto($this->authManager->login($user, $requestDto->Password));
+    }
+
+    protected function logout()
+    {
+        $this->authManager->logout();
+    }
+
+    public function responseAuthenticateDto(Session $session) : ?AuthenticateDto
+    {
+        if ($session && $session->isAuthenticated()) {
             return new AuthenticateDto(
                 $session->getToken(),
                 $session->getExpirationTime(),
-                $user->Role,
-                $this->mapper->map($user->Profile, ProfileDto::class)
+                $session->getUser()->RoleGroups,
+                $this->mapper->map($session->getUser()->Profile, ProfileDto::class)
             );
         }
-
-        throw new Exception(ErrorCodes::AUTH_UNAUTHENTICATED);
-    }
-
-    public function login(AuthRequestDto $requestDto): AuthenticateDto
-    {
-        $user = $this->userRepository->findOneBy(['Username' => $requestDto->Username]);
-        $session = $this->authManager->login($user, $requestDto->Password);
-        return new AuthenticateDto(
-            $session->getToken(),
-            $session->getExpirationTime(),
-            $user->Role,
-            $this->mapper->map($user->Profile, ProfileDto::class)
-        );
-    }
-
-    public function logout()
-    {
-        $this->authManager->logout();
+        return null;
     }
 }

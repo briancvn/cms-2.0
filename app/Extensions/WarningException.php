@@ -2,7 +2,7 @@
 
 namespace CMS\Extensions;
 
-class Exception extends \Exception
+class WarningException extends \Exception
 {
     public function __construct($code, $message = null)
     {

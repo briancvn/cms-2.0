@@ -102,6 +102,8 @@ class Route {
         foreach ($this->namespaces as $ns) {
             $scan = scandir($ns['dir']);
 
+            $controllersCache = $this->cache->getControllers();
+            $cacheController = empty($controllersCache);
             foreach ($scan as $f) {
                 $ff = $ns['dir'] . DIRECTORY_SEPARATOR . $f;
                 $info = pathinfo($ns['dir'] . PATH_SEPARATOR . $f);
@@ -120,10 +122,8 @@ class Route {
                 $this->autoloadClass($className);
                 $reflector = $reader->get($className);
                 $methodsAnnotations = $reflector->getMethodsAnnotations();
-
                 $curPrefix = '/'.str_replace('Controller','', $classRef->getShortName());
-
-                $controllerCache = new ControllerCache($classRef->getName());
+                $controllerCache = $cacheController ? new ControllerCache($classRef->getName()) : null;
                 foreach ($classRef->getMethods() as $methodRef) {
                     if ($methodRef->isConstructor() || !$methodRef->isPublic())
                         continue;
@@ -134,7 +134,7 @@ class Route {
                     $ignore = false;
                     if ($methodsAnnotations && !empty($methodsAnnotations[$function])) {
                         foreach ($methodsAnnotations[$function] as $annotation) {
-                            if (strtolower($annotation->getName()) === AnnotationConstants::CONTROLLER_ACTION_IGNORE) {
+                            if ($annotation->getName() === AnnotationConstants::CONTROLLER_ACTION_IGNORE) {
                                 $ignore = true;
                                 break;
                             }
@@ -150,10 +150,17 @@ class Route {
                         $this->updateCollection($className, $function, $uri, $httpMethod);
                         $parameters = $methodRef->getParameters();
                         $paramType = empty($parameters) ? null : $parameters[0]->getType()->getName();
-                        $controllerCache->addAction(new ActionCache($function, $paramType));
+                        if ($controllerCache) {
+                            $controllerCache->addAction(new ActionCache($function, $paramType));
+                        }
                     }
                 }
-                $this->cache->addController($controllerCache);
+                if ($cacheController) {
+                    array_push($controllersCache, $controllerCache);
+                }
+            }
+            if ($cacheController) {
+                $this->cache->setControllers($controllersCache);
             }
         }
     }

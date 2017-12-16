@@ -4,6 +4,8 @@ namespace CMS\Constants;
 
 class ErrorCodes
 {
+    const NOT_ACCEPTABLE= 406;
+
     // General
     const GENERAL_SYSTEM = 1010;
     const GENERAL_NOT_IMPLEMENTED = 1020;

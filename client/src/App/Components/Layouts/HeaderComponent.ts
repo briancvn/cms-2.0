@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import * as _ from 'underscore';
 
-import { AuthRequest, AuthenticateService, Authenticate, ERole } from '../../../Infrastructure';
+import { Authenticate, AuthenticateService, AuthRequest, ERoleGroup } from '../../../Infrastructure';
 
 declare var userContext: Authenticate;
 
@@ -15,15 +16,15 @@ export class HeaderComponent {
     }
 
     get userIcon(): string {
-        let role = userContext && userContext.Role;
-        switch(role) {
-            case ERole[ERole.Administrator]:
-                return 'fa-tachometer';
-            case ERole[ERole.User]:
-                return 'fa-cog';
-            default:
-                return 'fa-user-circle';
+        let roles = userContext && userContext.RoleGroups;
+
+        if (!_.isEmpty(_.intersection(roles, [ERoleGroup[ERoleGroup.ADMINISTRATOR], ERoleGroup[ERoleGroup.MANAGER]]))) {
+            return 'fa-tachometer';
+        } else if (_.contains(roles, ERoleGroup[ERoleGroup.AUTHORIZED])) {
+            return 'fa-cog';
         }
+
+        return 'fa-user-circle';
     }
 
     get isAuthenticated(): boolean {

@@ -1,5 +1,5 @@
 <?php
-//error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING );
 
 /** @var \Phalcon\Config $config */
 $config = null;
@@ -22,6 +22,7 @@ try {
     define("SERVICES_DIR", APP_DIR.'/Services');
     define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
     define("CONTROLLERS_DIR", APP_DIR.'/Controllers');
+    define("ACCESS_DINIFITIONS_PATH", SERVICES_DIR.'/AccessControlDefinitions.xml');
     define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
     require VENDOR_DIR.'/autoload.php';

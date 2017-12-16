@@ -5,8 +5,9 @@ use AutoMapperPlus\AutoMapperInterface;
 use AutoMapperPlus\AutoMapper;
 use Underscore\Types\Strings;
 
-use CMS\Extensions\Util;
+use CMS\Extensions\Utils;
 use CMS\Extensions\Auth\Session;
+use CMS\Contracts\ProfileDto;
 
 class Manager extends AutoMapper {
 
@@ -14,7 +15,8 @@ class Manager extends AutoMapper {
     {
         $mapper = parent::initialize($configurator);
         $configuration = $mapper->getConfiguration();
-        foreach (Util::scanNamespaces('CMS\Contracts', CONTRACTS_DIR) as $dtoName) {
+        $configuration->registerMapping('__PHP_Incomplete_Class', ProfileDto::class);
+        foreach (Utils::scanNamespaces('CMS\Contracts', CONTRACTS_DIR) as $dtoName) {
             if (Strings::endsWith($dtoName, 'RequestDto')) {
                 $configuration->registerMapping(\stdClass::class, $dtoName);
             }

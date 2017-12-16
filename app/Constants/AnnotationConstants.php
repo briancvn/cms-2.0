@@ -4,5 +4,6 @@ namespace CMS\Constants;
 
 class AnnotationConstants
 {
-    const CONTROLLER_ACTION_IGNORE = 'ignore';
+    const CONTROLLER_ACTION_IGNORE = 'Ignore';
+    const ACCESS_CONTTROL_BUSINESSES = 'Business';
 }

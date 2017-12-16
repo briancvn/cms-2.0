@@ -2,9 +2,10 @@
 
 namespace CMS\Extensions\Http;
 
-use CMS\Constants\Services;
 use CMS\Contracts\ResponseDto;
 use CMS\Contracts\ResponseErrorDto;
+use CMS\Contracts\ResponseWarningDto;
+use CMS\Extensions\WarningException;
 
 class Response extends \Phalcon\Http\Response
 {
@@ -12,10 +13,15 @@ class Response extends \Phalcon\Http\Response
     {
         if (!$debugMode) {
             $content = new  ResponseDto();
-            $content->Error = new ResponseErrorDto();
-            $content->Error->Error = new ResponseErrorDto($e);
-            $content->Error->
+            $content->Error = new ResponseErrorDto($e);
             $this->setJsonContent($content);
+            return;
+        }
+
+        if ($e instanceof WarningException) {
+            $this->setStatusCode($e->getCode());
+            $this->setContent($e->getMessage());
+            return;
         }
 
         $this->setContent(join('', [

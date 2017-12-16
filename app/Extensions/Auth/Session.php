@@ -2,69 +2,65 @@
 
 namespace CMS\Extensions\Auth;
 
+use CMS\Domains\User;
+
 class Session
 {
-    protected $identity;
-    protected $accountTypeName;
-    protected $token;
-    protected $startTime;
-    protected $expirationTime;
+    protected $User;
+    protected $Token;
+    protected $StartTime;
+    protected $ExpirationTime;
 
-    public function __construct($identity, $startTime, $expirationTime, $token = null)
+    public function __construct(User $user = null, $startTime, $expirationTime, $token = null)
     {
-        $this->identity = $identity;
-        $this->startTime = $startTime;
-        $this->expirationTime = $expirationTime;
-        $this->token = $token;
+        $this->User = $user;
+        $this->StartTime = $startTime;
+        $this->ExpirationTime = $expirationTime;
+        $this->Token = $token;
     }
 
-    public function getIdentity()
+    public function isAuthenticated()
     {
-        return $this->identity;
+        return !is_null($this->User);
     }
 
-    public function setIdentity($identity)
+    public function getUser()
     {
-        $this->identity = $identity;
+        return $this->User;
+    }
+
+    public function setUser($user)
+    {
+        $this->User = $user;
     }
 
     public function getToken()
     {
-        return $this->token;
+        return $this->Token;
     }
 
-    public function setToken($token)
+    public function setToken($Token)
     {
-        $this->token = $token;
+        $this->Token = $Token;
     }
 
     public function getExpirationTime()
     {
-        return $this->expirationTime;
+        return $this->ExpirationTime;
     }
 
     public function setExpirationTime($time)
     {
-        $this->expirationTime = $time;
+        $this->ExpirationTime = $time;
     }
 
     public function getStartTime()
     {
-        return $this->startTime;
+        return $this->StartTime;
     }
 
     public function setStartTime($time)
     {
-        $this->startTime = $time;
-    }
-
-    public function getAccountTypeName()
-    {
-        return $this->accountTypeName;
-    }
-
-    public function setAccountTypeName($accountTypeName)
-    {
-        $this->accountTypeName = $accountTypeName;
+        $this->StartTime = $time;
     }
 }

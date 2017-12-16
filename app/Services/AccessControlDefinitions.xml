@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<accessControl>
+    <businessItem name="ViewUser" />
+    <businessItem name="ModifyUser" />
+    <businessItem name="ViewProfile" />
+    <businessItem name="ModifyProfile" />
+
+    <businessRole name="User-Readonly">
+        <businessItemRef name="ViewUser" />
+    </businessRole>
+
+    <businessRole name="User">
+        <businessRoleRef name="User-Readonly" />
+        <businessItemRef name="ModifyUser" />
+    </businessRole>
+
+    <businessRole name="Profile-Readonly">
+        <businessItemRef name="ViewProfile" />
+    </businessRole>
+
+    <businessRole name="Profile">
+        <businessRoleRef name="Profile-Readonly" />
+        <businessItemRef name="ModifyProfile" />
+    </businessRole>
+
+    <businessRoleGroup name="UNAUTHORIZED">
+        <businessRoleRef name="User-Readonly" />
+    </businessRoleGroup>
+
+    <businessRoleGroup name="AUTHORIZED">
+        <businessRoleRef name="User" />
+        <businessRoleRef name="Profile" />
+    </businessRoleGroup>
+
+    <businessRoleGroup name="MANAGER">
+        <businessRoleGroupRef name="AUTHORIZED" />
+    </businessRoleGroup>
+
+    <businessRoleGroup name="ADMINISTRATOR">
+        <businessRoleGroupRef name="AUTHORIZED" />
+    </businessRoleGroup>
+</accessControl>

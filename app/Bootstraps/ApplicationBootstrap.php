@@ -11,16 +11,17 @@ use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\MongoDB\Connection;
-
 use AutoMapperPlus\Configuration\AutoMapperConfig;
 
 use CMS\Domains\MappingProfile;
 use CMS\BootstrapInterface;
 use CMS\Constants\Services;
+use CMS\Constants\CommonConstants;
+use CMS\Constants\CacheConstants;
 use CMS\Extensions\Api;
+use CMS\Extensions\Utils;
 use CMS\Extensions\Mapper\Manager as MapperManager;
 use CMS\Extensions\Auth\TokenParsers\JWTTokenParser;
-use CMS\Extensions\Auth\Session;
 use CMS\Extensions\Auth\Manager as AuthManager;
 use CMS\Extensions\Cache\Manager as CacheManager;
 
@@ -73,6 +74,7 @@ class ApplicationBootstrap implements BootstrapInterface
             $sessionAdapter = $di->get(Services::SESSION);
             $session = unserialize($sessionAdapter->get(Services::AUTH_MANAGER));
             return new AuthManager(
+                $di->get(CacheManager::class),
                 $config->get('authentication')->expirationTime,
                 $session ? $session : null
             );

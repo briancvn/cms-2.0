@@ -3,10 +3,9 @@ namespace CMS\Contracts;
 
 use CMS\Extensions\Exception;
 
-class ResponseErrorDto
+class ResponseWarningDto
 {
     public $Message;
-    public $Title = '500 Internal Server Error';
     public $Code;
 
     public function __construct(\Exception $e) {

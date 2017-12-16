@@ -2,7 +2,7 @@
 namespace CMS\Extensions\Cache;
 
 
-use CMS\Extensions\Util;
+use CMS\Extensions\Utils;
 use CMS\Extensions\Cache\ActionCache;
 
 class ControllerCache
@@ -20,7 +20,7 @@ class ControllerCache
     }
 
     public function getAction(string $actionName): ActionCache {
-        return Util::array_find($this->actions, function(ActionCache $action) use($actionName) {
+        return Utils::array_find($this->actions, function(ActionCache $action) use($actionName) {
             return  $action->name === $actionName;
         });
     }

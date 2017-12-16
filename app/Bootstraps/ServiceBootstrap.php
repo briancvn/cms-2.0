@@ -7,13 +7,17 @@ use Phalcon\DiInterface;
 
 use CMS\BootstrapInterface;
 use CMS\Extensions\Api;
-use CMS\Extensions\Util;
+use CMS\Extensions\Utils;
+use CMS\Extensions\Auth\Manager as AuthManager;
+use CMS\Extensions\Cache\Manager as CacheManager;
+use CMS\Extensions\Mapper\Manager as MapperManager;
+use CMS\Constants\Services;
 
 class ServiceBootstrap implements BootstrapInterface
 {
     public function run(Api $api, DiInterface $di, Config $config)
     {
-        foreach (Util::scanNamespaces('CMS\Services', SERVICES_DIR) as $serviceName) {
+        foreach (Utils::scanNamespaces('CMS\Services', SERVICES_DIR) as $serviceName) {
             $arguments = [];
             $classRef = new \ReflectionClass($serviceName);
             $constructor = $classRef->getConstructor();
@@ -29,7 +33,27 @@ class ServiceBootstrap implements BootstrapInterface
 
             $di->set($serviceName, [
                 'className' => $serviceName,
-                'arguments' => $arguments
+                'arguments' => $arguments,
+                "calls" => [
+                    [
+                        "method"    => "setAuthManager",
+                        "arguments" => [
+                            [
+                                "type"  => "service",
+                                "name" => AuthManager::class
+                            ]
+                        ]
+                    ],
+                    [
+                        "method"    => "setMapper",
+                        "arguments" => [
+                            [
+                                "type"  => "service",
+                                "name" => MapperManager::class
+                            ]
+                        ]
+                    ]
+                ]
             ]);
         }
     }

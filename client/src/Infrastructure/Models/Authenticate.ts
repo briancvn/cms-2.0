@@ -4,6 +4,6 @@ import { DataType } from '../Decorators';
 export class Authenticate {
     public Token: string;
     public Expires: Date;
-    public Role: string;
+    public RoleGroups: string;
     @DataType(Profile) public Profile: Profile;
 }

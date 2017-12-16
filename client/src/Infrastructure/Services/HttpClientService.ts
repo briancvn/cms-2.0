@@ -44,7 +44,9 @@ export class HttpClientService extends HttpClient {
                         Url: `${CommonConstants.API_PREFIX}${url}`,
                         Body: body,
                         Options: {
-                            headers: authenticate ? {[CommonConstants.AUTH_HEADER]: `Bearer ${this.tokenInterceptor.token}` } : null
+                            headers: authenticate && this.tokenInterceptor.token
+                                ? {[CommonConstants.AUTH_HEADER]: `Bearer ${this.tokenInterceptor.token}` }
+                                : null,
                             params: !environment.production ? {[CommonConstants.XDEBUG_PARAM]: CommonConstants.XDEBUG_TYPE} : null
                         }
                     });
