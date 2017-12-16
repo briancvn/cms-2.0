@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Type } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,10 +16,11 @@ import { INFRASTRUCTURE_COMPONENTS } from './Components';
 import { INFRASTRUCTURE_MODALS_COMPONENTS } from './Components/Modals';
 import { INFRASTRUCTURE_DIRECTIVES } from './Directives';
 import { INFRASTRUCTURE_PIPES } from './Pipes';
+import { HttpClientService } from './Services/HttpClientService';
 import { TokenInterceptor } from './Services/TokenInterceptor';
-import { Reflector } from './Utils/Reflection/Reflector';
-import { ReflectorReader } from './Utils/Reflection/ReflectionReader';
 import { reflector } from './Utils/Reflection/Reflection';
+import { ReflectorReader } from './Utils/Reflection/ReflectionReader';
+import { Reflector } from './Utils/Reflection/Reflector';
 
 const MATERIAL_MODULES = [
     MatToolbarModule,
@@ -62,6 +63,8 @@ export const INFRASTRUCTURE_COMPONENTS_DIRECTIVES: Type<any>[] = [
     ],
     providers: [
         TokenInterceptor,
+        HttpClientService,
+        { provide: Reflector, useValue: reflector },
         { provide: Reflector, useValue: reflector },
         { provide: ReflectorReader, useValue: reflector },
         {

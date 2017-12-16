@@ -3,15 +3,12 @@ namespace CMS\Contracts;
 
 class ResponseErrorDto
 {
-    public $Type;
-    public $Error;
-    public $ErrorDetails = array();
-    public $ValidationErrors= array();
+    public $Message;
+    public $Title = '500 Internal Server Error';
+    public $Code;
 
-    public function __construct(string $type, string $error, array $errorDetails = array(), array $validationErrors = array()) {
-        $this->Type = $type;
-        $this->Error = $type;
-        $this->ErrorDetails = $errorDetails;
-        $this->ValidationErrors = $validationErrors;
+    public function __construct(\Exception $e) {
+        $this->Message = $e->getMessage();
+        $this->Code = $e->getCode();
     }
 }

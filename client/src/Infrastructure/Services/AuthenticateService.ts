@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import * as _ from 'underscore';
 
-import { AuthRequest } from '../Models/AuthRequest';
 import { Authenticate } from '../Models/Authenticate';
+import { AuthRequest } from '../Models/AuthRequest';
 import { BaseBackendService } from './BaseBackendService';
-import { TokenInterceptor } from './TokenInterceptor';
 import { HttpClientService } from './HttpClientService';
+import { TokenInterceptor } from './TokenInterceptor';
 
 declare var userContext: Authenticate;
 

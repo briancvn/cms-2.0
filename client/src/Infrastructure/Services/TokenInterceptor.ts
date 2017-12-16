@@ -5,6 +5,7 @@ import * as _ from 'underscore';
 import * as s from 'underscore.string';
 
 import { CommonConstants } from '../Constants/CommonConstants';
+import { JsonDeserializer } from './JsonDeserializer';
 import { ModalService } from './ModalService';
 
 declare var RTCPeerConnection;
@@ -14,52 +15,61 @@ export class TokenInterceptor implements HttpInterceptor {
     private cachedRequests: Array<HttpRequest<any>> = [];
 
     public get token(): string {
-        return sessionStorage.getItem('x-auth-token');
+        return sessionStorage.getItem(CommonConstants.AUTH_TOKEN);
     }
 
     public set token(value: string) {
         if (!value) {
-            sessionStorage.removeItem('x-auth-token');
+            sessionStorage.removeItem(CommonConstants.AUTH_TOKEN);
         } else {
-            sessionStorage.setItem('x-auth-token', value);
+            sessionStorage.setItem(CommonConstants.AUTH_TOKEN, value);
         }
     }
 
     private get localIp(): string {
-        return sessionStorage.getItem('local-ip');
+        return sessionStorage.getItem(CommonConstants.LOCAL_IP);
     }
 
     private set localIp(value: string) {
-        sessionStorage.setItem('local-ip', value);
+        sessionStorage.setItem(CommonConstants.LOCAL_IP, value);
     }
 
-    constructor(private modalService: ModalService) {
+    constructor(
+        private modalService: ModalService,
+        private jsonDeserializer: JsonDeserializer
+    ) {
         if (!_.isEmpty(this.localIp)) {
-            this.getLocalIp().then(ip => this.localIp = ip);
+            this.getLocalIp().then(ip => (this.localIp = ip));
         }
     }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(
+        request: HttpRequest<any>,
+        next: HttpHandler
+    ): Observable<HttpEvent<any>> {
         if (!s.startsWith(request.url, 'api/Authenticate/')) {
-          let header = { Authorization: `Bearer ${this.token}` }
-          request = request.clone({ setHeaders: header });
+            let header = { Authorization: `Bearer ${this.token}` };
+            request = request.clone({ setHeaders: header });
         }
 
-        return next.handle(request).do((event: HttpEvent<any>) => {
-            if (event instanceof HttpResponse) {}
-        }, (err: any) => {
-            if (err instanceof HttpErrorResponse) {
-                if (err.status === 401) {
-                  this.collectFailedRequest(request);
+        return next.handle(request).do(
+            (event: HttpEvent<any>) => {
+                if (event instanceof HttpResponse) {}
+            },
+            (err: any) => {
+                if (err instanceof HttpErrorResponse) {
+                    if (err.status === 401) {
+                        this.collectFailedRequest(request);
+                    }
                 }
+                this.handlResponseError(err);
             }
-            this.handlResponseError(err);
-        });
+        );
     }
 
     private handlResponseError(err): void {
         if (err.error) {
-          this.modalService.showReponseError(err.error.text);
+            this.modalService.showReponseError(err.error.text);
         }
     }
 
@@ -68,11 +78,10 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     private getLocalIp(): Promise<string> {
-        return new Promise<string>((resolve) => {
+        // tslint:disable-next-line:promise-must-complete
+        return new Promise<string>(resolve => {
             let servers = { iceServers: [{ urls: 'stun:stun.services.mozilla.com' }] };
-            let constraints = {
-                optional: [{ RtpDataChannels: true }]
-            };
+            let constraints = { optional: [{ RtpDataChannels: true }] };
             var rtcPeerConnection = new RTCPeerConnection(servers, constraints);
             var foundcandidate = false;
 
@@ -83,22 +92,25 @@ export class TokenInterceptor implements HttpInterceptor {
 
                 let ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/;
                 let ip_addr = ip_regex.exec(candidate)[1];
-                if (ip_addr.match(/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/)) {
+                if (
+                    ip_addr.match(/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/)
+                ) {
                     foundcandidate = true;
                     resolve(ip_addr);
                 }
             };
-            rtcPeerConnection.onicecandidate = (ice) => ice.candidate && handleCandidate(ice.candidate.candidate);
-            rtcPeerConnection.createDataChannel('');
-            rtcPeerConnection.createOffer((result) => {
-                rtcPeerConnection.setLocalDescription(result, () => {
-                    // successCallback
-                }, () => {
-                    // errorCallback
-                });
-            }, () => {
-                // failureCallback
-            });
+            rtcPeerConnection.onicecandidate = ice => ice.candidate && handleCandidate(ice.candidate.candidate);
+            rtcPeerConnection.createDataChannel(CommonConstants.Empty);
+            rtcPeerConnection.createOffer(
+                result => {
+                    rtcPeerConnection.setLocalDescription(
+                        result,
+                        () => { /* successCallback */ },
+                        () => { /* errorCallback */ }
+                    );
+                },
+                () => { /* failureCallback */ }
+            );
 
             setTimeout(() => {
                 let lines = rtcPeerConnection.localDescription.sdp.split('\n');

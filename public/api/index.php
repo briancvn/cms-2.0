@@ -65,17 +65,14 @@ try {
 
     // Set appropriate response value
     $response = $app->di->getShared(CMS\Constants\Services::RESPONSE);
-    $response->setJsonContent($app->getReturnedValue());
+    $response->setJsonContent(new CMS\Contracts\ResponseDto($app->getReturnedValue()));
 } catch (\Exception $e) {
-    // Handle exceptions
-    $di = $app && $app->di ? $app->di : new CMS\Extensions\FactoryDefault();
+    $di = $di ?? new CMS\Extensions\FactoryDefault();
     $response = $di->getShared(CMS\Constants\Services::RESPONSE);
     if(!$response || !$response instanceof CMS\Extensions\Http\Response){
         $response = new CMS\Extensions\Http\Response();
     }
-
     $debugMode = isset($config->debug) ? $config->debug : (APPLICATION_ENV == 'development');
-
     $response->setErrorContent($e, $debugMode);
 }
 finally {

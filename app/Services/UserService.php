@@ -29,7 +29,8 @@ class UserService extends BaseService
             return new AuthenticateDto(
                 $session->getToken(),
                 $session->getExpirationTime(),
-                $this->mapper->map($user, ProfileDto::class)
+                $user->Role,
+                $this->mapper->map($user->Profile, ProfileDto::class)
             );
         }
 

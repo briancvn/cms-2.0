@@ -1,4 +1,4 @@
-import { Type } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 
@@ -6,16 +6,17 @@ import { Response } from '../Models';
 import { ReflectionService } from '../Services/ReflectionService';
 import { ArrayDataType, DataType } from '../Decorators';
 
+@Injectable()
 export class JsonDeserializer {
-    constructor(private reflectionService: ReflectionService, private deserializedType: Type<any>) {}
+    constructor(private reflectionService: ReflectionService) {}
 
-    public deserialize(responseObj: Response): Response {
-        if (!this.deserializedType || !responseObj || !responseObj.Result) {
+    public deserialize(responseObj: Response, deserializedType: Type<any>): Response {
+        if (!deserializedType || !responseObj || !responseObj.Result) {
             return responseObj;
         }
-        var typedResult = new this.deserializedType();
+        var typedResult = new deserializedType();
         _.extend(typedResult, responseObj.Result);
-        this.deserializeWithType(typedResult, this.deserializedType);
+        this.deserializeWithType(typedResult, deserializedType);
         responseObj.Result = typedResult;
         return responseObj;
     }

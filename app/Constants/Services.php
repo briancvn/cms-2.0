@@ -8,6 +8,8 @@ class Services
     const DB = 'MongoDB';
     const DOCUMENT_MANAGER = 'dm';
     const CACHE_MANAGER = 'cacheManager';
+    const AUTH_MANAGER = "authManager";
+    const AUTH_USER = "authUser";
 
     // Phalcon
     const APPLICATION = "application";
@@ -35,7 +37,6 @@ class Services
     const ASSETS = "assets";
 
     // PhalconApi
-    const AUTH_MANAGER = "authManager";
     const ACL = "acl";
     const TOKEN_PARSER = "tokenParser";
     const QUERY = "query";
