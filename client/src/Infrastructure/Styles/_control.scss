@@ -1,0 +1,8 @@
+.form-control {
+    width: 100%;
+    display: block;
+    position: relative;
+    .mat-input-container {
+        width: inherit;
+    }
+}

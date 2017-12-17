@@ -3,7 +3,7 @@ db.createCollection("User", {
     validator: {
         $jsonSchema: {
 			bsonType: "object",
-			required: ["Username", "Password", "Profile"],
+			required: ["Username", "Pin", "Password", "Profile"],
 			properties: {
 				Username: {
 				   bsonType: "string",
@@ -20,14 +20,22 @@ db.createCollection("User", {
 					pattern: "/^.{8,20}$/",
 					description: "Phone__phone"
 				},
-				Password: {
-				   bsonType: "string",
-				   description: "Password__string__required"
-				},
 				Pin: {
 				   bsonType: "int",
 				   description: "Pin__int__required"
-				}
+				},
+				Password: {
+				   bsonType: "string",
+				   description: "Password__string__required"
+                },
+				RoleGroups: {
+				   bsonType: "array",
+				   description: "RoleGroups__array"
+                },
+				Profile: {
+				   bsonType: "object",
+				   description: "Profile__object__required"
+                }
 			 }
 		  }
 	   }
@@ -39,7 +47,7 @@ db.createCollection("Profile", {
 	validator: {
     	$jsonSchema: {
         	bsonType: "object",
-         	required: ["Pin", "FirstName", "LastName", "Gender"],
+         	required: ["Pin", "FirstName", "LastName", "Gender", "Language"],
 	        properties: {
 				Pin: {
 				   bsonType: "int",
@@ -60,7 +68,12 @@ db.createCollection("Profile", {
 				Gender: {
 				   enum: ["M", "F", "O"],
 				   description: "Gender__enum(M|F|O)__Required"
-				}
+                },
+                Language: {
+                    bsonType: "string",
+                    pattern: "/^.{2,3}$/",
+                    description: "Language__string__required"
+                },
 			 }
 		  }
 	   }
@@ -72,9 +85,10 @@ db.User.insert({
 	_id: userId1,
 	Username: "admin",
 	Email: "briancvn@gmail.com",
-	Phone: "+84932727148",
-	Password: "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC",
-	Role : "Administrator",
+    Phone: "+84932727148",
+    Pin: NumberInt(1),
+    Password: "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC",
+	RoleGroups : ["ADMINISTRATOR"],
 	Profile: {
         "$ref" : "Profile",
         "$id" : userId1,
@@ -87,18 +101,19 @@ db.Profile.insertOne({
 	FirstName: "Brian",
 	LastName: "Nguyen",
 	Birthday: "1982-01-01 00:00:00",
-	Gender: "M"
+    Gender: "M",
+    Language: "vi"
 })
-
 
 userId2 = ObjectId()
 db.User.insert({
 	_id: userId2,
-	Username: "user",
-	Email: "user@cms.com",
-	Phone: null,
-	Password: "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC",
-	Role : "User",
+	Username: "manager",
+	Email: "manager@cms.com",
+    Phone: null,
+    Pin: NumberInt(2),
+    Password: "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC",
+	RoleGroups : ["MANAGER"],
 	Profile: {
         "$ref" : "Profile",
         "$id" : userId2,
@@ -108,8 +123,34 @@ db.User.insert({
 db.Profile.insertOne({
   	_id: userId2,
 	Pin: NumberInt(2),
+	FirstName: "Manager",
+	LastName : "Developer",
+	Birthday: "2018-01-01 00:00:00",
+	Gender: "F",
+    Language: "en"
+})
+
+userId3 = ObjectId()
+db.User.insert({
+	_id: userId3,
+	Username: "user",
+	Email: "user@cms.com",
+    Phone: null,
+    Pin: NumberInt(3),
+    Password: "$2y$10$1/U1yo5yMdXsrsU3RaeULu7dm7UFX1qq3rnfpbQugv7uIPdo2kMcC",
+	RoleGroups : [],
+	Profile: {
+        "$ref" : "Profile",
+        "$id" : userId3,
+        "$db" : "cms"
+	}
+})
+db.Profile.insertOne({
+  	_id: userId3,
+	Pin: NumberInt(3),
 	FirstName: "User",
 	LastName : "Developer",
 	Birthday: "2018-01-01 00:00:00",
-	Gender: "M"
+    Gender: "M",
+    Language: "vi"
 })

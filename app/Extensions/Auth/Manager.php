@@ -86,7 +86,7 @@ class Manager extends Plugin
         return true;
     }
 
-    public function login(User $user = null, string $password)
+    public function signIn(User $user = null, string $password)
     {
         $security = Di::getDefault()->get(Services::SECURITY);
         if (!$user || !$security->checkHash($password, $user->Password)) {
@@ -107,7 +107,7 @@ class Manager extends Plugin
         return $this->session;
     }
 
-    public function logout()
+    public function signOut()
     {
         $this->session = null;
     }

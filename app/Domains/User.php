@@ -16,6 +16,9 @@ class User extends BaseEntity
     /** @ODM\Field(type="string") */
     protected $Phone;
 
+    /** @ODM\Field(type="int") */
+    protected $Pin;
+
     /** @ODM\Field(type="string") */
     protected $Password;
 

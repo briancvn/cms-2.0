@@ -33,7 +33,7 @@ abstract class BaseService
         $methodsAnnotations = $reflector->getMethodsAnnotations();
         if (!empty($methodsAnnotations[$name])) {
             $annotation = Arrays::find($methodsAnnotations[$name]->getAnnotations(), function($annotation) {
-                return $annotation->getName() === AnnotationConstants::ACCESS_CONTTROL_BUSINESSES;
+                return $annotation->getName() === AnnotationConstants::ACCESS_ROLES;
             });
 
             if ($annotation && !$this->authManager->isValidBusinessItems($annotation->getArguments())) {

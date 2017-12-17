@@ -21,15 +21,15 @@ class UserService extends BaseService
         return $this->responseAuthenticateDto($session);
     }
 
-    public function login(AuthRequestDto $requestDto): ?AuthenticateDto
+    public function signIn(AuthRequestDto $requestDto): ?AuthenticateDto
     {
         $user = $this->userRepository->findOneBy(['Username' => $requestDto->Username]);
-        return $this->responseAuthenticateDto($this->authManager->login($user, $requestDto->Password));
+        return $this->responseAuthenticateDto($this->authManager->signIn($user, $requestDto->Password));
     }
 
-    protected function logout()
+    protected function signOut()
     {
-        $this->authManager->logout();
+        $this->authManager->signOut();
     }
 
     public function responseAuthenticateDto(Session $session) : ?AuthenticateDto

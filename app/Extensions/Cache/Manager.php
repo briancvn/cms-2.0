@@ -24,13 +24,6 @@ class Manager
         $this->controllers = $this->cache->get(CacheConstants::CONTROLLER_CACHE_KEY) ?? array();
     }
 
-    public function reset(): void {
-        $this->controllers = array();
-        $this->businessGroups = array();
-        $this->cache->delete(CacheConstants::CONTROLLER_CACHE_KEY);
-        $this->cache->delete(CacheConstants::ACCESS_CONTROL_CACHE_KEY);
-    }
-
     public function setControllers(array $controllers): void {
         $this->controllers = $controllers;
         $this->cache->save(CacheConstants::CONTROLLER_CACHE_KEY, $this->controllers);

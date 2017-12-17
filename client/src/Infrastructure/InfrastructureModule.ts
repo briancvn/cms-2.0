@@ -7,11 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ReCaptchaModule } from 'angular2-recaptcha';
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
 import { INFRASTRUCTURE_MODALS_COMPONENTS } from './Components/Modals';
@@ -28,12 +32,16 @@ const MATERIAL_MODULES = [
     MatMenuModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatInputModule
 ];
 
 const INFRASTRUCTURE_EXTERNAL_MODULES = [
     ...MATERIAL_MODULES,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReCaptchaModule,
+    PerfectScrollbarModule,
+    PasswordStrengthBarModule
 ];
 
 export const INFRASTRUCTURE_ENTRY_COMPONENTS: Type<any>[] = [

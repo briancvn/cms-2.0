@@ -6,6 +6,7 @@ export class Profile {
     public LastName: string;
     public Birthday: Date;
     public Gender: string;
+    public Language: string;
 
     public get DisplayName(): string {
        return _.compact([this.FirstName, this.LastName]).join(' ');

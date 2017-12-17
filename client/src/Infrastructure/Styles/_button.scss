@@ -1,0 +1,9 @@
+button {
+    &.btn-link {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: $primary-color;
+        font-size: inherit;
+    }
+}

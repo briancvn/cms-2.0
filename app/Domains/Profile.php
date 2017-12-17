@@ -20,4 +20,7 @@ class Profile extends BaseEntity
 
     /** @ODM\Field(type="string") */
     protected $Gender;
+
+    /** @ODM\Field(type="string") */
+    protected $Language;
 }

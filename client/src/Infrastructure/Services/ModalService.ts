@@ -11,9 +11,7 @@ const BreakLine = '<br \/>';
 
 @Injectable()
 export class ModalService {
-    private config: MatDialogConfig = {
-        disableClose: true
-    };
+    private config: MatDialogConfig = {};
 
     constructor(private dialog: MatDialog) {}
 

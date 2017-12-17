@@ -22,13 +22,13 @@ class AuthenticateController extends ApiController
     }
 
     /** @Post */
-    public function Login(AuthRequestDto $requestDto): AuthenticateDto
+    public function SignIn(AuthRequestDto $requestDto): AuthenticateDto
     {
-        return $this->userService->login($requestDto);
+        return $this->userService->signIn($requestDto);
     }
 
-    public function Logout()
+    public function SignOut()
     {
-        return $this->userService->logout();
+        return $this->userService->signOut();
     }
 }

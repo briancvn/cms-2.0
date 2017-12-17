@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import * as _ from 'underscore';
 
-import { Authenticate, AuthenticateService, AuthRequest, ERoleGroup } from '../../../Infrastructure';
+import { Authenticate, AuthenticateService, ERoleGroup, ModalService } from '../../../Infrastructure';
+import { AuthenticateModalComponent } from '../Modals/AuthenticateModalComponent';
 
 declare var userContext: Authenticate;
 
@@ -31,18 +32,18 @@ export class HeaderComponent {
         return this.authService.isAuthenticated;
     }
 
-    constructor(private authService: AuthenticateService, private cdr: ChangeDetectorRef) {
+    constructor(private authService: AuthenticateService,
+        private modalService: ModalService,
+        private cdr: ChangeDetectorRef
+    ) {
         this.authService.onUserContextChanged.subscribe(() => this.cdr.markForCheck());
     }
 
     login(): void {
-        let request = new AuthRequest();
-        request.Username = 'admin';
-        request.Password = 'test123';
-        this.authService.login(request);
+        this.modalService.show(AuthenticateModalComponent);
     }
 
     logout(): void {
-        this.authService.logout();
+        this.authService.signout();
     }
 }

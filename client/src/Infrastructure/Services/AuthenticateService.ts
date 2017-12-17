@@ -24,8 +24,8 @@ export class AuthenticateService extends BaseBackendService {
         super(http, 'Authenticate', false);
     }
 
-    login(request: AuthRequest): void {
-        this.post<Authenticate>('Login', request, Authenticate)
+    signin(request: AuthRequest): void {
+        this.post<Authenticate>('SignIn', request, Authenticate)
           .then(auth => {
               userContext = auth;
               this.tokenInterceptor.token = auth.Token;
@@ -50,8 +50,8 @@ export class AuthenticateService extends BaseBackendService {
             });
     }
 
-    logout(): void {
-        this.get<void>('Logout')
+    signout(): void {
+        this.get<void>('SignOut')
             .then(() => {
                 userContext = new Authenticate();
                 this.tokenInterceptor.token = null;
