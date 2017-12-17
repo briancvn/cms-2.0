@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material';
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 import * as _ from 'underscore';
 
-import { AuthenticateService, AuthRequest, BaseModalComponent, TranslateService } from '../../../Infrastructure';
+import { AuthenticateService, AuthRequest, BaseModalComponent, TranslateService, EModalSize } from '../../../Infrastructure';
 
 enum EAuthenticationType {
     SignIn,
@@ -17,6 +17,8 @@ enum EAuthenticationType {
     styleUrls: ['../../../Styles/Modals/AuthenticateModal.scss']
 })
 export class AuthenticateModalComponent extends BaseModalComponent<AuthenticateModalComponent> {
+    static size = EModalSize.SMALL;
+
     @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
     readonly EAuthenticationType = EAuthenticationType;
