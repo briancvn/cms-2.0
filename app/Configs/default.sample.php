@@ -13,5 +13,11 @@ return [
     'authentication' => [
         'secret' => 'Centralized_Management_Solutions',
         'expirationTime' => 86400 * 7 // One week
+    ],
+    'externals' => [
+        'client' => [
+            'reCaptchaSiteKey' => 'xxx'
+        ],
+        'server' => []
     ]
 ];

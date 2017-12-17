@@ -1,3 +1,4 @@
+import { SystemService } from './SystemService';
 import { AuthenticateService } from './AuthenticateService';
 import { HttpClientService } from './HttpClientService';
 import { JsonDeserializer } from './JsonDeserializer';
@@ -10,6 +11,7 @@ import { TranslateService } from './TranslateService';
 import { SpinnerService } from './SpinnerService';
 
 export const INFRASTRUCTURE_SERVICES = [
+    SystemService,
     AuthenticateService,
     LogService,
     ModalService,
@@ -22,8 +24,10 @@ export const INFRASTRUCTURE_SERVICES = [
     SpinnerService
 ];
 
+export * from './BaseService';
 export * from './BaseBackendService';
 export * from './InfrastructureContext';
+export * from './SystemService';
 export * from './AuthenticateService';
 export * from './HttpClientService';
 export * from './LogService';

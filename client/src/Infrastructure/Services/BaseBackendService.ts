@@ -1,10 +1,14 @@
 import { Type } from '@angular/core';
 
 import { IHttpParam } from '../Interfaces/IHttpParam';
+import { Authenticate } from '../Models';
+import { BaseService } from './BaseService';
 import { HttpClientService } from './HttpClientService';
 
-export abstract class BaseBackendService {
-    constructor(protected http: HttpClientService, private apiUrl: string, private authenticateService = true) {}
+export abstract class BaseBackendService extends BaseService {
+    constructor(protected http: HttpClientService, private apiUrl: string, private authenticateService = true) {
+        super();
+    }
 
     public get<T>(method: string, deserializedType: Type<any> = null, spinnerId: string = null, authenticate = true): Promise<T> {
         return this.http.httpGet<T>(this.getHttpParam(method, null, deserializedType, spinnerId, authenticate));

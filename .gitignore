@@ -4,5 +4,6 @@ composer.lock
 .idea
 tests/_output/*
 app/Cache
+app/Configs/default.php
 client/package-lock.json
 public/client

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Authenticate } from '../Models/Authenticate';
-
-declare var userContext: Authenticate;
+import { BaseService } from './BaseService';
 
 export enum LogLevel {
     Info,
@@ -14,7 +12,7 @@ export enum LogLevel {
 }
 
 @Injectable()
-export class LogService {
+export class LogService extends BaseService {
     static debugEnabled = true;
     static errorEnabled = true;
     static infoEnabled = true;

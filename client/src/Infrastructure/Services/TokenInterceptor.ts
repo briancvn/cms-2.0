@@ -51,7 +51,9 @@ export class TokenInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         return next.handle(request).do(
             (event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse) {}
+                if (event instanceof HttpResponse) {
+                    // Not implemented
+                }
             },
             (response: any) => {
                 if (response instanceof HttpErrorResponse) {

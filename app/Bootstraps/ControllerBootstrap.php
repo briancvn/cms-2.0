@@ -35,6 +35,15 @@ class ControllerBootstrap implements BootstrapInterface
                 'arguments' => $arguments,
                 "calls" => [
                     [
+                        "method"    => "setConfig",
+                        "arguments" => [
+                            [
+                                "type"  => "service",
+                                "name" => Services::CONFIG
+                            ]
+                        ]
+                    ],
+                    [
                         "method"    => "setDispatcher",
                         "arguments" => [
                             [

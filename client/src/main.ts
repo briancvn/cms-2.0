@@ -15,5 +15,6 @@ if (environment.production) {
 
 setTimeout(() => {
     window.top[VariableNameConstants.UserContext] = {};
+    window.top[VariableNameConstants.Settings] = {};
     platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err));
 }, CommonConstants.MEDIUM_TIMEOUT);

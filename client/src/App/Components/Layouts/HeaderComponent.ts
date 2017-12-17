@@ -1,23 +1,21 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import * as _ from 'underscore';
 
-import { Authenticate, AuthenticateService, ERoleGroup, ModalService } from '../../../Infrastructure';
+import { AuthenticateService, BaseComponent, ERoleGroup, ModalService } from '../../../Infrastructure';
 import { AuthenticateModalComponent } from '../Modals/AuthenticateModalComponent';
-
-declare var userContext: Authenticate;
 
 @Component({
     selector: 'header',
     templateUrl: 'HeaderComponent.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
+export class HeaderComponent extends BaseComponent {
     get userInfo(): string {
-        return userContext.Profile && userContext.Profile.DisplayName;
+        return this.userContext.Profile && this.userContext.Profile.DisplayName;
     }
 
     get userIcon(): string {
-        let roles = userContext && userContext.RoleGroups;
+        let roles = this.userContext && this.userContext.RoleGroups;
 
         if (!_.isEmpty(_.intersection(roles, [ERoleGroup[ERoleGroup.ADMINISTRATOR], ERoleGroup[ERoleGroup.MANAGER]]))) {
             return 'fa-tachometer';
@@ -36,6 +34,7 @@ export class HeaderComponent {
         private modalService: ModalService,
         private cdr: ChangeDetectorRef
     ) {
+        super();
         this.authService.onUserContextChanged.subscribe(() => this.cdr.markForCheck());
     }
 

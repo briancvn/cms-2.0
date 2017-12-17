@@ -8,8 +8,8 @@
                         <h4>{{ 'Description' }}</h4>
                         <text-control [(ngModel)]="signInRequest.Username" placeholder="Username/Email" name="Username" required></text-control>
                         <password-control forgotPassword [(ngModel)]="signInRequest.Password" (onForgotPasswordClick)="forgotPassword()" placeholder="Field.Password" name="Password"></password-control>
-                        <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="reCaptchaSiteKey" [language]="translateService.language"></re-captcha>
-                        <button mat-raised-button type="submit" color="primary" (click)="signIn()">{{ 'Signin' }}</button>
+                        <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="settings.reCaptchaSiteKey" [language]="translateService.language"></re-captcha>
+                        <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signIn()">{{ 'Signin' }}</button>
                     </div>
                     <div fxFlex="40" class="signup-content">
                         <div fxFill fxLayout="column">

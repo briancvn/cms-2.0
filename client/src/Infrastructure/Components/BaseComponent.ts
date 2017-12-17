@@ -1,8 +1,17 @@
 import { AfterViewInit, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { ISettings } from '../Interfaces/ISettings';
+import { Authenticate } from '../Models';
+
+declare var settings: ISettings;
+declare var userContext: Authenticate;
+
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
     @ViewChild(NgForm) form: NgForm;
+
+    get settings(): ISettings { return settings; }
+    get userContext(): Authenticate { return userContext; }
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;

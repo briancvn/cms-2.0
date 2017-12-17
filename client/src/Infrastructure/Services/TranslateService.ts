@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { CommonConstants } from '../Constants/CommonConstants';
-import { Authenticate } from '../Models/Authenticate';
-
-declare var userContext: Authenticate;
+import { BaseService } from './BaseService';
 
 @Injectable()
-export class TranslateService {
+export class TranslateService extends BaseService {
     get language(): string {
-        return userContext && userContext.Profile && userContext.Profile.Language || CommonConstants.DEFAULT_LANGUAGE;
+        return this.userContext && this.userContext.Profile && this.userContext.Profile.Language || CommonConstants.DEFAULT_LANGUAGE;
     }
 
     private currentLanguage = CommonConstants.DEFAULT_LANGUAGE;

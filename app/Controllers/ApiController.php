@@ -10,6 +10,8 @@ use CMS\Extensions\Mapper\Manager as Mapper;
 
 abstract class ApiController extends Controller
 {
+    protected $config;
+
     /** @var Dispatcher */
     protected $dispatcher;
 
@@ -18,6 +20,12 @@ abstract class ApiController extends Controller
 
     /** @var Mapper */
     protected $mapper;
+
+    /** @Ignore */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
 
     /** @Ignore */
     public function setDispatcher(Dispatcher $dispatcher)
