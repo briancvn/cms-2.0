@@ -14,3 +14,12 @@
 - Moment: https://momentjs.com/
 - Underscore: http://underscorejs.org/
 - Underscore.string: https://epeli.github.io/underscore.string/
+
+## How to install:
+- install.bat
+
+## How to run:
+**Development:** 
+- run.bat
+**Production:** 
+- build.bat or build-aot.bat
