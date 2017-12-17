@@ -12,6 +12,4 @@ export class TranslateService {
     }
 
     private currentLanguage = CommonConstants.DEFAULT_LANGUAGE;
-
-    constructor() {}
 }

@@ -13,20 +13,6 @@ export enum LogLevel {
     Trace
 }
 
-export class LogInfo {
-    ElapsedTime?: number;
-    Message: string;
-    LogLevel: LogLevel;
-    CorrelationId: string;
-
-    constructor(msg: string, level: LogLevel, correlationId?: string, elapsedTime?: number) {
-        this.Message = msg;
-        this.LogLevel = level;
-        this.ElapsedTime = elapsedTime;
-        this.CorrelationId = correlationId;
-    }
-}
-
 @Injectable()
 export class LogService {
     static debugEnabled = true;

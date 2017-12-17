@@ -17,7 +17,7 @@ interface IRequest {
     Options?: IRequestOptions;
 }
 
-Injectable()
+@Injectable()
 export class HttpClientService extends HttpClient {
     public beforeRequest = new Subject<any>();
     public afterRequest = new Subject<Response>();
@@ -59,7 +59,7 @@ export class HttpClientService extends HttpClient {
                     });
                 });
             this.beforeRequest.next(param.Body);
-        })
+        });
     }
 
     private hanldeResponse<T>(param: IHttpParam, response: Response): Promise<T> {
