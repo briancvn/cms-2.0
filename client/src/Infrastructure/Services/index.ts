@@ -7,6 +7,7 @@ import { ReflectionService } from './ReflectionService';
 import { TokenInterceptor } from './TokenInterceptor';
 import { SnackBarService } from './SnackBarService';
 import { TranslateService } from './TranslateService';
+import { SpinnerService } from './SpinnerService';
 
 export const INFRASTRUCTURE_SERVICES = [
     AuthenticateService,
@@ -17,7 +18,8 @@ export const INFRASTRUCTURE_SERVICES = [
     HttpClientService,
     TokenInterceptor,
     SnackBarService,
-    TranslateService
+    TranslateService,
+    SpinnerService
 ];
 
 export * from './BaseBackendService';
@@ -28,3 +30,4 @@ export * from './LogService';
 export * from './ModalService';
 export * from './SnackBarService';
 export * from './TranslateService';
+export * from './SpinnerService';

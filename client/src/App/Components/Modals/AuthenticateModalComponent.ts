@@ -40,7 +40,7 @@ export class AuthenticateModalComponent extends BaseModalComponent<AuthenticateM
     }
 
     signIn(): void {
-        this.authService.signin(this.signInRequest);
+        this.authService.signin(this.signInRequest).then(() => this.close());
     }
 
     register(): void {}

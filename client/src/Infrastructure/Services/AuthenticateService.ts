@@ -24,8 +24,8 @@ export class AuthenticateService extends BaseBackendService {
         super(http, 'Authenticate', false);
     }
 
-    signin(request: AuthRequest): void {
-        this.post<Authenticate>('SignIn', request, Authenticate)
+    signin(request: AuthRequest): Promise<void> {
+        return this.post<Authenticate>('SignIn', request, Authenticate, 'modalSpinner')
           .then(auth => {
               userContext = auth;
               this.tokenInterceptor.token = auth.Token;

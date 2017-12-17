@@ -1,6 +1,8 @@
 import { ResponseErrorDialogComponent } from './ResponseErrorDialogComponent';
+import { BaseMsgDialogComponent } from './BaseMsgDialogComponent';
 
 export const INFRASTRUCTURE_MODALS_COMPONENTS = [
+    BaseMsgDialogComponent,
     ResponseErrorDialogComponent
 ];
 

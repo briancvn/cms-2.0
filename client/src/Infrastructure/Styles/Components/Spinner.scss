@@ -1,0 +1,14 @@
+:host /deep/ {
+    height: 100%;
+    width: 100%;
+    .spinner-overlay {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0.48;
+        width: inherit;
+        height: inherit;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+}

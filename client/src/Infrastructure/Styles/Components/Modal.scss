@@ -1,10 +1,24 @@
 :host /deep/ {
-    padding: 24px;
+    padding: 15px;
     display: block;
+    padding-top: 0;
     .mat-dialog-title {
         margin: 0;
+        [modal-header] {
+            padding-top: 15px;
+        }
     }
-    [modal-footer] {
-        padding-top: 10px;
+    .modal-content {
+        position: relative;
+        margin: 0 -15px;
+        padding: 0 15px;
+        .mat-dialog-content {
+            padding: 15px;
+            margin: 0;
+        }
+        .mat-dialog-actions {
+            padding: 0;
+            padding-bottom: 15px;
+        }
     }
 }

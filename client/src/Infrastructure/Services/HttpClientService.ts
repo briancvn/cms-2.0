@@ -1,12 +1,14 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 
 import { environment } from '../../Environments/Environment';
 import { CommonConstants } from '../Constants';
+import { IHttpParam } from '../Interfaces/IHttpParam';
 import { IRequestOptions } from '../Interfaces/IRequestOptions';
 import { Response } from '../Models';
 import { JsonDeserializer } from './JsonDeserializer';
+import { SpinnerService } from './SpinnerService';
 import { TokenInterceptor } from './TokenInterceptor';
 
 interface IRequest {
@@ -15,49 +17,55 @@ interface IRequest {
     Options?: IRequestOptions;
 }
 
-@Injectable()
+Injectable()
 export class HttpClientService extends HttpClient {
     public beforeRequest = new Subject<any>();
     public afterRequest = new Subject<Response>();
 
-    constructor(handler: HttpHandler, private jsonDeserializer: JsonDeserializer, private tokenInterceptor: TokenInterceptor) {
+    constructor(handler: HttpHandler,
+        private jsonDeserializer: JsonDeserializer,
+        private tokenInterceptor: TokenInterceptor,
+        private spinnerService: SpinnerService
+    ) {
         super(handler);
     }
 
-    public httpGet<T>(url: string, deserializedType?: Type<any>, authenticate = true): Promise<T> {
-        return this.hanldeRequest(authenticate, url)
+    public httpGet<T>(param: IHttpParam): Promise<T> {
+        return this.hanldeRequest(param)
             .then(request => this.get<T>(request.Url, request.Options).toPromise())
-            .then(this.hanldeResponse.bind(this, deserializedType));
+            .then(this.hanldeResponse.bind(this, param));
     }
 
-    public httpPost<T>(url: string, body: any, deserializedType?: Type<any>, authenticate = true): Promise<T> {
-        return this.hanldeRequest(authenticate, url, body)
+    public httpPost<T>(param: IHttpParam): Promise<T> {
+        return this.hanldeRequest(param)
             .then(request => this.post<T>(request.Url, request.Body, request.Options).toPromise())
-            .then(this.hanldeResponse.bind(this, deserializedType));
+            .then(this.hanldeResponse.bind(this, param));
     }
 
-    private hanldeRequest(authenticate: boolean, url: string, body?: any): Promise<IRequest> {
+    private hanldeRequest(param: IHttpParam): Promise<IRequest> {
+        this.spinnerService.show(param.SpinnerId);
         return new Promise<IRequest>(resolve => {
             this.beforeRequest.asObservable().take(1).last().toPromise()
                 .then(() => {
                     resolve({
-                        Url: `${CommonConstants.API_PREFIX}${url}`,
-                        Body: body,
+                        Url: `${CommonConstants.API_PREFIX}${param.Url}`,
+                        Body: param.Body,
                         Options: {
-                            headers: authenticate && this.tokenInterceptor.token
+                            headers: param.Authenticate && this.tokenInterceptor.token
                                 ? {[CommonConstants.AUTH_HEADER]: `Bearer ${this.tokenInterceptor.token}` }
                                 : null,
                             params: !environment.production ? {[CommonConstants.XDEBUG_PARAM]: CommonConstants.XDEBUG_TYPE} : null
                         }
                     });
                 });
-            this.beforeRequest.next(body);
+            this.beforeRequest.next(param.Body);
         })
     }
 
-    private hanldeResponse<T>(deserializedType: Type<any>, response: Response): Promise<T> {
-        this.jsonDeserializer.deserialize(response, deserializedType);
+    private hanldeResponse<T>(param: IHttpParam, response: Response): Promise<T> {
+        this.jsonDeserializer.deserialize(response, param.DeserializedType);
         this.afterRequest.next(response);
+        this.spinnerService.hide(param.SpinnerId);
         return response.Result;
     }
 }

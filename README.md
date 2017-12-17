@@ -19,6 +19,10 @@
 - install.bat
 
 ## How to run:
+**Demo accounts:**
+- admin/test123
+- manager/test123
+- user/test123
 **Development:** 
 - run.bat
 **Production:** 
