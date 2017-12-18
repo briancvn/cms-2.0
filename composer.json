@@ -14,17 +14,20 @@
         "doctrine/orm": "^2.5",
         "mark-gerarts/auto-mapper-plus": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "anahkiasen/underscore-php": "dev-master"
+        "anahkiasen/underscore-php": "dev-master",
+        "phalcon/incubator": "^3.0"
     },
     "require-dev": {
-		"phalcon/devtools": "dev-master"
+        "phalcon/devtools": "dev-master",
+        "phpunit/phpunit": "^5.0"
+
     },
     "authors": [{
         "name": "Brian Nguyen",
         "email": "briancvn@gmail.com"
     }],
     "support": {
-        "source": "https://github.com/briancvn/cms",
-        "issues": "https://github.com/briancvn/cms/issues"
+        "source": "https://github.com/briancvn/cms-2.0",
+        "issues": "https://github.com/briancvn/cms-2.0/issues"
     }
 }
