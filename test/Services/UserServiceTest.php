@@ -2,9 +2,14 @@
 
 namespace Test\Services;
 
+use Test\Generator\UserGenerator;
+
 class UserServiceTest extends \Test\BaseTestCase
 {
-    /** @Inject('Test\Generator\UserGenerator') */
+    /**
+     * @var UserGenerator
+     * @Inject(Test\Generator\UserGenerator)
+     */
     protected $userGenerator;
 
     public function testTestCase()
@@ -14,6 +19,5 @@ class UserServiceTest extends \Test\BaseTestCase
             "works",
             "This is OK"
         );
-
     }
 }

@@ -8,6 +8,8 @@ class UserGenerator extends BaseGenerator
 {
     private $userRepository;
 
+    private $user;
+
     public function __construct(UserRepository $userRepository) {
         parent::__construct();
         $this->userRepository = $userRepository;
@@ -21,5 +23,13 @@ class UserGenerator extends BaseGenerator
             "This is OK"
         );
 
+    }
+
+    protected function start() {
+        // Not inplemented
+    }
+
+    public function end() {
+        // Not inplemented
     }
 }
