@@ -19,6 +19,8 @@ define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
 define("CONTROLLERS_DIR", APP_DIR.'/Controllers');
 define("ACCESS_DINIFITIONS_PATH", SERVICES_DIR.'/AccessControlDefinitions.xml');
 
+define("GENERATOR_DIR", ROOT_DIR.'/Generator');
+
 set_include_path(ROOT_DIR.PATH_SEPARATOR.get_include_path());
 
 // Required for phalcon/incubator
@@ -42,7 +44,8 @@ $bootstrap = new CMS\Bootstrap(
     new CMS\Bootstraps\RepositoryBootstrap,
     new CMS\Bootstraps\ServiceBootstrap,
     new CMS\Bootstraps\ControllerBootstrap,
-    new CMS\Bootstraps\RouterBootstrap
+    new CMS\Bootstraps\RouterBootstrap,
+    new Test\Bootstraps\GeneratorBootstrap
 );
 $bootstrap->run(new CMS\Extensions\Api($di), $di, $config);
 

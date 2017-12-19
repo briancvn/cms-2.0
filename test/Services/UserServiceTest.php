@@ -4,9 +4,8 @@ namespace Test\Services;
 
 class UserServiceTest extends \Test\BaseTestCase
 {
-
-    /** @Inject('CMS\Services\UserService') */
-    protected $userService;
+    /** @Inject('Test\Generator\UserGenerator') */
+    protected $userGenerator;
 
     public function testTestCase()
     {
