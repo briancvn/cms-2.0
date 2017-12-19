@@ -7,20 +7,20 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class Profile extends BaseEntity
 {
     /** @ODM\Field(type="int") */
-    protected $Pin;
+    public $Pin;
 
     /** @ODM\Field(type="string") */
-    protected $FirstName;
+    public $FirstName;
 
     /** @ODM\Field(type="string") */
-    protected $LastName;
+    public $LastName;
 
     /** @ODM\Field(type="date") */
-    protected $Birthday;
+    public $Birthday;
 
     /** @ODM\Field(type="string") */
-    protected $Gender;
+    public $Gender;
 
     /** @ODM\Field(type="string") */
-    protected $Language;
+    public $Language;
 }

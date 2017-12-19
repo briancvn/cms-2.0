@@ -49,6 +49,7 @@ abstract class BaseTestCase extends PhalconTestCase
                 $this->$propName = $service;
                 if (is_subclass_of($service, BaseGenerator::class)) {
                     array_push($this->_generators, $service);
+                    $service->init();
                 }
             }
         }

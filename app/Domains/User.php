@@ -8,23 +8,23 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceOne;
 class User extends BaseEntity
 {
     /** @ODM\Field(type="string") */
-    protected $Username;
+    public $Username;
 
     /** @ODM\Field(type="string") */
-    protected $Email;
+    public $Email;
 
     /** @ODM\Field(type="string") */
-    protected $Phone;
+    public $Phone;
 
     /** @ODM\Field(type="int") */
-    protected $Pin;
+    public $Pin;
 
     /** @ODM\Field(type="string") */
-    protected $Password;
+    public $Password;
 
     /** @ODM\Field(type="collection") */
-    protected $RoleGroups;
+    public $RoleGroups;
 
-    /** @ReferenceOne(targetDocument="CMS\Domains\Profile") */
-    protected $Profile;
+    /** @ReferenceOne(targetDocument="CMS\Domains\Profile", cascade="all") */
+    public $Profile;
 }

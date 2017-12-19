@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class BaseEntity
 {
     /** @ODM\Id */
-    protected $Id;
+    public $Id;
 
     public function __get($property) {
         if (property_exists($this, $property)) {
