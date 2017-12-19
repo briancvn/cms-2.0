@@ -1,13 +1,8 @@
 <?php
 namespace CMS\Contracts;
 
-class ValidationErrorMessageDto
+class ValidationErrorMessageDto extends BaseDto
 {
     public $Property;
     public $Message;
-
-    public function __construct(string $property, string $message) {
-        $this->Property = $property;
-        $this->Message = $message;
-    }
 }

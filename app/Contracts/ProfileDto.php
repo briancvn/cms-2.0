@@ -1,7 +1,7 @@
 <?php
 namespace CMS\Contracts;
 
-class ProfileDto extends BaseDto
+class ProfileDto extends BaseModelDto
 {
     public $Pin;
     public $FirstName;

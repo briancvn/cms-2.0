@@ -35,12 +35,12 @@ class UserService extends BaseService
     public function responseAuthenticateDto(Session $session) : ?AuthenticateDto
     {
         if ($session && $session->isAuthenticated()) {
-            return new AuthenticateDto(
-                $session->getToken(),
-                $session->getExpirationTime(),
-                $session->getUser()->RoleGroups,
-                $this->mapper->map($session->getUser()->Profile, ProfileDto::class)
-            );
+            return new AuthenticateDto([
+                Token => $session->getToken(),
+                Expires => $session->getExpirationTime(),
+                RoleGroups => $session->getUser()->RoleGroups,
+                Profile => $this->mapper->map($session->getUser()->Profile, ProfileDto::class)
+            ]);
         }
         return null;
     }

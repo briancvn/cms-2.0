@@ -1,7 +1,7 @@
 <?php
 namespace CMS\Contracts;
 
-class AuthRequestDto
+class AuthRequestDto extends BaseDto
 {
     public $Username;
     public $Password;

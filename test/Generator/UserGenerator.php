@@ -28,23 +28,22 @@ class UserGenerator extends BaseGenerator
     }
 
     protected function start() {
-        $user = new User();
-        $user->Username = 'aaa';
-        $user->Email = 'aaa';
-        $user->Phone = 'aaa';
-        $user->Pin = 123;
-        $user->Password = 'aaa';
-        $user->RoleGroups = [];
-
-        $profile = new Profile();
-        $profile->Pin = 123;
-        $profile->FirstName = 'aaa';
-        $profile->LastName = 'aaa';
-        $profile->Birthday = new \DateTime();
-        $profile->FirstName = 'M';
-        $profile->LastName = 'vi';
-
-        $user->Profile = $profile;
+        $user = new User([
+            Username => 'aaa',
+            Email => 'aaa',
+            Phone => 'aaa',
+            Pin => 123,
+            Password => 'aaa',
+            RoleGroups => [],
+            Profile => new Profile([
+                Pin => 123,
+                FirstName => 'aaa',
+                LastName => 'aaa',
+                Birthday => new \DateTime(),
+                FirstName => 'M',
+                LastName => 'vi'
+            ])
+        ]);
 
         $this->userRepository->getDocumentManager()->persist($user);
         $this->userRepository->getDocumentManager()->flush();
