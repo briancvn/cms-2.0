@@ -4,20 +4,12 @@ namespace CMS\Extensions\Auth;
 
 use CMS\Domains\User;
 
-class Session
+class Session extends CMS\Common\AbstractClass
 {
     protected $User;
     protected $Token;
     protected $StartTime;
     protected $ExpirationTime;
-
-    public function __construct(User $user = null, $startTime, $expirationTime, $token = null)
-    {
-        $this->User = $user;
-        $this->StartTime = $startTime;
-        $this->ExpirationTime = $expirationTime;
-        $this->Token = $token;
-    }
 
     public function isAuthenticated()
     {

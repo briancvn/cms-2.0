@@ -95,7 +95,12 @@ class JWTTokenParser implements TokenParserInterface
     public function getSession($token)
     {
         $tokenData = $this->decode($token);
-        return new Session($tokenData->iss, $tokenData->sub, $tokenData->iat, $tokenData->exp, $token);
+        return new Session([
+            User => $tokenData->sub,
+            StartTime => $tokenData->iat,
+            ExpirationTime => $tokenData->exp,
+            Token => $token
+        ]);
     }
 
     public function decode($token)

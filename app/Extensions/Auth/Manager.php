@@ -28,12 +28,12 @@ class Manager extends Plugin
         $this->cache = $cache;
         $this->sessionDuration = $sessionDuration;
         if ($session && $session->getExpirationTime() > time()) {
-            $this->session = new Session(
-                $session->getUser(),
-                $session->getStartTime(),
-                $session->getExpirationTime(),
-                $session->getToken()
-            );
+            $this->session = new Session([
+                User => $session->getUser(),
+                StartTime => $session->getStartTime(),
+                ExpirationTime => $session->getExpirationTime(),
+                Token => $session->getToken()
+            ]);
         }
     }
 
@@ -94,11 +94,11 @@ class Manager extends Plugin
         }
 
         $startTime = time();
-        $session = new Session(
-            $user,
-            $startTime,
-            $startTime + $this->sessionDuration
-        );
+        $session = new Session([
+            User => $user,
+            StartTime => $startTime,
+            ExpirationTime => $startTime + $this->sessionDuration
+        ]);
         $token = $this->tokenParser->getToken($session);
         $session->setToken($token);
 

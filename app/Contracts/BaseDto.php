@@ -1,13 +1,7 @@
 <?php
 namespace CMS\Contracts;
 
-class BaseDto
+class BaseDto extends CMS\Common\AbstractClass
 {
-    public function __construct(array $properties = null)
-    {
-        foreach ($properties as $property => $value)
-        {
-            $this->$property = $value;
-        }
-    }
+    public $Id;
 }
