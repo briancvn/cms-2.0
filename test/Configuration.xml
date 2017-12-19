@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./Bootstrap.php"
-         backupGlobals="false"
+         backupGlobals="true"
          backupStaticAttributes="false"
          verbose="true"
          colors="false"
@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="true">
-    <testsuite name="Phalcon - Testsuite">
-        <directory>./</directory>
+    <testsuite name="Services - Testsuite">
+        <directory>./Services</directory>
     </testsuite>
 </phpunit>

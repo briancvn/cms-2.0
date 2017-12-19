@@ -14,13 +14,12 @@
         "doctrine/orm": "^2.5",
         "mark-gerarts/auto-mapper-plus": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "anahkiasen/underscore-php": "dev-master",
-        "phalcon/incubator": "^3.0"
+        "anahkiasen/underscore-php": "dev-master"
     },
     "require-dev": {
         "phalcon/devtools": "dev-master",
-        "phpunit/phpunit": "^5.0"
-
+        "phpunit/phpunit": "^5.0",
+        "phalcon/incubator": "^3.0"
     },
     "authors": [{
         "name": "Brian Nguyen",

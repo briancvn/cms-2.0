@@ -4,6 +4,7 @@ namespace Test;
 
 use Phalcon\Di;
 use Phalcon\Test\UnitTestCase as PhalconTestCase;
+use Phalcon\Annotations\Adapter\Memory as MemoryAnnAdaptor;
 
 abstract class BaseTestCase extends PhalconTestCase
 {
@@ -11,10 +12,20 @@ abstract class BaseTestCase extends PhalconTestCase
 
     public function setUp()
     {
-        parent::setUp();
-        $di = Di::getDefault();
-        $this->setDi($di);
+        $this->setDi(Di::getDefault());
+        $this->injectHandler();
         $this->_loaded = true;
+    }
+
+    private function injectHandler()
+    {
+        $reader = new MemoryAnnAdaptor();
+        $reflector = $reader->get($this);
+        foreach($reflector->getPropertiesAnnotations() as $propName => $propAnnotations) {
+            if ($propAnnotations->has('Inject')) {
+                $this->$propName = $this->di->get($propAnnotations->get('Inject')->getArguments()[0]);
+            }
+        }
     }
 
     /**
