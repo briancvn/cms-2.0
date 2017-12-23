@@ -9,6 +9,7 @@ use CMS\Contracts\ProfileDto;
 
 class UserService extends BaseService
 {
+    /** @var UserRepository */
     private $userRepository;
 
     public function __construct(UserRepository $userRepository) {
@@ -23,7 +24,7 @@ class UserService extends BaseService
 
     protected function signIn(AuthRequestDto $requestDto): ?AuthenticateDto
     {
-        $user = $this->userRepository->findOneBy(['Username' => $requestDto->Username]);
+        $user = $this->userRepository->findOneByAuthRequest($requestDto->Username);
         return $this->responseAuthenticateDto($this->authManager->signIn($user, $requestDto->Password));
     }
 
