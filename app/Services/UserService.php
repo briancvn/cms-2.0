@@ -15,13 +15,13 @@ class UserService extends BaseService
         $this->userRepository = $userRepository;
     }
 
-    public function IsAuthenticated(): ?AuthenticateDto
+    protected function IsAuthenticated(): ?AuthenticateDto
     {
         $session = $this->authManager->getSession();
         return $this->responseAuthenticateDto($session);
     }
 
-    public function signIn(AuthRequestDto $requestDto): ?AuthenticateDto
+    protected function signIn(AuthRequestDto $requestDto): ?AuthenticateDto
     {
         $user = $this->userRepository->findOneBy(['Username' => $requestDto->Username]);
         return $this->responseAuthenticateDto($this->authManager->signIn($user, $requestDto->Password));
@@ -32,7 +32,7 @@ class UserService extends BaseService
         $this->authManager->signOut();
     }
 
-    public function responseAuthenticateDto(Session $session) : ?AuthenticateDto
+    private function responseAuthenticateDto(Session $session) : ?AuthenticateDto
     {
         if ($session && $session->isAuthenticated()) {
             return new AuthenticateDto([

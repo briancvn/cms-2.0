@@ -41,6 +41,6 @@ abstract class BaseService
             }
         }
 
-        return $this->$name($arguments);
+        return $this->$name(empty($arguments) ? null: $arguments[0]);
     }
 }

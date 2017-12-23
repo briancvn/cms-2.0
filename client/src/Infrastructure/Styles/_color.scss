@@ -26,3 +26,18 @@ $btn-google-color: #333 !important;
 $btn-google-icon-background-color: #db4437 !important;
 $btn-twitter-background-color: #00aced !important;
 $btn-twitter-icon-background-color: #0099d4 !important;
+
+.mat-snack-bar-container {
+    &.error {
+        background-color: $error-color;
+    }
+    &.info {
+        background-color: $info-color;
+    }
+    &.success {
+        background-color: $primary-color-900;
+    }
+    &.warning {
+        background-color: $warning-color;
+    }
+}

@@ -5,21 +5,25 @@ import { SpinnerComponent } from '../Components/SpinnerComponent';
 
 @Injectable()
 export class SpinnerService {
-    private spinner: {[id: string]: SpinnerComponent} = {};
+    private spinners: {[id: string]: SpinnerComponent} = {};
 
     register(component: SpinnerComponent): void {
-        this.spinner[component.id] = component;
+        this.spinners[component.id] = component;
     }
 
     show(id: string): void {
         if (!_.isEmpty(id)) {
-            this.spinner[id].visible = true;
+            this.spinners[id].visible = true;
         }
     }
 
     hide(id: string): void {
         if (!_.isEmpty(id)) {
-            this.spinner[id].visible = false;
+            this.spinners[id].visible = false;
         }
+    }
+
+    hideAll(): void {
+        Object.keys(this.spinners).forEach(this.hide.bind(this));
     }
 }
