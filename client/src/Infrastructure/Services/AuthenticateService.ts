@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
 import * as _ from 'underscore';
 
@@ -6,7 +7,6 @@ import { Authenticate } from '../Models/Authenticate';
 import { AuthRequest } from '../Models/AuthRequest';
 import { BaseBackendService } from './BaseBackendService';
 import { HttpClientService } from './HttpClientService';
-import { TokenInterceptor } from './TokenInterceptor';
 
 declare var userContext: Authenticate;
 
@@ -20,41 +20,48 @@ export class AuthenticateService extends BaseBackendService {
         return Boolean(userContext && userContext.Profile);
     }
 
-    constructor(http: HttpClientService, private tokenInterceptor: TokenInterceptor) {
+    constructor(http: HttpClientService) {
         super(http, 'Authenticate', false);
     }
 
-    signin(request: AuthRequest): Promise<void> {
-        return this.post<Authenticate>('SignIn', request, Authenticate, 'modalSpinner')
-          .then(auth => {
-              userContext = auth;
-              this.tokenInterceptor.token = auth.Token;
-              this.onUserContextChangedSubject.next();
-          });
+    signin(request: AuthRequest, form: NgForm): Promise<void> {
+        return this.modalPost<Authenticate>({
+            Method: 'SignIn',
+            Body: request,
+            DeserializedType: Authenticate,
+            SpinnerId: 'modalSpinner',
+            Form: form
+        }).then(auth => {
+            userContext = auth;
+            this.http.token = auth.Token;
+            this.onUserContextChangedSubject.next();
+        });
     }
 
     loadUserContext(): void {
-        if (_.isEmpty(this.tokenInterceptor.token)) {
+        if (_.isEmpty(this.http.token)) {
             return;
         }
-        this.get<Authenticate>('IsAuthenticated', Authenticate)
-            .then(auth => {
-                if (auth) {
-                    userContext = auth;
-                } else {
-                    userContext = new Authenticate();
-                    this.tokenInterceptor.token = null;
-                }
+        this.get<Authenticate>({
+            Method: 'IsAuthenticated',
+            DeserializedType: Authenticate
+        }).then(auth => {
+            if (auth) {
+                userContext = auth;
+            } else {
+                userContext = new Authenticate();
+                this.http.token = null;
+            }
 
-                this.onUserContextChangedSubject.next();
-            });
+            this.onUserContextChangedSubject.next();
+        });
     }
 
     signout(): void {
-        this.get<void>('SignOut')
+        this.get<void>({ Method: 'SignOut' })
             .then(() => {
                 userContext = new Authenticate();
-                this.tokenInterceptor.token = null;
+                this.http.token = null;
                 this.onUserContextChangedSubject.next();
             });
     }

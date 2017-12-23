@@ -5,7 +5,8 @@ namespace CMS\Extensions\Http;
 use CMS\Contracts\ResponseDto;
 use CMS\Contracts\ResponseErrorDto;
 use CMS\Contracts\ResponseWarningDto;
-use CMS\Extensions\WarningException;
+use CMS\Extensions\Exception\WarningException;
+use CMS\Extensions\Exception\ValidationException;
 
 class Response extends \Phalcon\Http\Response
 {
@@ -22,6 +23,12 @@ class Response extends \Phalcon\Http\Response
                 Message => $e->getMessage(),
                 Code => $e->getCode()
             ])]);
+            $this->setJsonContent($content);
+            return;
+        }
+
+        if ($e instanceof ValidationException) {
+            $content = new  ResponseDto([ValidationErrors => $e->getMessages()]);
             $this->setJsonContent($content);
             return;
         }

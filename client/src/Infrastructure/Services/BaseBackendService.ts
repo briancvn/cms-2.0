@@ -10,21 +10,26 @@ export abstract class BaseBackendService extends BaseService {
         super();
     }
 
-    public get<T>(method: string, deserializedType: Type<any> = null, spinnerId: string = null, authenticate = true): Promise<T> {
-        return this.http.httpGet<T>(this.getHttpParam(method, null, deserializedType, spinnerId, authenticate));
+    public modalGet<T>(param: IHttpParam): Promise<T> {
+        param.IsModalRequest = true;
+        return this.get<T>(param);
     }
 
-    public post<T>(method: string, body: any, deserializedType: Type<any> = null, spinnerId: string = null, authenticate = true): Promise<T> {
-        return this.http.httpPost<T>(this.getHttpParam(method, body, deserializedType, spinnerId, authenticate));
+    public get<T>(param: IHttpParam): Promise<T> {
+        return this.http.httpGet<T>(this.getHttpParam(param));
     }
 
-    private getHttpParam(method: string, body: any, deserializedType: Type<any> = null, spinnerId: string, authenticate = true): IHttpParam {
-        return {
-            Url: `${this.apiUrl}/${method}`,
-            Body: body,
-            DeserializedType: deserializedType,
-            SpinnerId: spinnerId,
-            Authenticate: this.authenticateService && authenticate
-        };
+    public modalPost<T>(param: IHttpParam): Promise<T> {
+        param.IsModalRequest = true;
+        return this.post<T>(param);
+    }
+
+    public post<T>(param: IHttpParam): Promise<T> {
+        return this.http.httpPost<T>(this.getHttpParam(param));
+    }
+
+    private getHttpParam(param: IHttpParam): IHttpParam {
+        param.Url = param.Url ? param.Url : `${this.apiUrl}/${param.Method}`;
+        return param;
     }
 }

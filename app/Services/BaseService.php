@@ -8,7 +8,9 @@ use CMS\Extensions\Auth\Manager as AuthManager;
 use CMS\Extensions\Mapper\Manager as MapperManager;
 use CMS\Constants\AnnotationConstants;
 use CMS\Constants\ErrorCodes;
-use CMS\Extensions\WarningException;
+use CMS\Constants\ValidationMessageConstants;
+use CMS\Extensions\Exception\WarningException;
+
 
 abstract class BaseService
 {
@@ -37,7 +39,7 @@ abstract class BaseService
             });
 
             if ($annotation && !$this->authManager->isValidBusinessItems($annotation->getArguments())) {
-                throw new WarningException(ErrorCodes::NOT_ACCEPTABLE, 'NOT_ACCEPTABLE');
+                throw new WarningException(ErrorCodes::NOT_ACCEPTABLE, ValidationMessageConstants::NOT_ACCEPTABLE);
             }
         }
 

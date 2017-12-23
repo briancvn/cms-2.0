@@ -8,7 +8,9 @@ use CMS\Domains\User;
 use CMS\Constants\ErrorCodes;
 use CMS\Constants\Services;
 use CMS\Constants\RoleGroupConstants;
-use CMS\Extensions\Exception;
+use CMS\Constants\ValidationMessageConstants;
+use CMS\Extensions\Exception\Exception;
+use CMS\Extensions\Exception\ValidationException;
 use CMS\Extensions\Mvc\Plugin;
 use CMS\Extensions\Auth\Session;
 use CMS\Extensions\Cache\Manager as CacheManager;
@@ -90,7 +92,7 @@ class Manager extends Plugin
     {
         $security = Di::getDefault()->get(Services::SECURITY);
         if (!$user || !$security->checkHash($password, $user->Password)) {
-            throw new Exception(ErrorCodes::AUTH_LOGIN_FAILED);
+            throw new ValidationException(ValidationMessageConstants::AUTH_LOGIN_FAILED);
         }
 
         $startTime = time();

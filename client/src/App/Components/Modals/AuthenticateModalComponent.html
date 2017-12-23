@@ -6,6 +6,7 @@
                     <div fxFlex="60" class="signin-content">
                         <h1>{{ 'Signin' }}</h1>
                         <h4>{{ 'Description' }}</h4>
+                        <modal-messages></modal-messages>
                         <text-control [(ngModel)]="signInRequest.Username" placeholder="Username/Email" name="Username" required></text-control>
                         <password-control forgotPassword [(ngModel)]="signInRequest.Password" (onForgotPasswordClick)="forgotPassword()" placeholder="Field.Password" name="Password"></password-control>
                         <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="settings.reCaptchaSiteKey" [language]="translateService.language"></re-captcha>

@@ -1,7 +1,7 @@
 <?php
 namespace CMS\Contracts;
 
-use CMS\Extensions\Exception;
+use CMS\Extensions\Exception\Exception;
 
 class ResponseErrorDto
 {

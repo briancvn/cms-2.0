@@ -1,8 +1,8 @@
 <?php
 
-namespace CMS\Extensions;
+namespace CMS\Extensions\Exception;
 
-class Exception extends \Exception
+class WarningException extends \Exception
 {
     public function __construct($code, $message = null)
     {

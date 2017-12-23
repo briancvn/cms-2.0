@@ -14,7 +14,7 @@ export class SystemService extends BaseBackendService {
     }
 
     getSettings(): Promise<void> {
-        return this.get<ISettings>('GetSettings')
+        return this.get<ISettings>({ Method: 'GetSettings' })
           .then(response => {
                 settings = response;
           });

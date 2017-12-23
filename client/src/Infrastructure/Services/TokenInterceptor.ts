@@ -14,18 +14,6 @@ declare var RTCPeerConnection;
 export class TokenInterceptor implements HttpInterceptor {
     private cachedRequests: Array<HttpRequest<any>> = [];
 
-    public get token(): string {
-        return sessionStorage.getItem(CommonConstants.AUTH_TOKEN);
-    }
-
-    public set token(value: string) {
-        if (!value) {
-            sessionStorage.removeItem(CommonConstants.AUTH_TOKEN);
-        } else {
-            sessionStorage.setItem(CommonConstants.AUTH_TOKEN, value);
-        }
-    }
-
     private get localIp(): string {
         return sessionStorage.getItem(CommonConstants.LOCAL_IP);
     }
@@ -67,7 +55,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     private handlResponseError(response): void {
         if (response.error) {
-            this.modalService.showReponseError(response.error.text);\
+            this.modalService.showReponseError(response.error.text);
             this.spinnerService.hideAll();
         }
     }
