@@ -3,8 +3,9 @@
 namespace CMS\Extensions\Auth;
 
 use CMS\Domains\User;
+use CMS\Common\AbstractClass;
 
-class Session extends CMS\Common\AbstractClass
+class Session extends AbstractClass
 {
     protected $User;
     protected $Token;

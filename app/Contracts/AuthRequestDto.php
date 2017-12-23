@@ -1,7 +1,9 @@
 <?php
 namespace CMS\Contracts;
 
-class AuthRequestDto extends CMS\Common\AbstractClass
+use CMS\Common\AbstractClass;
+
+class AuthRequestDto extends AbstractClass
 {
     public $Username;
     public $Password;

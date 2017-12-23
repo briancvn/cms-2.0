@@ -66,7 +66,7 @@ try {
 
     // Set appropriate response value
     $response = $app->di->getShared(CMS\Constants\Services::RESPONSE);
-    $response->setJsonContent(new CMS\Contracts\ResponseDto($app->getReturnedValue()));
+    $response->setJsonContent(new CMS\Contracts\ResponseDto([Result => $app->getReturnedValue()]));
 } catch (\Exception $e) {
     $di = $di ?? new CMS\Extensions\FactoryDefault();
     $response = $di->getShared(CMS\Constants\Services::RESPONSE);

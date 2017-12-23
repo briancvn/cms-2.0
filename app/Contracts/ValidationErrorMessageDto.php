@@ -1,7 +1,9 @@
 <?php
 namespace CMS\Contracts;
 
-class ValidationErrorMessageDto extends CMS\Common\AbstractClass
+use CMS\Common\AbstractClass;
+
+class ValidationErrorMessageDto extends AbstractClass
 {
     public $Property;
     public $Message;

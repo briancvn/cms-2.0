@@ -1,7 +1,9 @@
 <?php
 namespace CMS\Contracts;
 
-class ResponseWarningDto extends CMS\Common\AbstractClass
+use CMS\Common\AbstractClass;
+
+class ResponseWarningDto extends AbstractClass
 {
     public $Message;
     public $Code;

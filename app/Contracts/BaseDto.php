@@ -1,7 +1,9 @@
 <?php
 namespace CMS\Contracts;
 
-class BaseDto extends CMS\Common\AbstractClass
+use CMS\Common\AbstractClass;
+
+class BaseDto extends AbstractClass
 {
     public $Id;
 }

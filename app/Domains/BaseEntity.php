@@ -2,8 +2,9 @@
 namespace CMS\Domains;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use CMS\Common\AbstractClass;
 
-class BaseEntity extends CMS\Common\AbstractClass
+class BaseEntity extends AbstractClass
 {
     /** @ODM\Id */
     public $Id;
