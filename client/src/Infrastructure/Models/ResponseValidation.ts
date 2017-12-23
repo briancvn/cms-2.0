@@ -1,4 +1,4 @@
-export class ValidationErrorMessage {
+export class ResponseValidation {
     public Property: string;
     public Message: string;
 }

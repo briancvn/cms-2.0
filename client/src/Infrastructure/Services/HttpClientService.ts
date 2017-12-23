@@ -1,13 +1,17 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
+import * as _ from 'underscore';
 
 import { environment } from '../../Environments/Environment';
 import { CommonConstants } from '../Constants';
+import { HttpStatusCodeConstants } from '../Constants/HttpStatusCodeConstants';
 import { IHttpParam } from '../Interfaces/IHttpParam';
 import { IRequestOptions } from '../Interfaces/IRequestOptions';
 import { Response } from '../Models';
 import { JsonDeserializer } from './JsonDeserializer';
+import { LogService } from './LogService';
+import { SnackBarService } from './SnackBarService';
 import { SpinnerService } from './SpinnerService';
 import { TokenInterceptor } from './TokenInterceptor';
 
@@ -25,7 +29,9 @@ export class HttpClientService extends HttpClient {
     constructor(handler: HttpHandler,
         private jsonDeserializer: JsonDeserializer,
         private tokenInterceptor: TokenInterceptor,
-        private spinnerService: SpinnerService
+        private spinnerService: SpinnerService,
+        private snackBarService: SnackBarService,
+        private logService: LogService
     ) {
         super(handler);
     }
@@ -63,6 +69,14 @@ export class HttpClientService extends HttpClient {
     }
 
     private hanldeResponse<T>(param: IHttpParam, response: Response): Promise<T> {
+        if (response.Warning) {
+            this.snackBarService.warning(response.Warning.Message);
+            if (_.includes(HttpStatusCodeConstants.REJECT_CODE, response.Warning.Code)) {
+                this.spinnerService.hide(param.SpinnerId);
+                return Promise.reject(response.Warning.Message);
+            }
+        }
+
         this.jsonDeserializer.deserialize(response, param.DeserializedType);
         this.afterRequest.next(response);
         this.spinnerService.hide(param.SpinnerId);

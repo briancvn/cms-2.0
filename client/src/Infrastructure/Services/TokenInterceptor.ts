@@ -4,10 +4,8 @@ import { Observable } from 'rxjs';
 import * as _ from 'underscore';
 
 import { CommonConstants } from '../Constants/CommonConstants';
-import { HttpStatusCodeConstants } from '../Constants/HttpStatusCodeConstants';
 import { JsonDeserializer } from './JsonDeserializer';
 import { ModalService } from './ModalService';
-import { SnackBarService } from './SnackBarService';
 import { SpinnerService } from './SpinnerService';
 
 declare var RTCPeerConnection;
@@ -38,7 +36,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
     constructor(
         private modalService: ModalService,
-        private snackBarService: SnackBarService,
         private jsonDeserializer: JsonDeserializer,
         private spinnerService: SpinnerService
     ) {
@@ -61,9 +58,6 @@ export class TokenInterceptor implements HttpInterceptor {
                 if (response instanceof HttpErrorResponse) {
                     if (response.status === 401) {
                         this.collectFailedRequest(request);
-                    } else if (_.contains(HttpStatusCodeConstants.WARNING_CODE, response.status)) {
-                        this.handlResponseWarning(response);
-                        return;
                     }
                 }
                 this.handlResponseError(response);
@@ -74,13 +68,6 @@ export class TokenInterceptor implements HttpInterceptor {
     private handlResponseError(response): void {
         if (response.error) {
             this.modalService.showReponseError(response.error.text);\
-            this.spinnerService.hideAll();
-        }
-    }
-
-    private handlResponseWarning(response): void {
-        if (response.error) {
-            this.snackBarService.warning(response.error);
             this.spinnerService.hideAll();
         }
     }

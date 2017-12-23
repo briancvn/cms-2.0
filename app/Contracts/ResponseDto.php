@@ -1,9 +1,10 @@
 <?php
 namespace CMS\Contracts;
 
+use CMS\Common\AbstractClass;
 use CMS\Contracts\ResponseErrorDto;
 use CMS\Contracts\ResponseWarningDto;
-use CMS\Common\AbstractClass;
+use CMS\Contracts\ResponseValidationDto;
 
 class ResponseDto extends AbstractClass
 {
@@ -14,4 +15,7 @@ class ResponseDto extends AbstractClass
 
     /** @var ResponseWarningDto */
     public $Warning;
+
+    /** @var ResponseValidationDto */
+    public $ValidationErrors = array();
 }
