@@ -1,5 +1,6 @@
 import { AfterViewInit, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
@@ -16,11 +17,20 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;
+    private subscriptions: Subscription[] = [];
 
     constructor(protected commonService: CommonService) {}
 
     ngOnInit(): void {
         this.onInit();
+        var initPromise = Promise.all([this.performInitAsync()]);
+        if (initPromise) {
+            initPromise.then(() => {
+                // Not implemented
+            }, error => {
+                // Not implemented
+            });
+        }
     }
 
     ngAfterViewInit(): void {
@@ -32,10 +42,16 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     ngOnDestroy(): void {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
         if (this.form) {
             this.commonService.formCollection.remove(this.form);
         }
         this.onDestroy();
+    }
+
+    protected subscribe<T>(observable: Observable<T>, handler: { (data: T): void }): void {
+        var subscription: Subscription = observable.subscribe(data => handler(data));
+        this.subscriptions.push(subscription);
     }
 
     protected onInit(): void {
@@ -52,5 +68,9 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
 
     protected onDestroy(): void {
         // Virtual method
+    }
+
+    protected performInitAsync(): Promise<any> {
+        return Promise.resolve(null);
     }
 }

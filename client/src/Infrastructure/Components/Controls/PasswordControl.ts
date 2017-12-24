@@ -52,6 +52,6 @@ export class PasswordControl extends BaseControl<string> {
     }
 
     forgotPasswordClick(): void {
-        this.onForgotPasswordClick.emit();
+        this.onForgotPasswordClick.next();
     }
 }

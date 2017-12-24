@@ -30,9 +30,9 @@ export class ModalMessagesComponent extends MessagesComponent {
     }
 
     protected init(): void {
-        this.httpService.beforeModalRequest.subscribe(() => this.messages = []);
-        this.httpService.afterModalResponse.subscribe(response => {
+        this.subscribe(this.httpService.beforeModalRequest, () => this.messages = []);
+        this.subscribe(this.httpService.afterModalResponse, response => {
             response.ValidationErrors.forEach(error => this.messages.push({ Message: error.Message, Type: EMessageType.Error }));
-        })
+        });
     }
 }

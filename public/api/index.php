@@ -19,11 +19,14 @@ try {
     define("CONFIGS_DIR", APP_DIR.'/Configs');
     define("CONTRACTS_DIR", APP_DIR.'/Contracts');
     define("DOMAINS_DIR", APP_DIR.'/Domains');
+    define("ENUMS_DIR", APP_DIR.'/Enums');
     define("SERVICES_DIR", APP_DIR.'/Services');
     define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
     define("CONTROLLERS_DIR", APP_DIR.'/Controllers');
     define("ACCESS_DINIFITIONS_PATH", SERVICES_DIR.'/AccessControlDefinitions.xml');
     define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
+
+    define('EReferenceDataKind', include_once ENUMS_DIR.'/EReferenceDataKind.php');
 
     require VENDOR_DIR.'/autoload.php';
 

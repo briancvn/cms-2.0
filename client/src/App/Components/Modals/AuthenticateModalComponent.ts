@@ -11,6 +11,7 @@ import {
     EModalSize,
     SignUpRequest,
     TranslateService,
+    EReferenceDataKind
 } from '../../../Infrastructure';
 
 enum EAuthenticationType {
@@ -49,6 +50,10 @@ export class AuthenticateModalComponent extends BaseModalComponent<AuthenticateM
         private authService: AuthenticateService
     ) {
         super(commonService, dialogRef);
+        this.commonService.referenceDataService.register([
+            EReferenceDataKind.Boolean,
+            EReferenceDataKind.Gender
+        ]);
     }
 
     signIn(): void {

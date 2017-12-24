@@ -1,10 +1,10 @@
 import { MatDialogRef } from '@angular/material';
 
 import { EModalSize } from '../../Enums/EModalSize';
-import { BaseComponent } from '../BaseComponent';
+import { BaseContentComponent } from '../BaseContentComponent';
 import { CommonService } from '../../Services/CommonService';
 
-export abstract class BaseModalComponent<T> extends BaseComponent {
+export abstract class BaseModalComponent<T> extends BaseContentComponent {
     static size: EModalSize | number = EModalSize.MEDIUM;
 
     constructor(commonService: CommonService, protected dialogRef: MatDialogRef<T>) {
