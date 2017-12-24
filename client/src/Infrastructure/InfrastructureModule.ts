@@ -4,7 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Type } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -36,7 +38,9 @@ const MATERIAL_MODULES = [
     MatDialogModule,
     MatSnackBarModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 ];
 
 const INFRASTRUCTURE_EXTERNAL_MODULES = [

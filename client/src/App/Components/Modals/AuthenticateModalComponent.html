@@ -34,8 +34,13 @@
                     <text-control [(ngModel)]="signUpRequest.Phone" placeholder="Phone" name="Phone" required></text-control>
                     <password-control [(ngModel)]="signUpRequest.Password" placeholder="Password" name="Password"></password-control>
                     <text-control [(ngModel)]="signUpRequest.ConfirmPassword" type="password" placeholder="ConfirmPassword" name="ConfirmPassword" required [equal]="signUpRequest.Password"></text-control>
-                    <text-control [(ngModel)]="signUpRequest.Profile.FirstName" placeholder="FirstName" name="FirstName" required></text-control>
-                    <text-control [(ngModel)]="signUpRequest.Profile.LastName" placeholder="LastName" name="LastName" required></text-control>
+                    <div fxLayout="row" fxLayoutGap="20px">
+                        <text-control [(ngModel)]="signUpRequest.Profile.FirstName" placeholder="FirstName" name="FirstName" required></text-control>
+                        <text-control [(ngModel)]="signUpRequest.Profile.LastName" placeholder="LastName" name="LastName" required></text-control>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="20px">
+                            <date-control [(ngModel)]="signUpRequest.Profile.Birthday" placeholder="Birthday" name="Birthday"></date-control>
+                        </div>
                     <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="settings.reCaptchaSiteKey" [language]="language"></re-captcha>
                     <div modal-footer>
                         <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signUp()">{{ 'Signup' }}</button>
