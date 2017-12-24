@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 
+import { CommonService } from '../Services/CommonService';
 import { SpinnerService } from '../Services/SpinnerService';
 import { BaseComponent } from './BaseComponent';
 
@@ -17,8 +18,8 @@ export class SpinnerComponent extends BaseComponent {
 
     visible = false;
 
-    constructor(private spinnerService: SpinnerService) {
-        super();
+    constructor(commonService: CommonService, private spinnerService: SpinnerService) {
+        super(commonService);
     }
 
     protected onInit(): void {

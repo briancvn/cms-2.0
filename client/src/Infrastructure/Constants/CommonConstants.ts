@@ -13,5 +13,7 @@ export class CommonConstants {
     public static XDEBUG_PARAM = 'XDEBUG_SESSION_START';
     public static XDEBUG_TYPE = 'PHPSTORM';
     public static API_PREFIX = 'api/';
+
+    public static FormErrorChanged = 'formErrorChanged';
 }
 

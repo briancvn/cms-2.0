@@ -4,6 +4,7 @@ import * as _ from 'underscore';
 
 import { EMessageType } from '../Enums/EMessageType';
 import { IMessage } from '../Interfaces/IMessage';
+import { CommonService } from '../Services/CommonService';
 import { HttpClientService } from '../Services/HttpClientService';
 import { BaseComponent } from './BaseComponent';
 
@@ -32,8 +33,8 @@ export class MessagesComponent extends BaseComponent {
         return _.isEmpty(this.messages);
     }
 
-    constructor(protected httpService: HttpClientService) {
-        super();
+    constructor(commonService: CommonService, protected httpService: HttpClientService) {
+        super(commonService);
         this.init();
     }
 

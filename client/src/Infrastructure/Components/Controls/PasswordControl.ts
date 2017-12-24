@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, Optional, Output } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, NgForm, NgModel } from '@angular/forms';
 import * as _ from 'underscore';
 
 import { BaseControl } from './BaseControl';
@@ -21,6 +21,7 @@ import { BaseControl } from './BaseControl';
                     maxlength="50"
                     spellcheck="false"
                     required />
+            <mat-error *ngIf="innerNgModel.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <div class="btn-forgot-password">
             <button *ngIf="!this.focused && showForgotPassword" class="btn-link" (click)="event.stopPropagation() && forgotPasswordClick()">
@@ -36,6 +37,7 @@ import { BaseControl } from './BaseControl';
     }]
 })
 export class PasswordControl extends BaseControl<string> {
+    @Input() ngModel: NgModel;
     @Input() forgotPassword: boolean;
     @Output() onForgotPasswordClick: EventEmitter<void> = new EventEmitter<void>();
 

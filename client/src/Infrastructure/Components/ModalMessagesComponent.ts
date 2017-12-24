@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 
 import { EMessageType } from '../Enums/EMessageType';
+import { CommonService } from '../Services/CommonService';
 import { HttpClientService } from '../Services/HttpClientService';
 import { MessagesComponent } from './MessagesComponent';
 
@@ -24,8 +25,8 @@ import { MessagesComponent } from './MessagesComponent';
     styleUrls: ['../Styles/Components/Messages.scss']
 })
 export class ModalMessagesComponent extends MessagesComponent {
-    constructor(httpService: HttpClientService) {
-        super(httpService);
+    constructor(commonService: CommonService, httpService: HttpClientService) {
+        super(commonService, httpService);
     }
 
     protected init(): void {

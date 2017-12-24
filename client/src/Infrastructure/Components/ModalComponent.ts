@@ -1,5 +1,6 @@
-import { Component, ContentChild, TemplateRef } from '@angular/core';
+import { Component } from '@angular/core';
 
+import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';
 
 @Component({
@@ -21,4 +22,8 @@ import { BaseComponent } from './BaseComponent';
         `,
     styleUrls: ['../Styles/Components/Modal.scss']
 })
-export class ModalComponent extends BaseComponent {}
+export class ModalComponent extends BaseComponent {
+    constructor(commonService: CommonService) {
+        super(commonService);
+    }
+}

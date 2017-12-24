@@ -2,6 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
 import { EModalSize } from '../../Enums/EModalSize';
+import { CommonService } from '../../Services/CommonService';
 import { BaseMsgDialogComponent } from './BaseMsgDialogComponent';
 
 @Component({
@@ -14,7 +15,7 @@ export class ResponseErrorDialogComponent extends BaseMsgDialogComponent<Respons
 
     @HostBinding('attr.class') classes = 'response-error-dialog';
 
-    constructor(dialogRef: MatDialogRef<ResponseErrorDialogComponent>) {
-        super(dialogRef);
+    constructor(commonService: CommonService, dialogRef: MatDialogRef<ResponseErrorDialogComponent>) {
+        super(commonService, dialogRef);
     }
 }

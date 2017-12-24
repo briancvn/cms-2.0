@@ -3,7 +3,7 @@ db.createCollection("User", {
     validator: {
         $jsonSchema: {
 			bsonType: "object",
-			required: ["Username", "Pin", "Password", "Profile"],
+			required: ["Username", "Email", "Phone", "Pin", "Password", "Profile"],
 			properties: {
 				Username: {
 				   bsonType: "string",
@@ -13,12 +13,12 @@ db.createCollection("User", {
 				Email: {
 					bsonType: "string",
 					pattern: "/^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/",
-					description: "Email__email"
+					description: "Email__email__required"
 				},
 				Phone: {
 					bsonType: "string",
 					pattern: "/^.{8,20}$/",
-					description: "Phone__phone"
+					description: "Phone__phone__required"
 				},
 				Pin: {
 				   bsonType: "int",

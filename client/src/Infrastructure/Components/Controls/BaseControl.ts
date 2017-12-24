@@ -11,6 +11,10 @@ import {
     ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NgForm, NgModel } from '@angular/forms';
+import * as _ from 'underscore';
+
+import { ErrorMessageConstants } from '../../Constants/ErrorMessageConstants';
+import { StringUtils } from '../../Utils/StringUtils';
 
 const noop = () => {};
 
@@ -27,7 +31,6 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
     @Input() tab: number;
     @Input() disabled: boolean;
     @Input() readOnly: boolean;
-    @Input() required;
 
     focused: boolean;
 
@@ -46,7 +49,9 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
         }
     }
 
-    constructor(public form: NgForm, protected element: ElementRef) {}
+    constructor(public form: NgForm, protected element: ElementRef) {
+        this.form.addControl = this.addControl.bind(this, this.form.addControl);
+    }
 
     focusControl(): boolean {
         if (!this.disabled && !this.readOnly) {
@@ -97,6 +102,16 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
         this.keypress.next();
     }
 
+    protected getErrorMessage(): string {
+        let message;
+        if (!_.isEmpty(this.innerNgModel.errors)) {
+            let key = Object.keys(this.innerNgModel.errors).find(key => this.innerNgModel.errors[key]);
+            message = StringUtils.formatString(ErrorMessageConstants.DEFAULT_MESSAGE[key], this.placeholder)
+                || StringUtils.formatString(ErrorMessageConstants.MESSAGE_UNDEFINED, this.placeholder, key);
+        }
+        return message;
+    }
+
     protected onInit(): void {
         // Virtual method
     }
@@ -111,5 +126,14 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
 
     protected onDestroy(): void {
         // Virtual method
+    }
+
+    private addControl(addControl: Function, ngModel: NgModel): void {
+        if (ngModel.name === this.element.nativeElement.getAttribute('name')) {
+            this.innerNgModel.control.setValidators(ngModel.validator);
+            this.innerNgModel.control.setAsyncValidators(ngModel.asyncValidator);
+            this.innerNgModel.control.setErrors(ngModel.errors);
+        }
+        addControl(ngModel);
     }
 }

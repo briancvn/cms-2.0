@@ -6,3 +6,4 @@ export * from './Response';
 export * from './ResponseError';
 export * from './ResponseWarning';
 export * from './ResponseValidation';
+export * from './SignUpRequest';

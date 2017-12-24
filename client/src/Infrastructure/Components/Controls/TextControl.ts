@@ -8,24 +8,22 @@ import { BaseControl } from './BaseControl';
     template: `
         <mat-form-field>
             <input matInput
+                    spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
                     [type]="type"
                     [placeholder]="placeholder"
                     [disabled]="disabled"
                     [(ngModel)]="value"
-                    spellcheck="false"
-                    [required]="required"
                     (keypress)="onKeypress($event)"
                     (blur)="onBlur($event)"
                     (focus)="onFocus($event)" />
             <ng-content></ng-content>
+            <mat-error *ngIf="innerNgModel.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>`,
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => TextControl),
-        multi: true
-    }]
+    providers: [
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TextControl), multi: true }
+    ]
 })
 export class TextControl extends BaseControl<string> {
     @Input() type = 'text';

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Type } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
+import { CustomFormsModule } from 'ng2-validation';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
@@ -43,7 +44,8 @@ const INFRASTRUCTURE_EXTERNAL_MODULES = [
     FlexLayoutModule,
     ReCaptchaModule,
     PerfectScrollbarModule,
-    PasswordStrengthBarModule
+    PasswordStrengthBarModule,
+    CustomFormsModule
 ];
 
 export const INFRASTRUCTURE_ENTRY_COMPONENTS: Type<any>[] = [

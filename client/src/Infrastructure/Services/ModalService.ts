@@ -4,7 +4,8 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'underscore';
 
-import { BaseMsgDialogComponent, ResponseErrorDialogComponent } from '../Components';
+import { BaseMsgDialogComponent } from '../Components/Modals/BaseMsgDialogComponent';
+import { ResponseErrorDialogComponent } from '../Components/Modals/ResponseErrorDialogComponent';
 import { CommonConstants } from '../Constants/CommonConstants';
 
 const BreakLine = '<br \/>';

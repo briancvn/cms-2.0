@@ -3,7 +3,15 @@ import { MatDialogRef } from '@angular/material';
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 import * as _ from 'underscore';
 
-import { AuthenticateService, AuthRequest, BaseModalComponent, TranslateService, EModalSize } from '../../../Infrastructure';
+import {
+    AuthenticateService,
+    AuthRequest,
+    BaseModalComponent,
+    CommonService,
+    EModalSize,
+    SignUpRequest,
+    TranslateService,
+} from '../../../Infrastructure';
 
 enum EAuthenticationType {
     SignIn,
@@ -25,24 +33,39 @@ export class AuthenticateModalComponent extends BaseModalComponent<AuthenticateM
 
     authType: EAuthenticationType = EAuthenticationType.SignIn;
     signInRequest: AuthRequest = new AuthRequest();
+    signUpRequest: SignUpRequest = new SignUpRequest();
     isCaptchaInvalid = true;
 
     get isSubmitisabled(): boolean {
         return !this.form.dirty || this.form.invalid || this.isCaptchaInvalid;
     }
 
-    constructor(dialogRef: MatDialogRef<AuthenticateModalComponent>,
-        public translateService: TranslateService,
+    get language(): string {
+        return this.commonService.translateService.language;
+    }
+
+    constructor(commonService: CommonService,
+        dialogRef: MatDialogRef<AuthenticateModalComponent>,
         private authService: AuthenticateService
     ) {
-        super(dialogRef);
+        super(commonService, dialogRef);
     }
 
     signIn(): void {
-        this.authService.signin(this.signInRequest).then(() => this.close());
+        this.authService.signin(this.signInRequest, this.form).then(() => this.close());
     }
 
-    register(): void {}
+    signUp(): void {
+        this.authService.signUp(this.signUpRequest, this.form).then(() => this.close());
+    }
+
+    register(): void {
+        this.isCaptchaInvalid = true;
+        this.authType = EAuthenticationType.SignUp;
+        this.signInRequest = null;
+        this.signUpRequest = new SignUpRequest();
+        this.updateSize(EModalSize.EXTRA_SMALL);
+    }
 
     forgotPassword(): void {}
 

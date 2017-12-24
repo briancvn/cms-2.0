@@ -2,6 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
 import { EModalSize } from '../../Enums/EModalSize';
+import { CommonService } from '../../Services/CommonService';
 import { BaseModalComponent } from './BaseModalComponent';
 
 @Component({
@@ -17,7 +18,7 @@ export class BaseMsgDialogComponent<T> extends BaseModalComponent<T> {
     message: string;
     title: string;
 
-    constructor(dialogRef: MatDialogRef<T>) {
-        super(dialogRef);
+    constructor(commonService: CommonService, dialogRef: MatDialogRef<T>) {
+        super(commonService, dialogRef);
     }
 }

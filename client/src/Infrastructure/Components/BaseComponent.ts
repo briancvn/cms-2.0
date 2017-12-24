@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
+import { CommonService } from '../Services/CommonService';
 
 declare var settings: ISettings;
 declare var userContext: Authenticate;
@@ -15,6 +16,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;
+
+    constructor(protected commonService: CommonService) {}
 
     ngOnInit(): void {
         this.onInit();
@@ -29,6 +32,9 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     ngOnDestroy(): void {
+        if (this.form) {
+            this.commonService.formCollection.remove(this.form);
+        }
         this.onDestroy();
     }
 

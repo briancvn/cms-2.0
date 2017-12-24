@@ -9,6 +9,8 @@ import { TokenInterceptor } from './TokenInterceptor';
 import { SnackBarService } from './SnackBarService';
 import { TranslateService } from './TranslateService';
 import { SpinnerService } from './SpinnerService';
+import { FormCollection } from './FormCollection';
+import { CommonService } from './CommonService';
 
 export const INFRASTRUCTURE_SERVICES = [
     SystemService,
@@ -21,7 +23,9 @@ export const INFRASTRUCTURE_SERVICES = [
     TokenInterceptor,
     SnackBarService,
     TranslateService,
-    SpinnerService
+    SpinnerService,
+    FormCollection,
+    CommonService
 ];
 
 export * from './BaseService';
@@ -35,3 +39,4 @@ export * from './ModalService';
 export * from './SnackBarService';
 export * from './TranslateService';
 export * from './SpinnerService';
+export * from './CommonService';

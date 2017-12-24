@@ -7,6 +7,7 @@ import { Authenticate } from '../Models/Authenticate';
 import { AuthRequest } from '../Models/AuthRequest';
 import { BaseBackendService } from './BaseBackendService';
 import { HttpClientService } from './HttpClientService';
+import { SignUpRequest } from '../Models/SignUpRequest';
 
 declare var userContext: Authenticate;
 
@@ -27,6 +28,20 @@ export class AuthenticateService extends BaseBackendService {
     signin(request: AuthRequest, form: NgForm): Promise<void> {
         return this.modalPost<Authenticate>({
             Method: 'SignIn',
+            Body: request,
+            DeserializedType: Authenticate,
+            SpinnerId: 'modalSpinner',
+            Form: form
+        }).then(auth => {
+            userContext = auth;
+            this.http.token = auth.Token;
+            this.onUserContextChangedSubject.next();
+        });
+    }
+
+    signUp(request: SignUpRequest, form: NgForm): Promise<void> {
+        return this.modalPost<Authenticate>({
+            Method: 'SignUp',
             Body: request,
             DeserializedType: Authenticate,
             SpinnerId: 'modalSpinner',
