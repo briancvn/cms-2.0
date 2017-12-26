@@ -11,12 +11,6 @@ export class FormCollection extends Array<NgForm> {
     public onErrorChanged: Subject<void> = new Subject<void>();
     private forceDirty = false;
 
-    constructor(@Optional() ...forms: NgForm[]) {
-        super();
-        this.add(...forms);
-        this.registerFormErrorChanged(this);
-    }
-
     registerFormErrorChanged = (forms: NgForm[]): void => {
         forms.forEach(form => form[CommonConstants.FormErrorChanged] && form[CommonConstants.FormErrorChanged].asObservable().subscribe(status => {
             this.onErrorChanged.next(status);

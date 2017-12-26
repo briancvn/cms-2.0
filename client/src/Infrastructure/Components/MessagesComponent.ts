@@ -27,7 +27,7 @@ import { BaseComponent } from './BaseComponent';
     styleUrls: ['../Styles/Components/Messages.scss']
 })
 export class MessagesComponent extends BaseComponent {
-    protected messages: IMessage[] = [];
+    public messages: IMessage[] = [];
 
     get hidden(): boolean {
         return _.isEmpty(this.messages);
