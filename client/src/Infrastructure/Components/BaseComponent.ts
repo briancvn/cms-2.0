@@ -43,9 +43,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
 
     ngOnDestroy(): void {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
-        if (this.form) {
-            this.commonService.formCollection.remove(this.form);
-        }
         this.onDestroy();
     }
 
