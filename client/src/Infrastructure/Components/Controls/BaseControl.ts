@@ -50,7 +50,7 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
     }
 
     constructor(public form: NgForm, protected element: ElementRef) {
-        this.form.addControl = this.addControl.bind(this.form, this.form.addControl);
+        this.form.addControl = this.addControl.bind(this, this.form.addControl.bind(this.form));
     }
 
     focusControl(): boolean {
