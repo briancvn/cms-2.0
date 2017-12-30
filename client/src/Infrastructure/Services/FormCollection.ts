@@ -1,13 +1,14 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { compact, isEmpty } from 'lodash';
 import { Subject } from 'rxjs/Rx';
 import * as _ from 'underscore';
 
 import { CommonConstants } from '../Constants/CommonConstants';
+import { Collection } from '../Models/Collection';
 
 @Injectable()
-export class FormCollection extends Array<NgForm> {
+export class FormCollection extends Collection<NgForm> {
     public onErrorChanged: Subject<void> = new Subject<void>();
     private forceDirty = false;
 
