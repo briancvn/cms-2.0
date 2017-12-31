@@ -39,8 +39,9 @@
                         <text-control [(ngModel)]="signUpRequest.Profile.LastName" placeholder="LastName" name="LastName" required></text-control>
                     </div>
                     <div fxLayout="row" fxLayoutGap="20px">
-                            <date-control [(ngModel)]="signUpRequest.Profile.Birthday" placeholder="Birthday" name="Birthday"></date-control>
-                        </div>
+                        <date-control [(ngModel)]="signUpRequest.Profile.Birthday" placeholder="Birthday" name="Birthday"></date-control>
+                        <select-control [(ngModel)]="signUpRequest.Profile.Gender" [referenceData]="EReferenceDataKind.Gender" placeholder="Gender" name="Gender" required></select-control>
+                    </div>
                     <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="settings.reCaptchaSiteKey" [language]="language"></re-captcha>
                     <div modal-footer>
                         <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signUp()">{{ 'Signup' }}</button>

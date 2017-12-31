@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
 import { CommonService } from '../Services/CommonService';
+import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 
 declare var settings: ISettings;
 declare var userContext: Authenticate;
@@ -14,6 +15,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
 
     get settings(): ISettings { return settings; }
     get userContext(): Authenticate { return userContext; }
+
+    readonly EReferenceDataKind = EReferenceDataKind;
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;

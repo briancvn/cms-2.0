@@ -1,2 +1,36 @@
 {
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\cmd.exe",
+    "editor.minimap.enabled": false,
+    "vsicons.projectDetection.disableDetect": true,
+    "path-intellisense.extensionOnImport": true,
+    "workbench.editor.enablePreview": false,
+    "files.exclude": {
+        "**/.git":  true,
+        "**/*.php":  true,
+        "client/**/*.js.map":  true,
+        "**/*.js.map":  true
+    },
+    "files.autoSave": "off",  
+    "workbench.iconTheme": "vscode-icons",
+    "editor.renderIndentGuides": true,
+    "explorer.openEditors.visible": 0,
+    "autoimport.autoComplete": false,
+
+    // Relative Path
+    "relativePath.ignore": [
+        "**/node_modules/**",
+        "**/*.php",
+        "**/*.json",
+        "**/*.bat",
+        "**/*.md",
+        "**/*.js",
+        "**/*.js.map",
+        "**/client/e2e/*.*"
+    ],
+    "relativePath.removeExtension": true,
+    "relativePath.excludedExtensions": [
+        ".js", ".php"
+    ],
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4
 }
