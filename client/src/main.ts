@@ -1,7 +1,3 @@
-import 'hammerjs';
-import 'underscore';
-import 'rxjs/Rx';
-
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -10,7 +6,7 @@ import { environment } from './Environments/Environment';
 import { VariableNameConstants, CommonConstants } from './Infrastructure';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 setTimeout(() => {
