@@ -15,10 +15,13 @@ import * as _ from 'underscore';
 
 import { ErrorMessageConstants } from '../../Constants/ErrorMessageConstants';
 import { StringUtils } from '../../Utils/StringUtils';
+import { EResource } from '../../Enums/EResource';
 
 const noop = () => {};
 
 export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy, ControlValueAccessor {
+    readonly EResource = EResource;
+
     @HostBinding('class') class = 'form-control';
 
     @ViewChild('innerElement') protected innerElement: ElementRef;

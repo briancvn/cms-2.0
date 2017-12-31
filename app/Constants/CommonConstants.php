@@ -4,6 +4,8 @@ namespace CMS\Constants;
 
 class CommonConstants
 {
+    const DEFAULT_LANGUAGE = 'vi';
+
     const ACCESS_CONTROL_TAG = 'accessControl';
     const BUSINESS_ATTR = 'name';
     const BUSINESS_ROLE_GROUP_TAG = 'businessRoleGroup';

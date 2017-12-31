@@ -4,21 +4,21 @@
             <ng-container *ngSwitchCase="EAuthenticationType.SignIn">
                 <div fxLayout="row" class="signin-container">
                     <div fxFlex="60" class="signin-content">
-                        <h1>{{ 'Signin' }}</h1>
-                        <h4>{{ 'Description' }}</h4>
+                        <h1>{{ 'Signin_Title' | translate }}</h1>
+                        <h4>{{ 'Signin_Description' | translate }}</h4>
                         <modal-messages></modal-messages>
-                        <text-control [(ngModel)]="signInRequest.Username" placeholder="Username/Email/Pin" name="Username" required></text-control>
-                        <password-control forgotPassword [(ngModel)]="signInRequest.Password" (onForgotPasswordClick)="forgotPassword()" placeholder="Field.Password" name="Password"></password-control>
+                        <text-control [(ngModel)]="signInRequest.Username" placeholder="Username|Email|Pin" name="Username" required></text-control>
+                        <password-control forgotPassword [(ngModel)]="signInRequest.Password" (onForgotPasswordClick)="forgotPassword()" placeholder="Password" name="Password"></password-control>
                         <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="settings.reCaptchaSiteKey" [language]="language"></re-captcha>
-                        <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signIn()">{{ 'Signin' }}</button>
+                        <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signIn()">{{ 'Button.Signin' | translate }}</button>
                     </div>
                     <div fxFlex="40" class="signup-content">
                         <div fxFill fxLayout="column">
                             <div fxFlex fxLayoutAlign="center center">
                                 <div class="signup-content">
-                                    <h1>{{ 'Signup' }}</h1>
-                                    <span class="signup-description">{{ 'Description' }}</span>
-                                    <button mat-raised-button type="button" (click)="register()">{{ 'Button.Signup' }}</button>
+                                    <h1>{{ 'Signup_Title' | translate }}</h1>
+                                    <span class="signup-description">{{ 'Signup_Description' | translate }}</span>
+                                    <button mat-raised-button type="button" (click)="register()">{{ 'Button.Signup' | translate }}</button>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
 
             <ng-container *ngSwitchCase="EAuthenticationType.SignUp">
                 <div fxLayout="column" class="register-container">
-                    <h1>{{ 'Signup' }}</h1>
+                    <h1>{{ 'Signup_Title' | translate }}</h1>
                     <text-control [(ngModel)]="signUpRequest.Username" placeholder="Username" name="Username" required></text-control>
                     <text-control [(ngModel)]="signUpRequest.Email" type="email" placeholder="Email" name="Email" required [email]></text-control>
                     <text-control [(ngModel)]="signUpRequest.Phone" placeholder="Phone" name="Phone" required></text-control>
@@ -44,7 +44,7 @@
                     </div>
                     <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" [site_key]="settings.reCaptchaSiteKey" [language]="language"></re-captcha>
                     <div modal-footer>
-                        <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signUp()">{{ 'Signup' }}</button>
+                        <button mat-raised-button type="submit" color="primary" [disabled]="isSubmitisabled" (click)="signUp()">{{ 'Button.Signup' | translate }}</button>
                     </div>
                 </div>
             </ng-container>

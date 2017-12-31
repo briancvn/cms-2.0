@@ -38,6 +38,14 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
 
     ngAfterViewInit(): void {
         this.afterViewInit();
+        var afterViewInitPromise = Promise.all([this.performAfterViewInitAsync()]);
+        if (afterViewInitPromise) {
+            afterViewInitPromise.then(() => {
+                // Not implemented
+            }, error => {
+                // Not implemented
+            });
+        }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -71,6 +79,10 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     protected performInitAsync(): Promise<any> {
+        return Promise.resolve(null);
+    }
+
+    protected performAfterViewInitAsync(): Promise<any> {
         return Promise.resolve(null);
     }
 }

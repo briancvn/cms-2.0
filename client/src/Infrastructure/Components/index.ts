@@ -14,4 +14,5 @@ export const INFRASTRUCTURE_COMPONENTS = [
 
 export * from './Modals';
 export * from './BaseComponent';
+export * from './BaseContentComponent';
 export * from './ModalComponent';

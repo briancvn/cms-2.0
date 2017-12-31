@@ -22,6 +22,7 @@ try {
     define("ENUMS_DIR", APP_DIR.'/Enums');
     define("SERVICES_DIR", APP_DIR.'/Services');
     define("REPOSITORIES_DIR", APP_DIR.'/Repositories');
+    define("RESOURCES_DIR", APP_DIR.'/Resources');
     define("CONTROLLERS_DIR", APP_DIR.'/Controllers');
     define("ACCESS_DINIFITIONS_PATH", SERVICES_DIR.'/AccessControlDefinitions.xml');
     define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');

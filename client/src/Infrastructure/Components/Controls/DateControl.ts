@@ -11,8 +11,8 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
+                    placeholder="{{ 'Field.' + placeholder | translate }}"
                     [matDatepicker]="picker"
-                    [placeholder]="placeholder"
                     [disabled]="disabled"
                     [(ngModel)]="value"
                     (keypress)="onKeypress($event)"
@@ -20,7 +20,9 @@ import { BaseControl } from './BaseControl';
                     (focus)="onFocus($event)" />
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="innerNgModel.invalid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="innerNgModel.invalid">
+                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+            </mat-error>
         </mat-form-field>`,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateControl), multi: true }

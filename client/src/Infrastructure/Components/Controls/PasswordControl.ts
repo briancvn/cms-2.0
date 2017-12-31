@@ -12,8 +12,8 @@ import { BaseControl } from './BaseControl';
             <input matInput
                     #innerElement
                     #innerNgModel="ngModel"
+                    placeholder="{{ 'Field.' + placeholder | translate }}"
                     [type]="hide ? 'password' : 'text'"
-                    [placeholder]="placeholder"
                     [disabled]="disabled"
                     [(ngModel)]="value"
                     (blur)="onBlur($event)"
@@ -21,11 +21,13 @@ import { BaseControl } from './BaseControl';
                     maxlength="50"
                     spellcheck="false"
                     required />
-            <mat-error *ngIf="innerNgModel.invalid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="innerNgModel.invalid">
+                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+            </mat-error>
         </mat-form-field>
         <div class="btn-forgot-password">
             <button *ngIf="!this.focused && showForgotPassword" class="btn-link" (click)="event.stopPropagation() && forgotPasswordClick()">
-                {{ 'Forgot password' }}
+                {{ 'Forgot_Password_Text' | translate }}
             </button>
             <ng2-password-strength-bar *ngIf="!showForgotPassword" [passwordToCheck]="value"></ng2-password-strength-bar>
         </div>`,

@@ -12,6 +12,7 @@ import { SpinnerService } from './SpinnerService';
 import { FormCollection } from './FormCollection';
 import { CommonService } from './CommonService';
 import { ReferenceDataService } from './ReferenceDataService';
+import { ResourceService } from './ResourceService';
 
 export const INFRASTRUCTURE_SERVICES = [
     SystemService,
@@ -27,7 +28,8 @@ export const INFRASTRUCTURE_SERVICES = [
     SpinnerService,
     FormCollection,
     CommonService,
-    ReferenceDataService
+    ReferenceDataService,
+    ResourceService
 ];
 
 export * from './BaseService';
@@ -43,3 +45,4 @@ export * from './TranslateService';
 export * from './SpinnerService';
 export * from './CommonService';
 export * from './ReferenceDataService';
+export * from './ResourceService';

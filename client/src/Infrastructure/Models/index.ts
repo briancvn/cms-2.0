@@ -7,6 +7,7 @@ export * from './ReferenceData';
 export * from './ReferenceDataCollectionRequest';
 export * from './ReferenceDataCollectionResult';
 export * from './ReferenceDataValue';
+export * from './ResourceRequest';
 export * from './Response';
 export * from './ResponseError';
 export * from './ResponseValidation';

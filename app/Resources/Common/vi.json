@@ -1,0 +1,80 @@
+{
+    "Signin_Title": "Đăng nhập",
+    "Signin_Description": "Đăng nhập vào tài khoản của bạn",
+    "Signup_Title": "Đăng ký",
+    "Signup_Description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Forgot_Password_Text": "Quên mật khẩu?",
+    "Search_As_Move": "Tìm kiếm khi tôi di chuyển",
+    "Title": {
+        "BasicInfo": "Thông tin",
+        "AdditionalInfo": "Thông tin bổ sung",
+        "Address": "Địa chỉ",
+        "Amenities": "Tiện nghi",
+        "PicturesRoom": "Hình ảnh"
+    },
+    "Description": {
+        "BasicInfo": "Thông tin",
+        "AdditionalInfo": "Thông tin bổ sung",
+        "Address": "Địa chỉ",
+        "Amenities": "Tiện nghi",
+        "PicturesRoom": "Hình ảnh"
+    },
+    "Button": {
+        "OK": "OK",
+        "Signin": "Đăng nhập",
+        "Signout": "Thoát",
+        "Signup": "Đăng ký ngay!",
+        "Cancel": "Thoát",
+        "Create_Listing": "Đăng tin miễn phí",
+        "Next": "Tiếp tục",
+        "RequestCode": "Gửi mã xác thực",
+        "ReSendCode": "Gửi lại mã",
+        "Reset": "Đặt lại mật khẩu"
+    },
+    "Field": {
+        "Username|Email|Pin": "Tên đăng nhập, email hoặc số pin",
+        "Username": "Tên đăng nhập",
+        "Email": "Email",
+        "Phone": "Điện thoại",
+        "Password": "Mật khẩu",
+        "ConfirmPassword": "Nhập lại mật khẩu",
+        "FullName": "Họ tên",
+        "FirstName": "Tên",
+        "LastName": "Họ",
+        "Birthday": "Ngày sinh",
+        "Gender": "Giới tính",
+        "Title": "Tiêu đề",
+        "RoomType": "Loại phòng",
+        "PersonMax": "Số người",
+        "PriceDay": "Giá/ngày",
+        "Currency": "Loại tiền",
+        "CheckIn": "Giờ nhận phòng",
+        "CheckOut": "Giờ trả phòng",
+        "MinimumStay": "Ngày cho thuê tối đa",
+        "OnlyFor": "Chỉ dành cho",
+        "WeeklyDiscount": "Khuyến mãi theo tuần",
+        "MonthlyDiscount": "Khuyến mãi theo tháng",
+        "Size": "Diện tích(m²)",
+        "Country": "Quốc gia",
+        "City": "Thành Phố",
+        "Address": "Địa chỉ",
+        "Aparment": "Căn hộ",
+        "Place": "Địa điểm",
+        "Distance": "Khoảng cách",
+        "Latitude": "Vĩ độ",
+        "Longitude": "Kinh độ",
+        "ResetCode": "Mã xác thực",
+        "AmenityDetails": "Chi tiết"
+    },
+    "Grid": {
+        "Default_Hint": "Double click to edit"
+    },
+    "FieldTest": {
+        "Id": "Id",
+        "Column1": "Column1",
+        "Column2": "Column2",
+        "Column3": "Column3",
+        "Column4": "Column4",
+        "Column5": "Column5"
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "Signin_Title": "Sign In",
+    "Signin_Description": "Log in to your account",
+    "Signup_Title": "Sign Up",
+    "Signup_Description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Forgot_Password_Text": "Forgot password?",
+    "Search_As_Move": "Search as I move",
+    "Title": {
+        "BasicInfo": "Basic information",
+        "AdditionalInfo": "Additional information",
+        "Address": "Address",
+        "Amenities": "Amenities",
+        "PicturesRoom": "Pictures of room"
+    },
+    "Description": {
+        "BasicInfo": "Basic information",
+        "AdditionalInfo": "Additional information",
+        "Address": "Address",
+        "Amenities": "Amenities",
+        "PicturesRoom": "Pictures of room"
+    },
+    "Button": {
+        "OK": "OK",
+        "Signin": "Sign In",
+        "Signout": "Sign Out",
+        "Signup": "Register Now!",
+        "Cancel": "Thoát",
+        "Create_Listing": "List Your Place",
+        "Next": "Next",
+        "RequestCode": "Send Code",
+        "ReSendCode": "Resend Code",
+        "Reset": "Reset"
+    },
+    "Field": {
+        "Email": "Email",
+        "Phone": "Phone",
+        "Password": "Password",
+        "ConfirmPassword": "Confirm password",
+        "FullName": "Fullname",
+        "Birthday": "Birthday",
+        "Gender": "Gender",
+        "Title": "Title",
+        "RoomType": "Room type",
+        "PersonMax": "No. person max",
+        "PriceDay": "Price/day",
+        "Currency": "Currency",
+        "CheckIn": "Check in",
+        "CheckOut": "Check out",
+        "MinimumStay": "Minimun stay (days)",
+        "OnlyFor": "Only for",
+        "WeeklyDiscount": "Weekly discount",
+        "MonthlyDiscount": "Monthly discount",
+        "Size": "Size(m²)",
+        "Country": "Country",
+        "City": "City",
+        "Address": "Address",
+        "Aparment": "Apartment, Building (Optional)",
+        "Place": "Place",
+        "Distance": "Distance",
+        "Latitude": "Latitude",
+        "Longitude": "Longitude",
+        "ResetCode": "Code",
+        "AmenityDetails": "AmenityDetails"
+    },
+    "Grid": {
+        "Default_Hint": "Double click to edit"
+    },
+    "FieldTest": {
+        "Id": "Id",
+        "Column1": "Column1",
+        "Column2": "Column2",
+        "Column3": "Column3",
+        "Column4": "Column4",
+        "Column5": "Column5"
+    }
+}

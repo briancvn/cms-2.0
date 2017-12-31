@@ -11,15 +11,17 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
+                    placeholder="{{ 'Field.' + placeholder | translate }}"
                     [type]="type"
-                    [placeholder]="placeholder"
                     [disabled]="disabled"
                     [(ngModel)]="value"
                     (keypress)="onKeypress($event)"
                     (blur)="onBlur($event)"
                     (focus)="onFocus($event)" />
             <ng-content></ng-content>
-            <mat-error *ngIf="innerNgModel.invalid">{{getErrorMessage()}}</mat-error>
+            <mat-error *ngIf="innerNgModel.invalid">
+                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+            </mat-error>
         </mat-form-field>`,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TextControl), multi: true }
