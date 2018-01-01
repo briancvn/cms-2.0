@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Input, Optional } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, Optional, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 
 import { BaseControl } from './BaseControl';
@@ -11,7 +11,7 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
-                    placeholder="{{ 'Field.' + placeholder | translate }}"
+                    placeholder="{{ getPlaceholder() | translate }}"
                     [matDatepicker]="picker"
                     [disabled]="disabled"
                     [(ngModel)]="value"
@@ -21,17 +21,18 @@ import { BaseControl } from './BaseControl';
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+                {{ getErrorMessage() | translate: EResource.Message }}
             </mat-error>
         </mat-form-field>`,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateControl), multi: true }
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateControl extends BaseControl<Date> {
     @Input() type = 'text';
 
-    constructor(@Optional() ngForm: NgForm, element: ElementRef) {
-        super(ngForm, element);
+    constructor(@Optional() ngForm: NgForm, element: ElementRef, cdr: ChangeDetectorRef) {
+        super(ngForm, element, cdr);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Optional } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 
 import { BaseListControl } from './BaseListControl';
@@ -10,28 +10,29 @@ import { CommonService } from '../../Services/CommonService';
         <mat-form-field>
             <mat-select #innerElement
                         #innerNgModel="ngModel"
-                        placeholder="{{ 'Field.' + placeholder | translate }}"
+                        placeholder="{{ getPlaceholder() | translate }}"
                         [disabled]="disabled"
                         [(ngModel)]="value"
                         (keypress)="onKeypress($event)"
                         (blur)="onBlur($event)"
                         (focus)="onFocus($event)">
                 <mat-option *ngFor="let item of listView | async" [value]="getOptionValue(item)">
-                    {{ getDisplayText(item) }}
+                    {{ getDisplayText(item) | translate: getDisplayTextResource() }}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+                {{ getErrorMessage() | translate: EResource.Message }}
             </mat-error>
         </mat-form-field>`,
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => SelectControl),
         multi: true
-    }]
+    }],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectControl extends BaseListControl<string> {
-    constructor(@Optional() ngForm: NgForm, element: ElementRef, commonService: CommonService) {
-        super(ngForm, element, commonService);
+    constructor(@Optional() ngForm: NgForm, element: ElementRef, cdr: ChangeDetectorRef, commonService: CommonService) {
+        super(ngForm, element, cdr, commonService);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Input, Optional } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, Optional, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 
 import { BaseControl } from './BaseControl';
@@ -11,7 +11,7 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
-                    placeholder="{{ 'Field.' + placeholder | translate }}"
+                    placeholder="{{ getPlaceholder() | translate }}"
                     [type]="type"
                     [disabled]="disabled"
                     [(ngModel)]="value"
@@ -20,17 +20,18 @@ import { BaseControl } from './BaseControl';
                     (focus)="onFocus($event)" />
             <ng-content></ng-content>
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+                {{ getErrorMessage() | translate: EResource.Message }}
             </mat-error>
         </mat-form-field>`,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TextControl), multi: true }
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextControl extends BaseControl<string> {
     @Input() type = 'text';
 
-    constructor(@Optional() ngForm: NgForm, element: ElementRef) {
-        super(ngForm, element);
+    constructor(@Optional() ngForm: NgForm, element: ElementRef, cdr: ChangeDetectorRef) {
+        super(ngForm, element, cdr);
     }
 }

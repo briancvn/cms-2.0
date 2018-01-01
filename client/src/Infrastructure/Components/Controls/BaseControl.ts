@@ -9,6 +9,7 @@ import {
     OnInit,
     Output,
     ViewChild,
+    ChangeDetectorRef
 } from '@angular/core';
 import { ControlValueAccessor, NgForm, NgModel } from '@angular/forms';
 import * as _ from 'underscore';
@@ -52,7 +53,7 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
         }
     }
 
-    constructor(public form: NgForm, protected element: ElementRef) {
+    constructor(public form: NgForm, protected element: ElementRef, protected cdr: ChangeDetectorRef) {
         this.form.addControl = this.addControl.bind(this, this.form.addControl.bind(this.form));
     }
 
@@ -105,14 +106,18 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
         this.keypress.next();
     }
 
-    protected getErrorMessage(): string {
+    getErrorMessage(): string {
         let message;
         if (!_.isEmpty(this.innerNgModel.errors)) {
             let key = Object.keys(this.innerNgModel.errors).find(key => this.innerNgModel.errors[key]);
             message = StringUtils.formatString(ErrorMessageConstants.DEFAULT_MESSAGE[key], this.placeholder)
                 || StringUtils.formatString(ErrorMessageConstants.MESSAGE_UNDEFINED, this.placeholder, key);
         }
-        return message;
+        return `${ErrorMessageConstants.PREFIX_MESSAGE_VALIDATION}${message}`;
+    }
+
+    getPlaceholder(): string {
+        return `${ErrorMessageConstants.PREFIX_PLACEHOLDER}${this.placeholder}`;
     }
 
     protected onInit(): void {

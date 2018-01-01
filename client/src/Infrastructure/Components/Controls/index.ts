@@ -9,5 +9,3 @@ export const INFRASTRUCTURE_CONTROLS_COMPONENTS = [
     DateControl,
     SelectControl
 ];
-
-export * from './TextControl';

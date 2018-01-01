@@ -15,18 +15,12 @@ export class BaseContentComponent extends BaseComponent {
     }
 
     private loadReferenceData(): Promise<any> {
-        if (this.commonService.referenceDataService) {
-            return Promise.all([this.commonService.referenceDataService.internalLoad()])
-                .then(r => this.commonService.referenceDataService.notifyLoaded());
-        }
-        return Promise.resolve();
+        return Promise.all([this.commonService.referenceDataService.internalLoad()])
+            .then(r => this.commonService.referenceDataService.notifyLoaded());
     }
 
     private loadResource(): Promise<any> {
-        if (this.commonService.resourceService) {
-            return Promise.all([this.commonService.resourceService.internalLoad()])
-                .then(r => this.commonService.resourceService.notifyLoaded());
-        }
-        return Promise.resolve();
+        return Promise.all([this.commonService.resourceService.internalLoad()])
+            .then(r => this.commonService.resourceService.notifyLoaded());
     }
 }

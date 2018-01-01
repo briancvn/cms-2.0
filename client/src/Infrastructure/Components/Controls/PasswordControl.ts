@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Optional, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgForm, NgModel } from '@angular/forms';
 import * as _ from 'underscore';
 
@@ -12,7 +12,7 @@ import { BaseControl } from './BaseControl';
             <input matInput
                     #innerElement
                     #innerNgModel="ngModel"
-                    placeholder="{{ 'Field.' + placeholder | translate }}"
+                    placeholder="{{ getPlaceholder() | translate }}"
                     [type]="hide ? 'password' : 'text'"
                     [disabled]="disabled"
                     [(ngModel)]="value"
@@ -22,7 +22,7 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     required />
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ 'Validation.' + getErrorMessage() | translate: EResource.Message }}
+                {{ getErrorMessage() | translate: EResource.Message }}
             </mat-error>
         </mat-form-field>
         <div class="btn-forgot-password">
@@ -36,7 +36,8 @@ import { BaseControl } from './BaseControl';
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => PasswordControl),
         multi: true
-    }]
+    }],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordControl extends BaseControl<string> {
     @Input() ngModel: NgModel;
@@ -49,8 +50,8 @@ export class PasswordControl extends BaseControl<string> {
         return !_.isUndefined(this.forgotPassword);
     }
 
-    constructor(@Optional() ngForm: NgForm, element: ElementRef) {
-        super(ngForm, element);
+    constructor(@Optional() ngForm: NgForm, element: ElementRef, cdr: ChangeDetectorRef) {
+        super(ngForm, element, cdr);
     }
 
     forgotPasswordClick(): void {
