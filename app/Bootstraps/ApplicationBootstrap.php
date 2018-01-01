@@ -16,10 +16,7 @@ use AutoMapperPlus\Configuration\AutoMapperConfig;
 use CMS\Domains\MappingProfile;
 use CMS\BootstrapInterface;
 use CMS\Constants\Services;
-use CMS\Constants\CommonConstants;
-use CMS\Constants\CacheConstants;
 use CMS\Extensions\Api;
-use CMS\Extensions\Utils;
 use CMS\Extensions\Mapper\Manager as MapperManager;
 use CMS\Extensions\Auth\TokenParsers\JWTTokenParser;
 use CMS\Extensions\Auth\Manager as AuthManager;
@@ -61,8 +58,8 @@ class ApplicationBootstrap implements BootstrapInterface
         });
 
         $di->setShared(MapperManager::class, function () {
-            return MapperManager::initialize(function (AutoMapperConfig $config) {
-                MappingProfile::mappingConfig($config);
+            return MapperManager::initialize(function (AutoMapperConfig $config, MapperManager $mapper) {
+                MappingProfile::mappingConfig($config, $mapper);
             });
         });
 

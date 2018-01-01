@@ -11,7 +11,7 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
-                    placeholder="{{ getPlaceholder() | translate }}"
+                    placeholder="{{ placeholderKey | translate }}"
                     [matDatepicker]="picker"
                     [disabled]="disabled"
                     [(ngModel)]="value"
@@ -21,7 +21,7 @@ import { BaseControl } from './BaseControl';
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ getErrorMessage() | translate: EResource.Message }}
+                {{ errorMessage | translate: EResource.Message | stringFormat: controlName }}
             </mat-error>
         </mat-form-field>`,
     providers: [

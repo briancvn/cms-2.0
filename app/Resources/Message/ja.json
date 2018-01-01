@@ -1,20 +1,8 @@
 {
-    "Info_Title": "情報",
-    "Msg_Not_Implemented": "実装されていません！",
-    "Signin_Success": "成功したサインイン！",
-    "Signup_Success": "サインアップが成功しました！",
-    "Reset_Password_Success": "パスワードをリセットしてください！",
-    "Reset_Code_Expired": "期限切れのパスワードをリセットするためのコード",
-    "Reset_Code_Invalid": "パスワードを無効にするために使用するコード",
+    "NOT_PERMISSION": "アクセス権がありません",
     "Validation": {
-        "Title_Required": "必須",
-        "PersonMax_Required": "必須",
-        "Price_Required": "必須",
-        "Currency_Required": "必須",
-        "FullName_Required": "必須",
-        "Email_Required": "必須",
-        "Phone_Required": "必須",
-        "Password_Required": "必須",
-        "ConfirmPassword_Required": "必須"
+        "Required": "{0}は必須です",
+        "Unmatched": "{0}不一致",
+        "Invalid": "{0}は無効です"
     }
 }

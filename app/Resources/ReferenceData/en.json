@@ -1,50 +1,16 @@
 {
+    "Boolean": {
+        "True": "Yes",
+        "False": "No"
+    },
     "Gender": {
         "Male": "Male",
         "Female": "Female",
         "Other": "Other"
     },
-    "Amenities": {
-        "Wifi": "Wifi",
-        "Essentials": "Essentials",
-        "AirConditioner": "Air-Conditioner",
-        "HairDryer": "Hair dryer",
-        "Furnished": "Furnished",
-        "TV": "TV",
-        "Balcony": "Balcony",
-        "ParkingArea": "Parking area",
-        "PrivateBathroom": "Private bathroom",
-        "PrivateLivingroom": "Private Livingroom",
-        "Kitchen": "Kitchen",
-        "Pool": "Pool",
-        "Elevator": "Elevator",
-        "PrivateEntrance": "Private entrance",
-        "Gym": "Gym",
-        "Business": "Business",
-        "KidSuitable": "Kid suitable",
-        "SmokingAllow": "Smoking",
-        "PetAllow": "Pet allow",
-        "CameraSecurity": "Camera security"
-    },
-    "RoomType": {
-        "Vip": "VIP",
-        "Normal": "Normal"
-    },
-    "RoomGender": {
-        "Male": "Male",
-        "Female": "Female",
-        "Other" : "Other",
-        "All" : "All"
-    },
     "Currency": {
         "VietnamDong": "Vietnam dong",
         "USDollar": "US Dollar"
-    },
-    "EssentialPlace": {
-        "Beach": "Beach",
-        "Supermarket": "Supermarket",
-        "Airport": "Airport",
-        "MovieTheater": "Movie theater"
     },
     "Country": {
         "Afghanistan": "Afghanistan",

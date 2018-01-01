@@ -5,6 +5,7 @@ namespace CMS\Constants;
 class CommonConstants
 {
     const DEFAULT_LANGUAGE = 'vi';
+    const DEFAULT_RESOURCE = 'Common';
 
     const ACCESS_CONTROL_TAG = 'accessControl';
     const BUSINESS_ATTR = 'name';

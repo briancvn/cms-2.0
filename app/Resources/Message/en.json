@@ -1,21 +1,8 @@
 {
-    "Info_Title": "Infomations",
-    "Msg_Not_Implemented": "Not implemented !",
-    "Signin_Success": "Sign in successful !",
-    "Signup_Success": "Sign up successful !",
-    "Reset_Password_Success": "Reset password successful !",
-    "Reset_Code_Expired": "Reset code expired",
-    "Reset_Code_Invalid": "Reset code invalid",
+    "NOT_PERMISSION": "You have no permission to access",
     "Validation": {
-        "Username/Email/Pin_Required": "Title required",
-        "Title_Required": "Title required",
-        "PersonMax_Required": "No. person max required",
-        "Price_Required": "Price required",
-        "Currency_Required": "Currency required",
-        "FullName_Required": "Full name required",
-        "Email_Required": "Email required",
-        "Phone_Required": "Phone required",
-        "Password_Required": "Password required",
-        "ConfirmPassword_Required": "Confirm password required"
+        "Required": "{0} required",
+        "Unmatched": "{0} unmatched",
+        "Invalid": "{0} invalid"
     }
 }

@@ -1,50 +1,16 @@
 {
+    "Boolean": {
+        "True": "Có",
+        "False": "Không"
+    },
     "Gender": {
         "Male": "Nam",
         "Female": "Nữ",
         "Other": "Khác"
     },
-    "Amenities": {
-        "Wifi": "Wifi",
-        "Essentials": "Essentials",
-        "AirConditioner": "Điều hòa",
-        "HairDryer": "Máy sấy tóc",
-        "Furnished": "Nội thất",
-        "TV": "TV",
-        "Balcony": "Ban công",
-        "ParkingArea": "Khu vực đậu xe",
-        "PrivateBathroom": "Phòng tắm riêng",
-        "PrivateLivingroom": "Phòng khách riêng",
-        "Kitchen": "Phòng bếp",
-        "Pool": "Hồ bơi",
-        "Elevator": "Thang máy",
-        "PrivateEntrance": "Lối đi riêng",
-        "Gym": "Phòng thể dục",
-        "Business": "Business",
-        "KidSuitable": "KidSuitable",
-        "SmokingAllow": "Hút thuốc",
-        "PetAllow": "Thú nuôi",
-        "CameraSecurity": "Camera an ninh"
-    },
-    "RoomType": {
-        "Vip": "VIP",
-        "Normal": "Phòng thường"
-    },
-    "RoomGender": {
-        "Male": "Nam",
-        "Female": "Nữ",
-        "Other" : "Khác",
-        "All" : "Tất cả"
-    },
     "Currency": {
         "VietnamDong": "Việt nam đồng",
         "USDollar": "US đô la"
-    },
-    "EssentialPlace": {
-        "Beach": "Biển",
-        "Supermarket": "Siêu thị",
-        "Airport": "Sân bay",
-        "MovieTheater": "Rạp chiếu phim"
     },
     "Country": {
         "Afghanistan": "Afghanistan",

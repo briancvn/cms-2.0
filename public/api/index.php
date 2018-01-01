@@ -28,6 +28,7 @@ try {
     define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
     define('EReferenceDataKind', include_once ENUMS_DIR.'/EReferenceDataKind.php');
+    define('EResource', include_once ENUMS_DIR.'/EResource.php');
 
     require VENDOR_DIR.'/autoload.php';
 

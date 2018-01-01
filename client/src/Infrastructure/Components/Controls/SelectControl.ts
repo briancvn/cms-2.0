@@ -10,7 +10,7 @@ import { CommonService } from '../../Services/CommonService';
         <mat-form-field>
             <mat-select #innerElement
                         #innerNgModel="ngModel"
-                        placeholder="{{ getPlaceholder() | translate }}"
+                        placeholder="{{ placeholderKey | translate }}"
                         [disabled]="disabled"
                         [(ngModel)]="value"
                         (keypress)="onKeypress($event)"
@@ -21,7 +21,7 @@ import { CommonService } from '../../Services/CommonService';
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ getErrorMessage() | translate: EResource.Message }}
+                {{ errorMessage | translate: EResource.Message | stringFormat: controlName }}
             </mat-error>
         </mat-form-field>`,
     providers: [{

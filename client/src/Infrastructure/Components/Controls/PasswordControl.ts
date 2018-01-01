@@ -12,7 +12,7 @@ import { BaseControl } from './BaseControl';
             <input matInput
                     #innerElement
                     #innerNgModel="ngModel"
-                    placeholder="{{ getPlaceholder() | translate }}"
+                    placeholder="{{ placeholderKey | translate }}"
                     [type]="hide ? 'password' : 'text'"
                     [disabled]="disabled"
                     [(ngModel)]="value"
@@ -22,7 +22,7 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     required />
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ getErrorMessage() | translate: EResource.Message }}
+                {{ errorMessage | translate: EResource.Message | stringFormat: controlName }}
             </mat-error>
         </mat-form-field>
         <div class="btn-forgot-password">

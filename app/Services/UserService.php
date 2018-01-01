@@ -7,6 +7,7 @@ use CMS\Contracts\AuthRequestDto;
 use CMS\Contracts\AuthenticateDto;
 use CMS\Contracts\ProfileDto;
 use CMS\Contracts\SignUpRequestDto;
+use CMS\Domains\User;
 
 class UserService extends BaseService
 {
@@ -26,7 +27,7 @@ class UserService extends BaseService
     protected function signIn(AuthRequestDto $requestDto): ?AuthenticateDto
     {
         $user = $this->userRepository->findOneByAuthRequest($requestDto->Username);
-        return $this->responseAuthenticateDto($this->authManager->signIn($user, $requestDto->Password));
+        return $this->responseAuthenticateDto($this->authManager->signIn($this->mapper->map($user, User::class), $requestDto->Password));
     }
 
     protected function signUp(SignUpRequestDto $requestDto): ?AuthenticateDto

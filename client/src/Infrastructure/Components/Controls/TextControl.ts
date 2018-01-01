@@ -11,7 +11,7 @@ import { BaseControl } from './BaseControl';
                     spellcheck="false"
                     #innerElement
                     #innerNgModel="ngModel"
-                    placeholder="{{ getPlaceholder() | translate }}"
+                    placeholder="{{ placeholderKey | translate }}"
                     [type]="type"
                     [disabled]="disabled"
                     [(ngModel)]="value"
@@ -20,7 +20,7 @@ import { BaseControl } from './BaseControl';
                     (focus)="onFocus($event)" />
             <ng-content></ng-content>
             <mat-error *ngIf="innerNgModel.invalid">
-                {{ getErrorMessage() | translate: EResource.Message }}
+                {{ errorMessage | translate: EResource.Message | stringFormat: controlName }}
             </mat-error>
         </mat-form-field>`,
     providers: [

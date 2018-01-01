@@ -4,73 +4,26 @@
     "Signup_Title": "サインアップ",
     "Signup_Description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "Forgot_Password_Text": "パスワードをお忘れですか？",
-    "Search_As_Move": "私が移動すると検索",
-    "Title": {
-        "BasicInfo": "基本情報",
-        "AdditionalInfo": "追加情報",
-        "Address": "住所",
-        "Amenities": "アメニティ",
-        "PicturesRoom": "部屋の写真"
-    },
-    "Description": {
-        "BasicInfo": "基本情報",
-        "AdditionalInfo": "追加情報",
-        "Address": "住所",
-        "Amenities": "アメニティ",
-        "PicturesRoom": "部屋の写真"
-    },
     "Button": {
-        "OK": "OK",
         "Signin": "サインイン",
         "Signout": "サインアウト",
         "Signup": "今すぐ登録！",
         "Cancel": "キャンセル",
-        "Create_Listing": "あなたの場所を一覧表示する",
         "Next": "次",
         "RequestCode": "コードを送信する",
         "ReSendCode": "再送信コード",
         "Reset": "リセット"
     },
     "Field": {
+        "Username|Email|Pin": "ユーザー名、電子メールまたはピン",
+        "Username": "ユーザー名",
         "Email": "Eメール",
         "Phone": "電話",
         "Password": "パスワード",
         "ConfirmPassword": "パスワードを認証する",
-        "FullName": "フルネーム",
+        "FirstName": "ファーストネーム",
+        "LastName": "苗字",
         "Birthday": "お誕生日",
-        "Gender": "性別",
-        "Title": "タイトル",
-        "RoomType": "ルームタイプ",
-        "PersonMax": "大人",
-        "PriceDay": "価格/日",
-        "Currency": "通貨",
-        "CheckIn": "チェックイン",
-        "CheckOut": "チェックアウト",
-        "MinimumStay": "最低滞在",
-        "OnlyFor": "VN_Only for",
-        "WeeklyDiscount": "ウィークリーディスカウント",
-        "MonthlyDiscount": "月額割引",
-        "Size": "サイズ(m²)",
-        "Country": "国",
-        "City": "シティ",
-        "Address": "住所",
-        "Aparment": "アパート、ビル（オプション）",
-        "Place": "場所",
-        "Distance": "距離",
-        "Latitude": "緯度",
-        "Longitude": "経度",
-        "ResetCode": "コード",
-        "AmenityDetails": "詳細"
-    },
-    "Grid": {
-        "Default_Hint": "ダブルクリックして編集"
-    },
-    "FieldTest": {
-        "Id": "Id",
-        "Column1": "Column1",
-        "Column2": "Column2",
-        "Column3": "Column3",
-        "Column4": "Column4",
-        "Column5": "Column5"
+        "Gender": "性別"
     }
 }

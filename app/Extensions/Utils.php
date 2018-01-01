@@ -76,4 +76,14 @@ class Utils
         }
         return $result;
     }
+
+    public static function getDeepValue($obj, $path)
+    {
+        $pathArr = is_array($path) ? $path : explode('.', $path);
+        $value = $obj[array_shift($pathArr)];
+        if ($value && !empty($pathArr)) {
+            return Utils.getDeepValue($value, $pathArr);
+        }
+        return $value;
+    }
 }

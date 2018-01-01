@@ -39,10 +39,10 @@ abstract class BaseService
             });
 
             if ($annotation && !$this->authManager->isValidBusinessItems($annotation->getArguments())) {
-                throw new WarningException(ErrorCodes::NOT_ACCEPTABLE, ValidationMessageConstants::NOT_ACCEPTABLE);
+                throw new WarningException(ErrorCodes::NOT_ACCEPTABLE, ValidationMessageConstants::NOT_PERMISSION);
             }
         }
 
-        return $this->$name(empty($arguments) ? null: $arguments[0]);
+        return call_user_func_array([$this, $name], $arguments);
     }
 }

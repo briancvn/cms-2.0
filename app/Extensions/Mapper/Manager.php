@@ -13,7 +13,8 @@ class Manager extends AutoMapper {
 
     public static function initialize(callable $configurator): AutoMapperInterface
     {
-        $mapper = parent::initialize($configurator);
+        $mapper = new static;
+        $configurator($mapper->getConfiguration(), $mapper);
         $configuration = $mapper->getConfiguration();
         $configuration->registerMapping('__PHP_Incomplete_Class', ProfileDto::class);
         foreach (Utils::scanNamespaces('CMS\Contracts', CONTRACTS_DIR) as $dtoName) {

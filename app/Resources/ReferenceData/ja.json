@@ -1,50 +1,16 @@
 {
+    "Boolean": {
+        "True": "はい",
+        "False": "いいえ"
+    },
     "Gender": {
         "Male": "男性",
         "Female": "女性",
         "Other": "その他"
     },
-    "Amenities": {
-        "Wifi": "Wi-Fi",
-        "Essentials": "エッセンシャル",
-        "AirConditioner": "エアコン",
-        "HairDryer": "ヘアドライヤー",
-        "Furnished": "家具",
-        "TV": "テレビ",
-        "Balcony": "バルコニー",
-        "ParkingArea": "駐車場",
-        "PrivateBathroom": "専用バスルーム",
-        "PrivateLivingroom": "プライベートリビングルーム",
-        "Kitchen": "キッチン",
-        "Pool": "プール",
-        "Elevator": "エレベーター",
-        "PrivateEntrance": "プライベートエントランス",
-        "Gym": "ジム",
-        "Business": "Business",
-        "KidSuitable": "適切な子供",
-        "SmokingAllow": "喫煙",
-        "PetAllow": "ペット許可",
-        "CameraSecurity": "カメラのセキュリティ"
-    },
-    "RoomType": {
-        "Vip": "VIP",
-        "Normal": "正常"
-    },
-    "RoomGender": {
-        "Male": "Male",
-        "Female": "Female",
-        "Other" : "Other",
-        "All" : "All"
-    },
     "Currency": {
         "VietnamDong": "ベトナムドン",
         "USDollar": "米ドル"
-    },
-    "EssentialPlace": {
-        "Beach": "ビーチ",
-        "Supermarket": "スーパーマーケット",
-        "Airport": "空港",
-        "MovieTheater": "映画館"
     },
     "Country": {
         "Afghanistan": "アフガニスタン",

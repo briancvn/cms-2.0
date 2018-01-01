@@ -1,24 +1,8 @@
 {
-    "Info_Title": "Thông tin",
-    "Msg_Not_Implemented": "Chức năng chưa hoàn thành !",
-    "No_Record_Found": "Không có dữ liệu",
-    "Signin_Success": "Đăng nhập thành công !",
-    "Signup_Success": "Đăng ký thành công !",
-    "Reset_Password_Success": "Đặt lại mật khẩu thành công !",
-    "Reset_Code_Expired": "Mã xác thực đã hết hạn",
-    "Reset_Code_Invalid": "Mã xác thực không hợp lệ",
+    "NOT_PERMISSION": "Bạn không có quyền truy cập",
     "Validation": {
-        "Username|Email|Pin_Required": "Chưa nhập Tên đăng nhập|Email|Số Pin",
-        "Title_Required": "Chưa nhập tiêu đề",
-        "PersonMax_Required": "Chưa nhập số lượng người",
-        "Price_Required": "Chưa nhập giá",
-        "Currency_Required": "Chưa nhập loại tiền",
-        "FullName_Required": "Chưa nhập họ tên",
-        "Email_Required": "Chưa nhập email",
-        "Phone_Required": "Chưa nhập số điện thoại",
-        "Password_Required": "Chưa nhập mật khẩu",
-        "ConfirmPassword_Required": "Chưa nhập xác nhận mật khẩu",
-        "ConfirmPassword_Unmatched": "Xác nhận mật khẩu chưa đúng",
-        "Email_Invalid": "Email không hợp lệ"
+        "Required": "Chưa nhập {0}",
+        "Unmatched": "{0} chưa đúng",
+        "Invalid": "{0} không hợp lệ"
     }
 }

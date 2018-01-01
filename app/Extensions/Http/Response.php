@@ -7,11 +7,13 @@ use CMS\Contracts\ResponseErrorDto;
 use CMS\Contracts\ResponseWarningDto;
 use CMS\Extensions\Exception\WarningException;
 use CMS\Extensions\Exception\ValidationException;
+use CMS\Services\TranslateService;
 
 class Response extends \Phalcon\Http\Response
 {
     public function setErrorContent(\Exception $e, $debugMode = false)
     {
+        $translateService = $this->getDi()->get(TranslateService::class);
         if (!$debugMode) {
             $content = new  ResponseDto([Error => new ResponseErrorDto($e)]);
             $this->setJsonContent($content);
@@ -20,7 +22,7 @@ class Response extends \Phalcon\Http\Response
 
         if ($e instanceof WarningException) {
             $content = new  ResponseDto([Warning => new ResponseWarningDto([
-                Message => $e->getMessage(),
+                Message => $translateService->translate($e->getMessage(), EResource[2]),
                 Code => $e->getCode()
             ])]);
             $this->setJsonContent($content);
