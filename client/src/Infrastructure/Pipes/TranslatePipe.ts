@@ -1,12 +1,15 @@
 import { ChangeDetectorRef, OnDestroy, PipeTransform, WrappedValue, Pipe } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { ISubscription } from "rxjs/Subscription";
-import * as _ from 'underscore';
 
 import { ResourceService } from "../Services/ResourceService";
 import { EResource } from "../Enums/EResource";
+import { Utils } from "../Utils/Utils";
 
-@Pipe({ name: "translate", pure: false })
+@Pipe({
+    name: "translate",
+    pure: false
+})
 export class TranslatePipe implements OnDestroy, PipeTransform {
     private currentValue : string = null;
     private latestValue: any = null;
@@ -25,9 +28,7 @@ export class TranslatePipe implements OnDestroy, PipeTransform {
             this.currentValue = value;
             this.latestValue = value;
             var observable = this.resourceService.observe(resource)
-                .map((translate: Iterable<object>) => {
-                    return this.getDeepValue(translate, value);
-                });
+                .map((translate: Iterable<object>) => Utils.getDeepValue(translate, value));
             this.subscribe(observable);
         }
 
@@ -56,14 +57,5 @@ export class TranslatePipe implements OnDestroy, PipeTransform {
     private updateLatestValue(async: any, translate: string): void {
         this.latestValue = translate || this.currentValue;
         this.ref.markForCheck();
-    }
-
-    private getDeepValue(resource: Object, resourcePath: string|string[]): any {
-        let resourcePathArr = _.isArray(resourcePath) ? resourcePath : resourcePath.split(/\/|\./g);
-        let value = resource[resourcePathArr.shift()];
-        if (value && resourcePathArr.length > 0) {
-            return this.getDeepValue(value, resourcePathArr);
-        }
-        return value;
     }
 }
