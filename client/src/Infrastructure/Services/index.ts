@@ -52,3 +52,4 @@ export * from './ReferenceDataService';
 export * from './ResourceService';
 export * from './ModuleService';
 export * from './AuthenticateActivate';
+export * from './SubscriptionCollection';
