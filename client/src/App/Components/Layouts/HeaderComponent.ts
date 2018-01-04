@@ -7,6 +7,7 @@ import { AuthenticateModalComponent } from '../Modals/AuthenticateModalComponent
 @Component({
     selector: 'header',
     templateUrl: 'HeaderComponent.html',
+    styleUrls: ['../../../Styles/Layouts/Header.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent extends BaseComponent {

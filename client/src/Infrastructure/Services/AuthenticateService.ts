@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import * as _ from 'underscore';
 
@@ -21,7 +22,7 @@ export class AuthenticateService extends BaseBackendService {
         return Boolean(userContext && userContext.Profile);
     }
 
-    constructor(http: HttpClientService) {
+    constructor(http: HttpClientService, private router: Router) {
         super(http, 'Authenticate', false);
     }
 
@@ -66,6 +67,7 @@ export class AuthenticateService extends BaseBackendService {
             } else {
                 userContext = new Authenticate();
                 this.http.token = null;
+
             }
 
             this.onUserContextChangedSubject.next();
@@ -78,6 +80,7 @@ export class AuthenticateService extends BaseBackendService {
                 userContext = new Authenticate();
                 this.http.token = null;
                 this.onUserContextChangedSubject.next();
+                this.router.navigate(['/']);
             });
     }
 }

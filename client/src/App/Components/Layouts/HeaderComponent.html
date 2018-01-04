@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <mat-icon>assessment</mat-icon>
-        <span>CMS</span>
+        <a mat-icon-button routerLink="/" disableRipple class="logo">
+            <mat-icon>assessment</mat-icon>
+            <span>CMS</span>
+        </a>
 
         <span class="spacer"></span>
 
@@ -10,14 +12,22 @@
             <mat-icon fontSet="fa" [fontIcon]="userIcon" class="fa-1x8"></mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="login()" *ngIf="!isAuthenticated">
-                <mat-icon>lock_open</mat-icon>
-                <span>{{ 'Button.Signin' | translate }}</span>
-            </button>
-            <button mat-menu-item (click)="logout()" *ngIf="isAuthenticated">
-                <mat-icon>lock</mat-icon>
-                <span>{{ 'Button.Signout' | translate }}</span>
-            </button>
+            <ng-container *ngIf="!isAuthenticated">
+                <button mat-menu-item (click)="login()">
+                    <mat-icon>lock_open</mat-icon>
+                    <span>{{ 'Button.Signin' | translate }}</span>
+                </button>
+            </ng-container>
+            <ng-container *ngIf="isAuthenticated">
+                <button mat-menu-item [routerLink]="['/module-container']">
+                    <mat-icon>widgets</mat-icon>
+                    <span>{{ 'Button.Modules' | translate }}</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>lock</mat-icon>
+                    <span>{{ 'Button.Signout' | translate }}</span>
+                </button> 
+            </ng-container>
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

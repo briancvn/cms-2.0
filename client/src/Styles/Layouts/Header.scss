@@ -1,0 +1,12 @@
+:host /deep/ {
+    .logo {
+        font-size: 30px;
+        font-weight: bold;
+        .mat-icon {
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            font-size: 30px;
+        }
+    }    
+}

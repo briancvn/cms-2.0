@@ -13,6 +13,8 @@ import { FormCollection } from './FormCollection';
 import { CommonService } from './CommonService';
 import { ReferenceDataService } from './ReferenceDataService';
 import { ResourceService } from './ResourceService';
+import { ModuleService } from './ModuleService';
+import { AuthenticateActivate } from './AuthenticateActivate';
 
 export const INFRASTRUCTURE_SERVICES = [
     SystemService,
@@ -29,7 +31,9 @@ export const INFRASTRUCTURE_SERVICES = [
     FormCollection,
     CommonService,
     ReferenceDataService,
-    ResourceService
+    ResourceService,
+    ModuleService,
+    AuthenticateActivate
 ];
 
 export * from './BaseService';
@@ -46,3 +50,5 @@ export * from './SpinnerService';
 export * from './CommonService';
 export * from './ReferenceDataService';
 export * from './ResourceService';
+export * from './ModuleService';
+export * from './AuthenticateActivate';
