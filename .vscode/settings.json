@@ -32,5 +32,6 @@
         ".js", ".php"
     ],
     "prettier.singleQuote": true,
-    "prettier.tabWidth": 4
+    "prettier.tabWidth": 4,
+    "typescriptHero.resolver.disableImportsSorting": true
 }
