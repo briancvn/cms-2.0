@@ -1,9 +1,12 @@
 {
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\cmd.exe",
     "editor.minimap.enabled": false,
+    "editor.renderIndentGuides": true,
     "vsicons.projectDetection.disableDetect": true,
     "path-intellisense.extensionOnImport": true,
     "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.iconTheme": "vscode-icons",
     "files.exclude": {
         "**/.git":  true,
         "**/*.php":  true,
@@ -11,8 +14,6 @@
         "**/*.js.map":  true
     },
     "files.autoSave": "off",  
-    "workbench.iconTheme": "vscode-icons",
-    "editor.renderIndentGuides": true,
     "explorer.openEditors.visible": 0,
     "autoimport.autoComplete": false,
 
