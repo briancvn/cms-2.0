@@ -1,4 +1,4 @@
 export class VariableNameConstants {
-    public static UserContext = 'userContext';
-    public static Settings = 'settings';
+    static UserContext = 'userContext';
+    static Settings = 'settings';
 }

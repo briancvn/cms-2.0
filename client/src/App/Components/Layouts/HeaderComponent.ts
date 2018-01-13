@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import * as _ from 'underscore';
 
-import { AuthenticateService, BaseComponent, CommonService, ERoleGroup, ModalService } from '../../../Infrastructure';
+import { AuthenticateService, BaseComponent, CommonService, ERoleGroup, ModalService, ModuleService } from '../../../Infrastructure';
 import { AuthenticateModalComponent } from '../Modals/AuthenticateModalComponent';
 
 @Component({
@@ -32,6 +32,7 @@ export class HeaderComponent extends BaseComponent {
     }
 
     constructor(commonService: CommonService,
+        public moduleService: ModuleService,
         private modalService: ModalService,
         private authService: AuthenticateService,
         private cdr: ChangeDetectorRef

@@ -6,7 +6,10 @@
         </a>
 
         <span class="spacer"></span>
-
+        
+        <ng-container *ngIf="isAuthenticated">
+            <ul><li *ngFor="let module of moduleService.modules" (click)="moduleService.addModuleInstance(module)">{{ module.Name}}</li></ul>
+        </ng-container>
         <span>{{userInfo}}</span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon fontSet="fa" [fontIcon]="userIcon" class="fa-1x8"></mat-icon>
@@ -19,7 +22,7 @@
                 </button>
             </ng-container>
             <ng-container *ngIf="isAuthenticated">
-                <button mat-menu-item [routerLink]="['/module-container']">
+                <button mat-menu-item [routerLink]="['/module-container']" [skipLocationChange]="true">
                     <mat-icon>widgets</mat-icon>
                     <span>{{ 'Button.Modules' | translate }}</span>
                 </button>

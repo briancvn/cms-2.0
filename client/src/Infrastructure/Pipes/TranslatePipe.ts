@@ -1,13 +1,13 @@
-import { ChangeDetectorRef, OnDestroy, PipeTransform, WrappedValue, Pipe } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { ISubscription } from "rxjs/Subscription";
+import { ChangeDetectorRef, OnDestroy, PipeTransform, WrappedValue, Pipe } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { ISubscription } from 'rxjs/Subscription';
 
-import { ResourceService } from "../Services/ResourceService";
-import { EResource } from "../Enums/EResource";
-import { Utils } from "../Utils/Utils";
+import { ResourceService } from '../Services/ResourceService';
+import { EResource } from '../Enums/EResource';
+import { Utils } from '../Utils/Utils';
 
 @Pipe({
-    name: "translate",
+    name: 'translate',
     pure: false
 })
 export class TranslatePipe implements OnDestroy, PipeTransform {

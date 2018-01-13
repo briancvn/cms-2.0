@@ -8,3 +8,4 @@ export * from './IRequestOptions';
 export * from './IResourceDictionary';
 export * from './IResourceSubject';
 export * from './ISettings';
+export * from './IModuleParameter';

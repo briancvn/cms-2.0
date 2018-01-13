@@ -10,7 +10,7 @@
         "client/**/*.js.map":  true,
         "**/*.js.map":  true
     },
-    "files.autoSave": "off",  
+    "files.autoSave": "off",
     "workbench.iconTheme": "vscode-icons",
     "editor.renderIndentGuides": true,
     "explorer.openEditors.visible": 0,
@@ -32,5 +32,15 @@
         ".js", ".php"
     ],
     "prettier.singleQuote": true,
-    "prettier.tabWidth": 4
+    "prettier.tabWidth": 4,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    }
 }

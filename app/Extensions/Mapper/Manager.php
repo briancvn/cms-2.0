@@ -24,4 +24,9 @@ class Manager extends AutoMapper {
         }
         return $mapper;
     }
+
+    public function map($source, string $destinationClass)
+    {
+        return $source ? parent::map($source, $destinationClass) : $source;
+    }
 }

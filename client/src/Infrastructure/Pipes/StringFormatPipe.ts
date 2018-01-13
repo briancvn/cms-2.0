@@ -1,9 +1,9 @@
-import { PipeTransform, Pipe } from "@angular/core";
+import { PipeTransform, Pipe } from '@angular/core';
 
-import { StringUtils } from "../Utils/StringUtils";
+import { StringUtils } from '../Utils/StringUtils';
 
-@Pipe({ 
-    name: "stringFormat"
+@Pipe({
+    name: 'stringFormat'
 })
 export class StringFormatPipe implements PipeTransform {
     transform(str: string, ...params: string[]): string {

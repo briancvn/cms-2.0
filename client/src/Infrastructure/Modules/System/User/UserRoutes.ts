@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthenticateActivate } from '../../../../Infrastructure';
+import { AuthenticateActivate } from '../../../Services/AuthenticateActivate';
 import { UserContainerComponent } from './Components/UserContainerComponent';
 
-export const routes: Routes = [
+const routes: Routes = [
     { path: '', component: UserContainerComponent, canActivate:[AuthenticateActivate] }
 ];
 
-@NgModule({
-    imports: [ RouterModule.forRoot(routes) ],
-    exports: [ RouterModule ]
-})
-export class UserRoutingModule {}
+export const ROUTER_PROVIDERS = RouterModule.forChild(routes);

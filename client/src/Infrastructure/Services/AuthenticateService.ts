@@ -67,7 +67,6 @@ export class AuthenticateService extends BaseBackendService {
             } else {
                 userContext = new Authenticate();
                 this.http.token = null;
-
             }
 
             this.onUserContextChangedSubject.next();
