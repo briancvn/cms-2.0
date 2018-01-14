@@ -72,7 +72,9 @@ export class AuthenticateModalComponent extends BaseModalComponent<AuthenticateM
         this.updateSize(EModalSize.EXTRA_SMALL);
     }
 
-    forgotPassword(): void {}
+    forgotPassword(): void {
+        console.log('Not implemented');
+    }
 
     handleCorrectCaptcha(respone): void {
         this.isCaptchaInvalid = _.isEmpty(this.captcha.getResponse());

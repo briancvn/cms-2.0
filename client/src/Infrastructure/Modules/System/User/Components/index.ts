@@ -1,5 +1,5 @@
-import { UserContainerComponent } from './UserContainerComponent';
+import { UserContainer } from './UserContainer';
 
 export const COMPONENTS = [
-    UserContainerComponent
+    UserContainer
 ];

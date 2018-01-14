@@ -31,7 +31,7 @@ import { BaseComponent } from './BaseComponent';
         </spinner>`,
     providers: [ModuleNavigationService]
 })
-export class ModuleOutletContainerComponent extends BaseComponent {
+export class ModuleOutletContainer extends BaseComponent {
     @ViewChild(ModuleHostDirective) moduleHost: ModuleHostDirective;
 
     @Input() moduleInstance: ModuleInstance;

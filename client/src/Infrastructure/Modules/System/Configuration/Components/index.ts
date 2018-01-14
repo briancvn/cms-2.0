@@ -1,5 +1,5 @@
-import { ConfigurationContainerComponent } from './ConfigurationContainerComponent';
+import { ConfigurationContainer } from './ConfigurationContainer';
 
 export const COMPONENTS = [
-    ConfigurationContainerComponent
+    ConfigurationContainer
 ];

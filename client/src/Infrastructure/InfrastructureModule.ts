@@ -2,7 +2,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, SystemJsNgModuleLoader } from '@angular/core';
 
-import { ModuleOutletContainerComponent } from './Components/ModuleOutletContainerComponent';
+import { ModuleOutletContainer } from './Components/ModuleOutletContainer';
 import { InfrastructureCoreModule } from './InfrastructureCoreModule';
 import { TokenInterceptor } from './Services/TokenInterceptor';
 import { reflector } from './Utils/Reflection/Reflection';
@@ -14,7 +14,7 @@ import { Reflector } from './Utils/Reflection/Reflector';
         InfrastructureCoreModule
     ],
     declarations: [
-        ModuleOutletContainerComponent
+        ModuleOutletContainer
     ],
     providers: [
         SystemJsNgModuleLoader,
@@ -28,7 +28,7 @@ import { Reflector } from './Utils/Reflection/Reflector';
         }
     ],
     exports: [
-        ModuleOutletContainerComponent,
+        ModuleOutletContainer,
         InfrastructureCoreModule
     ]
 })

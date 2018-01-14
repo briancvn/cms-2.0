@@ -4,10 +4,10 @@ import { ModuleService, BaseComponent, CommonService } from '../../Infrastructur
 
 @Component({
     selector: 'module-container',
-    templateUrl: 'ModuleContainerComponent.html',
+    templateUrl: 'ModuleContainer.html',
     styleUrls: ['../../Styles/ModuleContainer.scss']
 })
-export class ModuleContainerComponent extends BaseComponent {
+export class ModuleContainer extends BaseComponent {
     constructor(commonService: CommonService, public moduleService: ModuleService) {
         super(commonService);
     }

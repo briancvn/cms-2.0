@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { AuthenticateActivate } from '../../../Services/AuthenticateActivate';
-import { ConfigurationContainerComponent } from './Components/ConfigurationContainerComponent';
+import { ConfigurationContainer } from './Components/ConfigurationContainer';
 
 export const ROUTES: Routes = [
-    { path: '', component: ConfigurationContainerComponent, canActivate:[AuthenticateActivate] }
+    { path: '', component: ConfigurationContainer, canActivate:[AuthenticateActivate] }
 ];

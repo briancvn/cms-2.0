@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'user-container',
-    templateUrl: 'UserContainerComponent.html'
+    templateUrl: 'UserContainer.html'
 })
-export class UserContainerComponent {}
+export class UserContainer {}
