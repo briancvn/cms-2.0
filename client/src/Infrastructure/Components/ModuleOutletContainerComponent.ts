@@ -7,21 +7,20 @@ import {
     NgModuleRef,
     ReflectiveInjector,
     Renderer2 as Renderer,
+    SystemJsNgModuleLoader,
     ValueProvider,
     ViewChild,
     ViewContainerRef,
-    SystemJsNgModuleLoader
 } from '@angular/core';
-import { AotCompiler } from '@angular/compiler';
 import { InternalNgModuleRef } from '@angular/core/src/linker/ng_module_factory';
 
 import { ModuleHostDirective } from '../Directives/ModuleHostDirective';
 import { ModuleInstance } from '../Models/ModuleInstance';
 import { CommonService } from '../Services/CommonService';
+import { ModuleNavigationService } from '../Services/ModuleNavigationService';
 import { ModuleParameter } from '../Services/ModuleParameter';
 import { ModuleService } from '../Services/ModuleService';
 import { BaseComponent } from './BaseComponent';
-import { ModuleNavigationService } from '../Services/ModuleNavigationService';
 
 @Component({
     selector: 'module-outlet-container',
@@ -40,7 +39,6 @@ export class ModuleOutletContainerComponent extends BaseComponent {
     constructor(commonService: CommonService,
         private moduleService: ModuleService,
         private compiler: Compiler,
-        //private aotCompiler: AotCompiler,
         private injector: Injector,
         private viewContainerRef: ViewContainerRef,
         private renderer: Renderer,

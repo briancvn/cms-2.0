@@ -7,7 +7,6 @@ import { EModuleGroup } from '../Enums/EModuleGroup';
 import { ERoleGroup } from '../Enums/ERoleGroup';
 import { Module } from '../Models/Module';
 import { ModuleInstance } from '../Models/ModuleInstance';
-import { RouteProvider } from '../RouteProvider';
 import { AuthenticateService } from './AuthenticateService';
 import { BaseService } from './BaseService';
 
@@ -64,7 +63,7 @@ export class ModuleService extends BaseService {
             EModuleGroup.System
         ), ERoleGroup.ADMINISTRATOR)
         this.register(new Module(
-            ModuleConstants.Configuration.Path,
+            ModuleConstants.User.Path,
             ModuleConstants.User.Name,
             EModuleGroup.System
         ), ERoleGroup.ADMINISTRATOR)

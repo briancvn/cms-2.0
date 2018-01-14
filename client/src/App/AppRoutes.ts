@@ -13,8 +13,8 @@ export const ROUTES: Routes = [
         component: ModuleContainerComponent,
         canActivate:[AuthenticateActivate],
         children: [
-            { path: ModuleConstants.Configuration.Name, loadChildren: ModuleConstants.Configuration.Path },
-            { path: ModuleConstants.User.Name, loadChildren: ModuleConstants.User.Path }
+            { path: ModuleConstants.Configuration.Name, loadChildren: 'Infrastructure/Modules/System/Configuration/Boot#ConfigurationModule' },
+            { path: ModuleConstants.User.Name, loadChildren: 'Infrastructure/Modules/System/User/Boot#UserModule' }
         ]
     }
 ];
