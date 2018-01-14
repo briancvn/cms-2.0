@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as _ from 'underscore';
 
 import { ModuleConstants } from '../Constants/ModuleConstants';
 import { EModuleGroup } from '../Enums/EModuleGroup';
 import { ERoleGroup } from '../Enums/ERoleGroup';
 import { Module } from '../Models/Module';
-import { BaseService } from './BaseService';
-import { AuthenticateService } from './AuthenticateService';
 import { ModuleInstance } from '../Models/ModuleInstance';
-import ConfigurationModule from '../Modules/System/Configuration/ConfigurationBoot';
+import { RouteProvider } from '../RouteProvider';
+import { AuthenticateService } from './AuthenticateService';
+import { BaseService } from './BaseService';
+
+declare var System: any;
 
 @Injectable()
 export class ModuleService extends BaseService {
     modules: Module[] = [];
-    moduleInstances: ModuleInstance[] = [];
+    instances: ModuleInstance[] = [];
+
+    get moduleInstanceActive(): ModuleInstance {
+        return this.instances.find(moduleInstance => moduleInstance.Active);
+    }
 
     private lastModuleId = 1;
 
-    constructor(private authService: AuthenticateService) {
+    constructor(private authService: AuthenticateService, private router: Router) {
         super();
         this.authService.onUserContextChanged.subscribe(() => {
             if (this.userContext.Token) {
@@ -43,17 +50,22 @@ export class ModuleService extends BaseService {
     }
 
     addModuleInstance(module: Module): void {
-        this.moduleInstances.push(new ModuleInstance(
-            `cms-module-${this.lastModuleId++}`,
-            module.Name,
-            module
-        ));
+        this.instances.unshift(new ModuleInstance(this.lastModuleId++, module.Name, module));
+    }
+
+    setActive(moduleInstance: ModuleInstance): void {
+        this.instances.forEach(instance => instance.Active = instance.CorrelationId === moduleInstance.CorrelationId);
     }
 
     private registerSystyem(): void {
         this.register(new Module(
-            ConfigurationModule,
-            ModuleConstants.Configuration,
+            ModuleConstants.Configuration.Path,
+            ModuleConstants.Configuration.Name,
+            EModuleGroup.System
+        ), ERoleGroup.ADMINISTRATOR)
+        this.register(new Module(
+            ModuleConstants.Configuration.Path,
+            ModuleConstants.User.Name,
             EModuleGroup.System
         ), ERoleGroup.ADMINISTRATOR)
     }

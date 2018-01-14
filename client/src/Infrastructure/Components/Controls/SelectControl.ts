@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forw
 import { NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 
 import { BaseListControl } from './BaseListControl';
-import { CommonService } from '../../Services/CommonService';
+import { ReferenceDataService } from '../../Services/ReferenceDataService';
+import { ResourceService } from '../../Services/ResourceService';
 
 @Component({
     selector: 'select-control',
@@ -32,7 +33,12 @@ import { CommonService } from '../../Services/CommonService';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectControl extends BaseListControl<string> {
-    constructor(@Optional() ngForm: NgForm, element: ElementRef, cdr: ChangeDetectorRef, commonService: CommonService) {
-        super(ngForm, element, cdr, commonService);
+    constructor(@Optional() ngForm: NgForm,
+        element: ElementRef,
+        cdr: ChangeDetectorRef,
+        referenceDataService: ReferenceDataService,
+        resourceService: ResourceService
+    ) {
+        super(ngForm, element, cdr, referenceDataService, resourceService);
     }
 }

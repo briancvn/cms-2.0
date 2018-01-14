@@ -1,20 +1,21 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
-import { NavigationService } from '../../../Services/NavigationService';
+import { ModuleNavigationService } from '../../../Services/ModuleNavigationService';
 import { SubscriptionCollection } from '../../../Services/SubscriptionCollection';
 import { COMPONENTS } from './Components';
-import { ROUTER_PROVIDERS } from './UserRoutes';
+import { ROUTES } from './Routes';
 
 @Component({
-    selector: ModuleConstants.User,
+    selector: ModuleConstants.Configuration.Name,
     template: `<module-router-outlet></module-router-outlet>`,
     encapsulation: ViewEncapsulation.None
 })
-export class UserBoot extends BaseRouterBoot {
-    constructor(navigationService: NavigationService, subscriptions: SubscriptionCollection) {
+export class ConfigurationBoot extends BaseRouterBoot {
+    constructor(navigationService: ModuleNavigationService, subscriptions: SubscriptionCollection) {
         super(navigationService, subscriptions);
     }
 }
@@ -22,15 +23,15 @@ export class UserBoot extends BaseRouterBoot {
 @NgModule({
     imports: [
         InfrastructureCoreModule,
-        ROUTER_PROVIDERS
+        RouterModule.forChild(ROUTES)
     ],
     providers: [
         SubscriptionCollection
     ],
     declarations: [
-        UserBoot,
+        ConfigurationBoot,
         ...COMPONENTS
     ],
-    bootstrap: [UserBoot]
+    bootstrap: [ConfigurationBoot]
 })
-export default class UserModule {}
+export class ConfigurationModule {}

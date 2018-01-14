@@ -1,7 +1,7 @@
 <div fxLayout="column" fxFlexFill>
     <messages></messages>
     <mat-tab-group fxFlex headerPosition="below" dynamicHeight>
-        <mat-tab *ngFor="let moduleInstance of moduleService.moduleInstances" [label]="moduleInstance.Title">
+        <mat-tab *ngFor="let moduleInstance of moduleService.instances" [label]="moduleInstance.Title">
             <module-outlet-container [moduleInstance]="moduleInstance"></module-outlet-container>
         </mat-tab>
     </mat-tab-group>

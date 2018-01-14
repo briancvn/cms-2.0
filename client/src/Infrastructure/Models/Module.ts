@@ -1,8 +1,18 @@
-import { Type } from '@angular/core';
+import { Route } from '@angular/router';
+
 import { EModuleGroup } from '../Enums/EModuleGroup';
+import { AuthenticateActivate } from '../Services/AuthenticateActivate';
 
 export class Module {
-    constructor(public ModuleType: Type<any>,
+    get route(): Route {
+        return { path: this.routePath, loadChildren: this.Path, canActivate:[AuthenticateActivate] };
+    }
+
+    get routePath(): string {
+        return this.Name;
+    }
+
+    constructor(public Path: string,
         public Name: string,
         public Group: EModuleGroup
     ) {}

@@ -6,7 +6,11 @@ import { IModuleParameter } from '../Interfaces/IModuleParameter';
 
 @Injectable()
 export class ModuleParameter {
-    constructor(private moduleParameter: IModuleParameter) {}
+    private moduleParameter: IModuleParameter;
+
+    setParameter(moduleParameter: IModuleParameter): void {
+        this.moduleParameter = moduleParameter;
+    }
 
     get<T>(key: string): T {
         let result = null;

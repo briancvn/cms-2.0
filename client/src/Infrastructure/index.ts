@@ -9,3 +9,4 @@ export * from './Interfaces';
 export * from './Models';
 export * from './Services';
 export * from './Utils';
+export * from './RouteProvider';

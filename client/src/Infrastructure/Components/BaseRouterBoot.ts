@@ -2,12 +2,11 @@ import { OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { SubscriptionCollection } from '../Services/SubscriptionCollection';
-import { NavigationService } from '../Services/NavigationService';
+import { ModuleNavigationService } from '../Services/ModuleNavigationService';
 
 export abstract class BaseRouterBoot implements OnDestroy {
-    constructor(private navigationService: NavigationService, private subscriptions: SubscriptionCollection) {
-        //this.navigationService.navigateByUrl('/module-container');
-        this.navigationService.hack();
+    constructor(private navigationService: ModuleNavigationService, private subscriptions: SubscriptionCollection) {
+        this.navigationService.navigate();
     }
 
     public ngOnDestroy(): void {

@@ -15,7 +15,6 @@ import { ReferenceDataService } from './ReferenceDataService';
 import { ResourceService } from './ResourceService';
 import { ModuleService } from './ModuleService';
 import { AuthenticateActivate } from './AuthenticateActivate';
-import { NavigationService } from './NavigationService';
 
 export const INFRASTRUCTURE_SERVICES = [
     SystemService,
@@ -34,8 +33,7 @@ export const INFRASTRUCTURE_SERVICES = [
     ReferenceDataService,
     ResourceService,
     ModuleService,
-    AuthenticateActivate,
-    NavigationService
+    AuthenticateActivate
 ];
 
 export * from './BaseService';
@@ -56,4 +54,4 @@ export * from './ModuleService';
 export * from './AuthenticateActivate';
 export * from './SubscriptionCollection';
 export * from './ModuleParameter';
-export * from './NavigationService';
+export * from './ModuleNavigationService';

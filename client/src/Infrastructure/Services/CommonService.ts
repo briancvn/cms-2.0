@@ -7,7 +7,6 @@ import { ReferenceDataService } from './ReferenceDataService';
 import { ResourceService } from './ResourceService';
 import { SnackBarService } from './SnackBarService';
 import { TranslateService } from './TranslateService';
-import { NavigationService } from './NavigationService';
 
 @Injectable()
 export class CommonService extends BaseService {
@@ -16,8 +15,7 @@ export class CommonService extends BaseService {
         public formCollection: FormCollection,
         public translateService: TranslateService,
         public referenceDataService: ReferenceDataService,
-        public resourceService: ResourceService,
-        public navigationService: NavigationService,
+        public resourceService: ResourceService
     ) {
         super();
     }

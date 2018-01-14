@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
-import {
-    Authenticate,
-    AuthenticateService,
-    INFRASTRUCTURE_SERVICES,
-    InfrastructureModule,
-    SystemService,
-} from '../Infrastructure';
-import { AppRoutingModule } from './AppRoutingModule';
+import { AuthenticateService, INFRASTRUCTURE_SERVICES, InfrastructureModule, SystemService } from '../Infrastructure';
+import { ROUTES } from './AppRoutes';
 import { APP_COMPONENTS, APP_ENTRY_COMPONENTS } from './Components';
 import { AppComponent } from './Components/AppComponent';
 import { APP_SERVICES } from './Services';
@@ -20,7 +15,7 @@ import { APP_SERVICES } from './Services';
         FormsModule,
         ReactiveFormsModule,
         InfrastructureModule,
-        AppRoutingModule
+        RouterModule.forRoot(ROUTES)
     ],
     declarations: [
         AppComponent,
