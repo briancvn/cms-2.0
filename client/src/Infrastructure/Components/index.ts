@@ -1,9 +1,9 @@
 import { INFRASTRUCTURE_CONTROLS_COMPONENTS } from './Controls';
-import { ModalComponent } from './ModalComponent';
-import { SpinnerComponent } from './SpinnerComponent';
 import { MessagesComponent } from './MessagesComponent';
+import { ModalComponent } from './ModalComponent';
 import { ModalMessagesComponent } from './ModalMessagesComponent';
 import { ModuleRouterOutletComponent } from './ModuleRouterOutletComponent';
+import { SpinnerComponent } from './SpinnerComponent';
 
 export const INFRASTRUCTURE_COMPONENTS = [
     ...INFRASTRUCTURE_CONTROLS_COMPONENTS,

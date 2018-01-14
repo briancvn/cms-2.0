@@ -11,10 +11,5 @@ export abstract class BaseRouterBoot implements OnDestroy {
 
     public ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
-        this.onDestroy();
-    }
-
-    protected onDestroy(): void {
-        // virtual method
     }
 }

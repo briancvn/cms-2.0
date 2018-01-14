@@ -48,8 +48,17 @@ export class ModuleService extends BaseService {
         }
     }
 
-    addModuleInstance(module: Module): void {
+    addInstance(module: Module): void {
         this.instances.unshift(new ModuleInstance(this.lastModuleId++, module.Name, module));
+    }
+
+    removeInstance(removeInstance: ModuleInstance): void {
+        let index = this.instances.findIndex(instance => instance.CorrelationId === removeInstance.CorrelationId);
+        this.instances.splice(index, 1);
+
+        if (!_.isEmpty(this.instances)) {
+            this.setActive(this.instances[this.instances.length > index ? index : index - 1]);
+        }
     }
 
     setActive(moduleInstance: ModuleInstance): void {

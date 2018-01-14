@@ -23,9 +23,9 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
 import { INFRASTRUCTURE_MODALS_COMPONENTS } from './Components/Modals';
+import { INFRASTRUCTURE_LAYOUTS_COMPONENTS } from './Components/Layouts';
 import { INFRASTRUCTURE_DIRECTIVES } from './Directives';
 import { INFRASTRUCTURE_PIPES } from './Pipes';
-
 
 const MATERIAL_MODULES = [
     MatToolbarModule,
@@ -58,7 +58,8 @@ export const INFRASTRUCTURE_ENTRY_COMPONENTS: Type<any>[] = [
 export const INFRASTRUCTURE_COMPONENTS_DIRECTIVES: Type<any>[] = [
     ...INFRASTRUCTURE_COMPONENTS,
     ...INFRASTRUCTURE_ENTRY_COMPONENTS,
-    ...INFRASTRUCTURE_DIRECTIVES
+    ...INFRASTRUCTURE_DIRECTIVES,
+    ...INFRASTRUCTURE_LAYOUTS_COMPONENTS
 ];
 
 @NgModule({

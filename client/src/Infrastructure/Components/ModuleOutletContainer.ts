@@ -25,16 +25,19 @@ import { BaseComponent } from './BaseComponent';
 @Component({
     selector: 'module-outlet-container',
     template: `
-        <spinner id="globalSpinner">
-            <ng-content></ng-content>
-            <module-host></module-host>
+        <spinner id="globalSpinner" fxLayout="column" fxFlexFill>
+            <module-header [instance]="instance"></module-header>
+            <div fxFlex>
+                <ng-content></ng-content>
+                <module-host></module-host>
+            </div>
         </spinner>`,
     providers: [ModuleNavigationService]
 })
 export class ModuleOutletContainer extends BaseComponent {
     @ViewChild(ModuleHostDirective) moduleHost: ModuleHostDirective;
 
-    @Input() moduleInstance: ModuleInstance;
+    @Input() instance: ModuleInstance;
 
     constructor(commonService: CommonService,
         private moduleService: ModuleService,
@@ -49,33 +52,33 @@ export class ModuleOutletContainer extends BaseComponent {
     }
 
     protected onInit(): void {
-        this.loader.load(this.moduleInstance.Module.Path)
+        this.loader.load(this.instance.Module.Path)
             .then(ngModuleFactory => {
-                var moduleInstanceProvider: ValueProvider = { provide: ModuleInstance, useValue: this.moduleInstance };
+                var moduleInstanceProvider: ValueProvider = { provide: ModuleInstance, useValue: this.instance };
                 var parameterInstance = new ModuleParameter();
-                parameterInstance.setParameter(this.moduleInstance.Parameters);
+                parameterInstance.setParameter(this.instance.Parameters);
                 var moduleParameterProvider: ValueProvider = { provide: ModuleParameter, useValue: parameterInstance };
                 var injector = ReflectiveInjector.resolveAndCreate([moduleInstanceProvider, moduleParameterProvider], this.injector);
                 var moduleRef: NgModuleRef<any> = ngModuleFactory.create(injector);
-                this.moduleInstance.ModuleRef = moduleRef;
-                this.moduleService.setActive(this.moduleInstance);
-                this.navigationService.moduleInstance = this.moduleInstance;
+                this.instance.ModuleRef = moduleRef;
+                this.moduleService.setActive(this.instance);
+                this.navigationService.moduleInstance = this.instance;
                 this.moduleDoBootstrap();
             });
     }
 
     private moduleDoBootstrap(): void {
-        var moduleRef: InternalNgModuleRef<any> = this.moduleInstance.ModuleRef as InternalNgModuleRef<any>;
+        var moduleRef: InternalNgModuleRef<any> = this.instance.ModuleRef as InternalNgModuleRef<any>;
         var boostrapComponent = moduleRef._bootstrapComponents[0];
         var componentFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(boostrapComponent);
         this.viewContainerRef.clear();
         let componentRef: ComponentRef<any> = this.moduleHost.viewContainerRef.createComponent(componentFactory);
-        this.moduleInstance.ComponentRef = componentRef;
-        this.renderer.setAttribute(componentRef.location.nativeElement, 'instance-id', this.moduleInstance.Id);
+        this.instance.ComponentRef = componentRef;
+        this.renderer.setAttribute(componentRef.location.nativeElement, 'instance-id', this.instance.Id);
         this.renderer.addClass(componentRef.location.nativeElement, 'loading');
         this.renderer.addClass(componentRef.location.nativeElement, 'module-root');
-        if (this.moduleInstance.Classes) {
-            this.renderer.addClass(componentRef.location.nativeElement, this.moduleInstance.Classes);
+        if (this.instance.Classes) {
+            this.renderer.addClass(componentRef.location.nativeElement, this.instance.Classes);
         }
     }
 }
