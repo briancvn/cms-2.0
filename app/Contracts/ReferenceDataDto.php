@@ -1,9 +1,7 @@
 <?php
 namespace CMS\Contracts;
 
-use CMS\Common\AbstractClass;
-
-class ReferenceDataDto extends AbstractClass
+class ReferenceDataDto extends BaseDto
 {
     public $Kind;
     public $ReferenceDataValues = array();

@@ -7,6 +7,6 @@ import { StringUtils } from '../Utils/StringUtils';
 })
 export class StringFormatPipe implements PipeTransform {
     transform(str: string, ...params: string[]): string {
-        return StringUtils.formatString(str, ...params);
+        return StringUtils.format(str, ...params);
     }
 }

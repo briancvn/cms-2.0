@@ -1,8 +1,13 @@
 import { Type } from '@angular/core';
-import { TranslatePipe } from './TranslatePipe';
+
+import { FullnamePipe } from './FullnamePipe';
+import { RoleIconPipe } from './RoleIconPipe';
 import { StringFormatPipe } from './StringFormatPipe';
+import { TranslatePipe } from './TranslatePipe';
 
 export const INFRASTRUCTURE_PIPES: Type<any>[] = [
-    TranslatePipe,
-    StringFormatPipe
+    FullnamePipe,
+    RoleIconPipe,
+    StringFormatPipe,
+    TranslatePipe
 ];

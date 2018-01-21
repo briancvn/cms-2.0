@@ -7,6 +7,8 @@ export class CommonConstants {
     public static REQUEST_TIMEOUT = 2000;
 
     public static Empty = '';
+    public static Space = ' ';
+
     public static AUTH_TOKEN = 'x-auth-token';
     public static AUTH_HEADER = 'Authorization';
     public static LOCAL_IP = 'local-ip';

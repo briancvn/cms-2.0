@@ -57,7 +57,7 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, OnDe
         if (!_.isEmpty(this.innerNgModel.errors)) {
             let key = Object.keys(this.innerNgModel.errors).find(key => this.innerNgModel.errors[key]);
             message = ErrorMessageConstants.DEFAULT_MESSAGE[key]
-                || StringUtils.formatString(ErrorMessageConstants.MESSAGE_UNDEFINED, this.placeholder, key);
+                || StringUtils.format(ErrorMessageConstants.MESSAGE_UNDEFINED, this.placeholder, key);
         }
         return `${ErrorMessageConstants.PREFIX_MESSAGE_VALIDATION}${message}`;
     }

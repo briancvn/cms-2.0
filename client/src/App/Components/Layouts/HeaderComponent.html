@@ -10,9 +10,9 @@
         <ng-container *ngIf="isAuthenticated">
             <ul><li *ngFor="let module of moduleService.modules" (click)="moduleService.addInstance(module)">{{ module.Name}}</li></ul>
         </ng-container>
-        <span>{{userInfo}}</span>
+        <span>{{ userContext?.Profile | fullname }}</span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon fontSet="fa" [fontIcon]="userIcon" class="fa-1x8"></mat-icon>
+            <mat-icon fontSet="fa" [fontIcon]="userContext?.RoleGroups | roleIcon" class="fa-1x8"></mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <ng-container *ngIf="!isAuthenticated">

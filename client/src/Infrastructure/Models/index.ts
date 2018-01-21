@@ -1,6 +1,7 @@
 
 export * from './AuthRequest';
 export * from './Authenticate';
+export * from './BaseModel';
 export * from './Collection';
 export * from './Profile';
 export * from './ReferenceData';

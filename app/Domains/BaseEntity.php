@@ -8,4 +8,7 @@ class BaseEntity extends AbstractClass
 {
     /** @ODM\Id */
     public $Id;
+
+    /** @ODM\Version @ODM\Field(type="int") */
+    public $Version;
 }

@@ -1,14 +1,10 @@
-import * as _ from 'underscore';
+import { BaseModel } from './BaseModel';
 
-export class Profile {
+export class Profile extends BaseModel {
     public Pin: number;
     public FirstName: string;
     public LastName: string;
     public Birthday: Date;
     public Gender: string;
     public Language: string;
-
-    public get DisplayName(): string {
-       return _.compact([this.FirstName, this.LastName]).join(' ');
-    }
 }

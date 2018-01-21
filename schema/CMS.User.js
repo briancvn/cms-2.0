@@ -5,6 +5,10 @@ db.createCollection("User", {
 			bsonType: "object",
 			required: ["Username", "Email", "Phone", "Pin", "Password", "Profile"],
 			properties: {
+                Version: {
+                    bsonType: "int",
+                    description: "Pin__int__required"
+                },
 				Username: {
 				   bsonType: "string",
 				   pattern: "/^.{8,50}$/",
@@ -49,6 +53,10 @@ db.createCollection("Profile", {
         	bsonType: "object",
          	required: ["Pin", "FirstName", "LastName", "Gender", "Language"],
 	        properties: {
+                Version: {
+                    bsonType: "int",
+                    description: "Pin__int__required"
+                },
 				Pin: {
 				   bsonType: "int",
 				   description: "Pin__int__required"
@@ -82,7 +90,8 @@ db.createCollection("Profile", {
 
 userId1 = ObjectId()
 db.User.insert({
-	_id: userId1,
+    _id: userId1,
+    Version: NumberInt(1),
 	Username: "admin",
 	Email: "briancvn@gmail.com",
     Phone: "+84932727148",
@@ -96,7 +105,8 @@ db.User.insert({
 	}
 })
 db.Profile.insertOne({
-  	_id: userId1,
+    _id: userId1,
+    Version: NumberInt(1),
 	Pin: NumberInt(1),
 	FirstName: "Brian",
 	LastName: "Nguyen",
@@ -107,7 +117,8 @@ db.Profile.insertOne({
 
 userId2 = ObjectId()
 db.User.insert({
-	_id: userId2,
+    _id: userId2,
+    Version: NumberInt(1),
 	Username: "manager",
 	Email: "manager@cms.com",
     Phone: null,
@@ -121,7 +132,8 @@ db.User.insert({
 	}
 })
 db.Profile.insertOne({
-  	_id: userId2,
+    _id: userId2,
+    Version: NumberInt(1),
 	Pin: NumberInt(2),
 	FirstName: "Manager",
 	LastName : "Developer",
@@ -132,7 +144,8 @@ db.Profile.insertOne({
 
 userId3 = ObjectId()
 db.User.insert({
-	_id: userId3,
+    _id: userId3,
+    Version: NumberInt(1),
 	Username: "user",
 	Email: "user@cms.com",
     Phone: null,
@@ -146,7 +159,8 @@ db.User.insert({
 	}
 })
 db.Profile.insertOne({
-  	_id: userId3,
+    _id: userId3,
+    Version: NumberInt(1),
 	Pin: NumberInt(3),
 	FirstName: "User",
 	LastName : "Developer",
