@@ -12,7 +12,8 @@
         "Next": "Next",
         "RequestCode": "Send Code",
         "ReSendCode": "Resend Code",
-        "Reset": "Reset"
+        "Reset": "Reset",
+        "Modules": "Modules"
     },
     "Field": {
         "Username|Email|Pin": "Username, email or pin",
@@ -25,5 +26,11 @@
         "LastName": "Last name",
         "Birthday": "Birthday",
         "Gender": "Gender"
+    },
+    "Title": {
+        "Header": {
+            "Configuration": "System configuration",
+            "User": "Account management"
+        }
     }
 }

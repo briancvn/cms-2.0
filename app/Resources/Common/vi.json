@@ -12,7 +12,8 @@
         "Next": "Tiếp tục",
         "RequestCode": "Gửi mã xác thực",
         "ReSendCode": "Gửi lại mã",
-        "Reset": "Đặt lại mật khẩu"
+        "Reset": "Đặt lại mật khẩu",
+        "Modules": "Modules"
     },
     "Field": {
         "Username|Email|Pin": "Tên đăng nhập, email hoặc số pin",
@@ -25,5 +26,11 @@
         "LastName": "Họ",
         "Birthday": "Ngày sinh",
         "Gender": "Giới tính"
+    },
+    "Title": {
+        "Header": {
+            "Configuration": "Cấu hình hệ thống",
+            "User": "Quản lý người dùng"
+        }
     }
 }

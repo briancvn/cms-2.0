@@ -12,7 +12,8 @@
         "Next": "次",
         "RequestCode": "コードを送信する",
         "ReSendCode": "再送信コード",
-        "Reset": "リセット"
+        "Reset": "リセット",
+        "Modules": "モジュール"
     },
     "Field": {
         "Username|Email|Pin": "ユーザー名、電子メールまたはピン",
@@ -25,5 +26,11 @@
         "LastName": "苗字",
         "Birthday": "お誕生日",
         "Gender": "性別"
+    },
+    "Title": {
+        "Header": {
+            "Configuration": "システム構成",
+            "User": "アカウント管理"
+        }
     }
 }
