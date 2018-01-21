@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
-import { CommonService } from '../../../Services/CommonService';
+import { ModuleCommonService } from '../../../Services/ModuleCommonService';
+import { CoreModule } from '../../CoreModule';
 import { COMPONENTS } from './Components';
 import { ROUTES } from './Routes';
 
@@ -14,7 +15,7 @@ import { ROUTES } from './Routes';
     encapsulation: ViewEncapsulation.None
 })
 export class UserBoot extends BaseRouterBoot {
-    constructor(commonService: CommonService) {
+    constructor(commonService: ModuleCommonService) {
         super(commonService);
     }
 }
@@ -22,6 +23,7 @@ export class UserBoot extends BaseRouterBoot {
 @NgModule({
     imports: [
         InfrastructureCoreModule,
+        CoreModule,
         RouterModule.forChild(ROUTES)
     ],
     providers: [],

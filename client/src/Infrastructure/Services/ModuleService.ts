@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import * as _ from 'underscore';
 
 import { ModuleConstants } from '../Constants/ModuleConstants';
 import { EModuleGroup } from '../Enums/EModuleGroup';
 import { ERoleGroup } from '../Enums/ERoleGroup';
 import { Module } from '../Models/Module';
-import { ModuleInstance } from '../Models/ModuleInstance';
 import { AuthenticateService } from './AuthenticateService';
 import { BaseService } from './BaseService';
+import { ModuleInstance } from './ModuleInstance';
 
 declare var System: any;
 
@@ -23,7 +22,7 @@ export class ModuleService extends BaseService {
 
     private lastModuleId = 1;
 
-    constructor(private authService: AuthenticateService, private router: Router) {
+    constructor(private authService: AuthenticateService) {
         super();
         this.authService.onUserContextChanged.subscribe(() => {
             if (this.userContext.Token) {
@@ -53,7 +52,6 @@ export class ModuleService extends BaseService {
     }
 
     removeInstance(removeInstance: ModuleInstance): void {
-        removeInstance.Subscriptions.unsubscribe();
         let index = this.instances.findIndex(instance => instance.CorrelationId === removeInstance.CorrelationId);
         this.instances.splice(index, 1);
 

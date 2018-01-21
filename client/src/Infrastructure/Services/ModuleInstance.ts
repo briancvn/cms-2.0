@@ -1,8 +1,10 @@
-import { ComponentRef, NgModuleRef } from '@angular/core';
+import { ComponentRef, Injectable, NgModuleRef } from '@angular/core';
 import { v4 } from 'uuid';
-import { Module } from './Module';
+
+import { Module } from '../Models/Module';
 import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 
+@Injectable()
 export class ModuleInstance {
     public Id: string;
     public CorrelationId = v4();
@@ -10,7 +12,6 @@ export class ModuleInstance {
     public Parameters: {[key: string]: string} = {};
     public ComponentRef: ComponentRef<any>;
     public Active: boolean;
-    public Subscriptions: SubscriptionCollection = new SubscriptionCollection();
 
     constructor(id: number,
         public Title: string,

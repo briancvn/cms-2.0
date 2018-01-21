@@ -17,9 +17,9 @@ import { InternalNgModuleRef } from '@angular/core/src/linker/ng_module_factory'
 import { Router } from '@angular/router';
 
 import { ModuleHostDirective } from '../Directives/ModuleHostDirective';
-import { ModuleInstance } from '../Models/ModuleInstance';
 import { CommonService } from '../Services/CommonService';
-import { ModuleNavigationService } from '../Services/ModuleNavigationService';
+import { ModuleInstance } from '../Services/ModuleInstance';
+import { NavigationService } from '../Services/NavigationService';
 import { ModuleParameter } from '../Services/ModuleParameter';
 import { ModuleService } from '../Services/ModuleService';
 import { SubscriptionCollection } from '../Services/SubscriptionCollection';
@@ -58,20 +58,10 @@ export class ModuleOutletContainer extends BaseComponent implements OnInit {
         this.loader.load(this.instance.Module.Path)
             .then(ngModuleFactory => {
                 var moduleInstanceProvider: ValueProvider = { provide: ModuleInstance, useValue: this.instance };
-                var subscriptionsProvider: ValueProvider = { provide: SubscriptionCollection, useValue: this.instance.Subscriptions };
-                var navigationServiceProvider: ValueProvider = {
-                    provide: ModuleNavigationService,
-                    useValue: new ModuleNavigationService(this.instance, this.router)
-                };
                 var parameterInstance = new ModuleParameter();
                 parameterInstance.setParameter(this.instance.Parameters);
                 var moduleParameterProvider: ValueProvider = { provide: ModuleParameter, useValue: parameterInstance };
-                var injector = ReflectiveInjector.resolveAndCreate([
-                    moduleInstanceProvider,
-                    subscriptionsProvider,
-                    navigationServiceProvider,
-                    moduleParameterProvider
-                ], this.injector);
+                var injector = ReflectiveInjector.resolveAndCreate([moduleInstanceProvider, moduleParameterProvider], this.injector);
                 var moduleRef: NgModuleRef<any> = ngModuleFactory.create(injector);
                 this.instance.ModuleRef = moduleRef;
                 this.moduleService.setActive(this.instance);

@@ -38,7 +38,7 @@ export class HeaderComponent extends BaseComponent {
         private cdr: ChangeDetectorRef
     ) {
         super(commonService);
-        this.subscribe(this.authService.onUserContextChanged, () => this.cdr.markForCheck());
+        this.authService.onUserContextChanged.subscribe(() => this.cdr.markForCheck());
     }
 
     login(): void {

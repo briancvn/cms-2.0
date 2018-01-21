@@ -1,5 +1,6 @@
 // Modules
 export * from './InfrastructureModule';
+export * from './Modules/CoreModule';
 
 export * from './Components';
 export * from './Constants';

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { BaseComponent } from '../BaseComponent';
 import { CommonService } from '../../Services/CommonService';
+import { ModuleInstance } from '../../Services/ModuleInstance';
 import { ModuleService } from '../../Services/ModuleService';
-import { ModuleInstance } from '../../Models/ModuleInstance';
+import { BaseComponent } from '../BaseComponent';
 
 @Component({
     selector: 'module-header',

@@ -1,12 +1,13 @@
 import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs/Rx';
 import { v4 } from 'uuid';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
 import { CommonService } from '../Services/CommonService';
+import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 
 declare var settings: ISettings;
 declare var userContext: Authenticate;
@@ -23,27 +24,21 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     protected isReadOnly: boolean;
     protected isEditable: boolean;
 
-    private subscriptions: Subscription[] = [];
+    private subscriptions = new SubscriptionCollection();
 
-    constructor(protected commonService: CommonService) {}
+    constructor(protected commonService: CommonService, subscriptions?: SubscriptionCollection) {
+        this.subscriptions = subscriptions || this.subscriptions;
+    }
 
     ngOnInit(): void {}
 
     ngAfterViewInit(): void {}
 
     ngOnDestroy(): void {
-        if (this.commonService.subscriptions) {
-            this.commonService.subscriptions.unsubscribe(this.id);
-        } else {
-            this.subscriptions.forEach(x => x.unsubscribe());
-        }
+        this.subscriptions.unsubscribe();
     }
 
     protected subscribe<T>(observable: Observable<T>, handler: { (data: T): void }): void {
-        if (this.commonService.subscriptions) {
-            this.commonService.subscriptions.subscribe(observable, handler, this.id);
-        } else {
-            this.subscriptions.push(observable.subscribe((data) => handler(data)));
-        }
+        this.subscriptions.subscribe(observable, handler, this.id);
     }
 }

@@ -39,8 +39,8 @@ export class MessagesComponent extends BaseComponent {
     }
 
     protected init(): void {
-        this.subscribe(this.httpService.beforeRequest, () => this.messages = []);
-        this.subscribe(this.httpService.afterResponse, response => {
+        this.httpService.beforeRequest.subscribe(() => this.messages = []);
+        this.httpService.afterResponse.subscribe(response => {
             response.ValidationErrors.forEach(error => this.messages.push({ Message: error.Message, Type: EMessageType.Error }));
         });
     }

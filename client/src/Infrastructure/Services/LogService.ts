@@ -19,21 +19,23 @@ export class LogService extends BaseService {
     static fatalEnabled = true;
     static LogTimeFormat = 'DD.MM.YYYY HH:mm:ss:SSS';
 
-    public log(msg: string): void {
+    log(msg: string): void {
         this.info(msg);
     }
 
-    public info(msg: string): void {
+    info(msg: string): void {
         this.sendLog(msg, LogLevel.Info);
     }
 
-    public debug(msg: string): void {
+    debug(msg: string): void {
         this.sendLog(msg, LogLevel.Debug);
     }
-    public warn(msg: string): void {
+
+    warn(msg: string): void {
         this.sendLog(msg, LogLevel.Warn);
     }
-    public error(msg: string): void {
+
+    error(msg: string): void {
         this.sendLog(msg, LogLevel.Error);
     }
 

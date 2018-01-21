@@ -1,20 +1,19 @@
-import { SystemService } from './SystemService';
+import { AuthenticateActivate } from './AuthenticateActivate';
 import { AuthenticateService } from './AuthenticateService';
+import { CommonService } from './CommonService';
 import { HttpClientService } from './HttpClientService';
 import { JsonDeserializer } from './JsonDeserializer';
 import { LogService } from './LogService';
 import { ModalService } from './ModalService';
-import { ReflectionService } from './ReflectionService';
-import { TokenInterceptor } from './TokenInterceptor';
-import { SnackBarService } from './SnackBarService';
-import { TranslateService } from './TranslateService';
-import { SpinnerService } from './SpinnerService';
-import { FormCollection } from './FormCollection';
-import { CommonService } from './CommonService';
-import { ReferenceDataService } from './ReferenceDataService';
-import { ResourceService } from './ResourceService';
 import { ModuleService } from './ModuleService';
-import { AuthenticateActivate } from './AuthenticateActivate';
+import { ReferenceDataService } from './ReferenceDataService';
+import { ReflectionService } from './ReflectionService';
+import { ResourceService } from './ResourceService';
+import { SnackBarService } from './SnackBarService';
+import { SpinnerService } from './SpinnerService';
+import { SystemService } from './SystemService';
+import { TokenInterceptor } from './TokenInterceptor';
+import { TranslateService } from './TranslateService';
 
 export const INFRASTRUCTURE_SERVICES = [
     SystemService,
@@ -28,7 +27,6 @@ export const INFRASTRUCTURE_SERVICES = [
     SnackBarService,
     TranslateService,
     SpinnerService,
-    FormCollection,
     CommonService,
     ReferenceDataService,
     ResourceService,
@@ -54,4 +52,7 @@ export * from './ModuleService';
 export * from './AuthenticateActivate';
 export * from './SubscriptionCollection';
 export * from './ModuleParameter';
-export * from './ModuleNavigationService';
+export * from './NavigationService';
+export * from './FormCollection';
+export * from './ModuleInstance';
+export * from './ModuleCommonService';

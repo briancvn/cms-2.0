@@ -1,13 +1,15 @@
-import { Type } from '@angular/core';
-
 import { IHttpParam } from '../Interfaces/IHttpParam';
-import { Authenticate } from '../Models';
 import { BaseService } from './BaseService';
 import { HttpClientService } from './HttpClientService';
+import { SubscriptionCollection } from './SubscriptionCollection';
 
 export abstract class BaseBackendService extends BaseService {
-    constructor(protected http: HttpClientService, private apiUrl: string, private authenticateService = true) {
-        super();
+    constructor(protected http: HttpClientService,
+        private apiUrl: string,
+        private authenticateService = true,
+        subscriptions?: SubscriptionCollection
+    ) {
+        super(subscriptions);
     }
 
     public modalGet<T>(param: IHttpParam): Promise<T> {

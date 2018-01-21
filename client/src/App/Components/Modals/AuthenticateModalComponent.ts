@@ -11,7 +11,8 @@ import {
     EModalSize,
     SignUpRequest,
     TranslateService,
-    EReferenceDataKind
+    EReferenceDataKind,
+    FormCollection
 } from '../../../Infrastructure';
 
 enum EAuthenticationType {
@@ -23,7 +24,8 @@ enum EAuthenticationType {
 @Component({
     selector: 'authenticate-modal',
     templateUrl: 'AuthenticateModalComponent.html',
-    styleUrls: ['../../../Styles/Modals/AuthenticateModal.scss']
+    styleUrls: ['../../../Styles/Modals/AuthenticateModal.scss'],
+    providers: [FormCollection]
 })
 export class AuthenticateModalComponent extends BaseModalComponent<AuthenticateModalComponent> {
     static size = EModalSize.SMALL;
