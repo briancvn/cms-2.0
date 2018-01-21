@@ -1,17 +1,21 @@
+import { AfterViewInit, OnInit } from '@angular/core';
+
 import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';
 
-export class BaseContentComponent extends BaseComponent {
+export class BaseContentComponent extends BaseComponent implements OnInit, AfterViewInit {
     constructor(commonService: CommonService) {
         super(commonService);
     }
 
-    protected performInitAsync(): Promise<any> {
-        return Promise.all([this.loadReferenceData()]);
+    ngAfterViewInit(): void {
+        super.ngAfterViewInit();
+        this.loadResource();
     }
 
-    protected performAfterViewInitAsync(): Promise<any> {
-        return Promise.all([this.loadResource()]);
+    ngOnInit(): void {
+        super.ngOnInit();
+        this.loadReferenceData()
     }
 
     private loadReferenceData(): Promise<any> {

@@ -9,3 +9,4 @@ export * from './IResourceDictionary';
 export * from './IResourceSubject';
 export * from './ISettings';
 export * from './IModuleParameter';
+export * from './ISubscription';

@@ -1,6 +1,7 @@
 import { ComponentRef, NgModuleRef } from '@angular/core';
 import { v4 } from 'uuid';
 import { Module } from './Module';
+import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 
 export class ModuleInstance {
     public Id: string;
@@ -9,6 +10,7 @@ export class ModuleInstance {
     public Parameters: {[key: string]: string} = {};
     public ComponentRef: ComponentRef<any>;
     public Active: boolean;
+    public Subscriptions: SubscriptionCollection = new SubscriptionCollection();
 
     constructor(id: number,
         public Title: string,

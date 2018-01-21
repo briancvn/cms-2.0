@@ -1,88 +1,49 @@
-import { AfterViewInit, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs/Rx';
+import { v4 } from 'uuid';
 
+import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
 import { CommonService } from '../Services/CommonService';
-import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 
 declare var settings: ISettings;
 declare var userContext: Authenticate;
 
-export abstract class BaseComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(NgForm) form: NgForm;
 
     get settings(): ISettings { return settings; }
     get userContext(): Authenticate { return userContext; }
 
     readonly EReferenceDataKind = EReferenceDataKind;
+    readonly id = `${this.constructor.name}-${v4()}`;
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;
+
     private subscriptions: Subscription[] = [];
 
     constructor(protected commonService: CommonService) {}
 
-    ngOnInit(): void {
-        this.onInit();
-        var initPromise = Promise.all([this.performInitAsync()]);
-        if (initPromise) {
-            initPromise.then(() => {
-                // Not implemented
-            }, error => {
-                // Not implemented
-            });
-        }
-    }
+    ngOnInit(): void {}
 
-    ngAfterViewInit(): void {
-        this.afterViewInit();
-        var afterViewInitPromise = Promise.all([this.performAfterViewInitAsync()]);
-        if (afterViewInitPromise) {
-            afterViewInitPromise.then(() => {
-                // Not implemented
-            }, error => {
-                // Not implemented
-            });
-        }
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        this.onChanges(changes);
-    }
+    ngAfterViewInit(): void {}
 
     ngOnDestroy(): void {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
-        this.onDestroy();
+        if (this.commonService.subscriptions) {
+            this.commonService.subscriptions.unsubscribe(this.id);
+        } else {
+            this.subscriptions.forEach(x => x.unsubscribe());
+        }
     }
 
     protected subscribe<T>(observable: Observable<T>, handler: { (data: T): void }): void {
-        var subscription: Subscription = observable.subscribe(data => handler(data));
-        this.subscriptions.push(subscription);
-    }
-
-    protected onInit(): void {
-        // Virtual method
-    }
-
-    protected afterViewInit(): void {
-        // Virtual method
-    }
-
-    protected onChanges(changes: SimpleChanges): void {
-        // Virtual method
-    }
-
-    protected onDestroy(): void {
-        // Virtual method
-    }
-
-    protected performInitAsync(): Promise<any> {
-        return Promise.resolve(null);
-    }
-
-    protected performAfterViewInitAsync(): Promise<any> {
-        return Promise.resolve(null);
+        if (this.commonService.subscriptions) {
+            this.commonService.subscriptions.subscribe(observable, handler, this.id);
+        } else {
+            this.subscriptions.push(observable.subscribe((data) => handler(data)));
+        }
     }
 }

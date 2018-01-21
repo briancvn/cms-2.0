@@ -1,6 +1,6 @@
 import {
-    AfterViewChecked,
     AfterViewInit,
+    ChangeDetectorRef,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -9,18 +9,17 @@ import {
     OnInit,
     Output,
     ViewChild,
-    ChangeDetectorRef
 } from '@angular/core';
 import { ControlValueAccessor, NgForm, NgModel } from '@angular/forms';
 import * as _ from 'underscore';
 
 import { ErrorMessageConstants } from '../../Constants/ErrorMessageConstants';
-import { StringUtils } from '../../Utils/StringUtils';
 import { EResource } from '../../Enums/EResource';
+import { StringUtils } from '../../Utils/StringUtils';
 
 const noop = () => {};
 
-export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy, ControlValueAccessor {
+export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
     readonly EResource = EResource;
 
     @HostBinding('class') class = 'form-control';
@@ -85,19 +84,15 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
     }
 
     ngOnInit(): void {
-        this.onInit();
+        // Virtual method
     }
 
     ngAfterViewInit(): void {
-        this.afterViewInit();
-    }
-
-    ngAfterViewChecked(): void {
-        this.afterViewChecked();
+        // Virtual method
     }
 
     ngOnDestroy(): void {
-        this.onDestroy();
+        // Virtual method
     }
 
     writeValue(v: any): void {
@@ -123,22 +118,6 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, Afte
 
     onKeypress(event: KeyboardEvent): void {
         this.keypress.next();
-    }
-
-    protected onInit(): void {
-        // Virtual method
-    }
-
-    protected afterViewInit(): void {
-        // Virtual method
-    }
-
-    protected afterViewChecked(): void {
-        // Virtual method
-    }
-
-    protected onDestroy(): void {
-        // Virtual method
     }
 
     private addControl(addControl: Function, ngModel: NgModel): void {

@@ -1,11 +1,11 @@
-import { ElementRef, HostBinding } from '@angular/core';
+import { AfterViewInit, ElementRef, HostBinding } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
 import { EModalSize } from '../../Enums/EModalSize';
-import { BaseContentComponent } from '../BaseContentComponent';
 import { CommonService } from '../../Services/CommonService';
+import { BaseContentComponent } from '../BaseContentComponent';
 
-export abstract class BaseModalComponent<T> extends BaseContentComponent {
+export abstract class BaseModalComponent<T> extends BaseContentComponent implements AfterViewInit {
     static size: EModalSize | number = EModalSize.MEDIUM;
 
     @HostBinding('class.draggable') draggable = true;
@@ -22,8 +22,8 @@ export abstract class BaseModalComponent<T> extends BaseContentComponent {
         this.dialogRef.updateSize(width ? `${width}px` : null, height ? `${height}px` : null);
     }
 
-    protected afterViewInit(): void {
-        super.afterViewInit();
+    ngAfterViewInit(): void {
+        super.ngAfterViewInit();
         if (this.draggable) {
             let containerRef = <ElementRef>(<any>this.dialogRef)._containerInstance._elementRef;
             jQuery(containerRef.nativeElement).draggable({ handle: '[mat-dialog-title]' });

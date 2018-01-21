@@ -5,6 +5,7 @@ import {
     Injector,
     Input,
     NgModuleRef,
+    OnInit,
     ReflectiveInjector,
     Renderer2 as Renderer,
     SystemJsNgModuleLoader,
@@ -13,6 +14,7 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import { InternalNgModuleRef } from '@angular/core/src/linker/ng_module_factory';
+import { Router } from '@angular/router';
 
 import { ModuleHostDirective } from '../Directives/ModuleHostDirective';
 import { ModuleInstance } from '../Models/ModuleInstance';
@@ -20,6 +22,7 @@ import { CommonService } from '../Services/CommonService';
 import { ModuleNavigationService } from '../Services/ModuleNavigationService';
 import { ModuleParameter } from '../Services/ModuleParameter';
 import { ModuleService } from '../Services/ModuleService';
+import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 import { BaseComponent } from './BaseComponent';
 
 @Component({
@@ -31,10 +34,9 @@ import { BaseComponent } from './BaseComponent';
                 <ng-content></ng-content>
                 <module-host></module-host>
             </div>
-        </spinner>`,
-    providers: [ModuleNavigationService]
+        </spinner>`
 })
-export class ModuleOutletContainer extends BaseComponent {
+export class ModuleOutletContainer extends BaseComponent implements OnInit {
     @ViewChild(ModuleHostDirective) moduleHost: ModuleHostDirective;
 
     @Input() instance: ModuleInstance;
@@ -45,24 +47,34 @@ export class ModuleOutletContainer extends BaseComponent {
         private injector: Injector,
         private viewContainerRef: ViewContainerRef,
         private renderer: Renderer,
-        private navigationService: ModuleNavigationService,
-        private loader: SystemJsNgModuleLoader
+        private loader: SystemJsNgModuleLoader,
+        private router: Router
     ) {
         super(commonService);
     }
 
-    protected onInit(): void {
+    ngOnInit(): void {
+        super.ngOnInit();
         this.loader.load(this.instance.Module.Path)
             .then(ngModuleFactory => {
                 var moduleInstanceProvider: ValueProvider = { provide: ModuleInstance, useValue: this.instance };
+                var subscriptionsProvider: ValueProvider = { provide: SubscriptionCollection, useValue: this.instance.Subscriptions };
+                var navigationServiceProvider: ValueProvider = {
+                    provide: ModuleNavigationService,
+                    useValue: new ModuleNavigationService(this.instance, this.router)
+                };
                 var parameterInstance = new ModuleParameter();
                 parameterInstance.setParameter(this.instance.Parameters);
                 var moduleParameterProvider: ValueProvider = { provide: ModuleParameter, useValue: parameterInstance };
-                var injector = ReflectiveInjector.resolveAndCreate([moduleInstanceProvider, moduleParameterProvider], this.injector);
+                var injector = ReflectiveInjector.resolveAndCreate([
+                    moduleInstanceProvider,
+                    subscriptionsProvider,
+                    navigationServiceProvider,
+                    moduleParameterProvider
+                ], this.injector);
                 var moduleRef: NgModuleRef<any> = ngModuleFactory.create(injector);
                 this.instance.ModuleRef = moduleRef;
                 this.moduleService.setActive(this.instance);
-                this.navigationService.moduleInstance = this.instance;
                 this.moduleDoBootstrap();
             });
     }

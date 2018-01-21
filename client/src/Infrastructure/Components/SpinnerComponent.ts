@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { CommonService } from '../Services/CommonService';
 import { SpinnerService } from '../Services/SpinnerService';
@@ -13,7 +13,7 @@ import { BaseComponent } from './BaseComponent';
         <ng-content></ng-content>`,
     styleUrls: ['../Styles/Components/Spinner.scss']
 })
-export class SpinnerComponent extends BaseComponent {
+export class SpinnerComponent extends BaseComponent implements OnInit {
     @Input() id: string;
 
     visible = false;
@@ -22,7 +22,8 @@ export class SpinnerComponent extends BaseComponent {
         super(commonService);
     }
 
-    protected onInit(): void {
+    ngOnInit(): void {
+        super.ngOnInit();
         this.spinnerService.register(this);
     }
 }

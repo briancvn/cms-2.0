@@ -4,8 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
-import { ModuleNavigationService } from '../../../Services/ModuleNavigationService';
-import { SubscriptionCollection } from '../../../Services/SubscriptionCollection';
+import { CommonService } from '../../../Services/CommonService';
 import { COMPONENTS } from './Components';
 import { ROUTES } from './Routes';
 
@@ -15,8 +14,8 @@ import { ROUTES } from './Routes';
     encapsulation: ViewEncapsulation.None
 })
 export class ConfigurationBoot extends BaseRouterBoot {
-    constructor(navigationService: ModuleNavigationService, subscriptions: SubscriptionCollection) {
-        super(navigationService, subscriptions);
+    constructor(commonService: CommonService) {
+        super(commonService);
     }
 }
 
@@ -25,9 +24,7 @@ export class ConfigurationBoot extends BaseRouterBoot {
         InfrastructureCoreModule,
         RouterModule.forChild(ROUTES)
     ],
-    providers: [
-        SubscriptionCollection
-    ],
+    providers: [],
     declarations: [
         ConfigurationBoot,
         ...COMPONENTS
