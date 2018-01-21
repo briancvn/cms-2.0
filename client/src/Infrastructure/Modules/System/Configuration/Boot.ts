@@ -5,10 +5,11 @@ import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
 import { CommonService } from '../../../Services/CommonService';
-import { ModuleCommonService } from '../../../Services/ModuleCommonService';
+import { NavigationService } from '../../../Services/NavigationService';
+import { SubscriptionCollection } from '../../../Services/SubscriptionCollection';
+import { CoreModule } from '../../CoreModule';
 import { COMPONENTS } from './Components';
 import { ROUTES } from './Routes';
-import { CoreModule } from '../../CoreModule';
 
 @Component({
     selector: ModuleConstants.Configuration.Name,
@@ -16,8 +17,8 @@ import { CoreModule } from '../../CoreModule';
     encapsulation: ViewEncapsulation.None
 })
 export class ConfigurationBoot extends BaseRouterBoot {
-    constructor(commonService: ModuleCommonService) {
-        super(commonService);
+    constructor(subscriptions: SubscriptionCollection, commonService: CommonService, navigationService: NavigationService) {
+        super(subscriptions, commonService, navigationService);
     }
 }
 
@@ -26,9 +27,6 @@ export class ConfigurationBoot extends BaseRouterBoot {
         InfrastructureCoreModule,
         CoreModule,
         RouterModule.forChild(ROUTES)
-    ],
-    providers: [
-        ModuleCommonService
     ],
     declarations: [
         ConfigurationBoot,

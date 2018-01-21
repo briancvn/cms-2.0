@@ -1,9 +1,14 @@
-import { ModuleCommonService } from '../Services/ModuleCommonService';
+import { CommonService } from '../Services/CommonService';
+import { NavigationService } from '../Services/NavigationService';
+import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 import { BaseComponent } from './BaseComponent';
 
 export abstract class BaseRouterBoot extends BaseComponent {
-    constructor(protected moduleCommonService: ModuleCommonService) {
-        super(moduleCommonService.commonService, moduleCommonService.subscriptions);
-        this.moduleCommonService.navigationService.navigate();
+    constructor(subscriptions: SubscriptionCollection,
+        protected commonService: CommonService,
+        protected navigationService: NavigationService
+    ) {
+        super(commonService, subscriptions);
+        this.navigationService.navigate();
     }
 }

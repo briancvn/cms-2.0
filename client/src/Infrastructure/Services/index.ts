@@ -55,4 +55,3 @@ export * from './ModuleParameter';
 export * from './NavigationService';
 export * from './FormCollection';
 export * from './ModuleInstance';
-export * from './ModuleCommonService';

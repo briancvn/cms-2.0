@@ -52,6 +52,7 @@ export class ModuleService extends BaseService {
     }
 
     removeInstance(removeInstance: ModuleInstance): void {
+        removeInstance.ComponentRef.instance.subscriptions.unsubscribe();
         let index = this.instances.findIndex(instance => instance.CorrelationId === removeInstance.CorrelationId);
         this.instances.splice(index, 1);
 
