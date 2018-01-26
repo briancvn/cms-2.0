@@ -1,7 +1,6 @@
 import { AfterViewInit, OnInit } from '@angular/core';
 
 import { CommonService } from '../Services/CommonService';
-import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 import { BaseComponent } from './BaseComponent';
 
 export class BaseContentComponent extends BaseComponent implements OnInit, AfterViewInit {

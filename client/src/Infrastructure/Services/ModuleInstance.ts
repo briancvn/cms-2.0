@@ -2,7 +2,6 @@ import { ComponentRef, Injectable, NgModuleRef } from '@angular/core';
 import { v4 } from 'uuid';
 
 import { Module } from '../Models/Module';
-import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 
 @Injectable()
 export class ModuleInstance {

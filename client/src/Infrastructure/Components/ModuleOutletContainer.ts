@@ -19,10 +19,8 @@ import { Router } from '@angular/router';
 import { ModuleHostDirective } from '../Directives/ModuleHostDirective';
 import { CommonService } from '../Services/CommonService';
 import { ModuleInstance } from '../Services/ModuleInstance';
-import { NavigationService } from '../Services/NavigationService';
 import { ModuleParameter } from '../Services/ModuleParameter';
 import { ModuleService } from '../Services/ModuleService';
-import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 import { BaseComponent } from './BaseComponent';
 
 @Component({

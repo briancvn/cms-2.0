@@ -28,6 +28,8 @@ export class ModuleSearchComponent extends BaseComponent implements OnInit, Afte
     //columns: string[] = [];
     dataSource = new MatTableDataSource();
 
+    columns = ['created', 'state', 'number', 'title'];
+
     constructor(commonService: CommonService, private service: UserService) {
         super(commonService);
     }
