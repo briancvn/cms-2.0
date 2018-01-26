@@ -10,9 +10,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
@@ -22,8 +25,8 @@ import { CustomFormsModule } from 'ng2-validation';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { INFRASTRUCTURE_COMPONENTS } from './Components';
-import { INFRASTRUCTURE_MODALS_COMPONENTS } from './Components/Modals';
 import { INFRASTRUCTURE_LAYOUTS_COMPONENTS } from './Components/Layouts';
+import { INFRASTRUCTURE_MODALS_COMPONENTS } from './Components/Modals';
 import { INFRASTRUCTURE_DIRECTIVES } from './Directives';
 import { INFRASTRUCTURE_PIPES } from './Pipes';
 
@@ -39,7 +42,10 @@ const MATERIAL_MODULES = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
 ];
 
 const INFRASTRUCTURE_EXTERNAL_MODULES = [

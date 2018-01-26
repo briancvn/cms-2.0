@@ -10,8 +10,6 @@ import { BaseBackendService } from './BaseBackendService';
 import { HttpClientService } from './HttpClientService';
 import { SignUpRequest } from '../Models/SignUpRequest';
 
-declare var userContext: Authenticate;
-
 @Injectable()
 export class AuthenticateService extends BaseBackendService {
     private onUserContextChangedSubject: Subject<void> = new Subject<void>();
@@ -19,7 +17,7 @@ export class AuthenticateService extends BaseBackendService {
     onUserContextChanged = this.onUserContextChangedSubject.asObservable();
 
     get isAuthenticated(): boolean {
-        return Boolean(userContext && userContext.Profile);
+        return Boolean(this.userContext && this.userContext.Profile);
     }
 
     constructor(http: HttpClientService, private router: Router) {
@@ -34,7 +32,7 @@ export class AuthenticateService extends BaseBackendService {
             SpinnerId: 'modalSpinner',
             Form: form
         }).then(auth => {
-            userContext = auth;
+            this.userContext = auth;
             this.http.token = auth.Token;
             this.onUserContextChangedSubject.next();
         });
@@ -48,7 +46,7 @@ export class AuthenticateService extends BaseBackendService {
             SpinnerId: 'modalSpinner',
             Form: form
         }).then(auth => {
-            userContext = auth;
+            this.userContext = auth;
             this.http.token = auth.Token;
             this.onUserContextChangedSubject.next();
         });
@@ -63,9 +61,9 @@ export class AuthenticateService extends BaseBackendService {
             DeserializedType: Authenticate
         }).then(auth => {
             if (auth) {
-                userContext = auth;
+                this.userContext = auth;
             } else {
-                userContext = new Authenticate();
+                this.userContext = new Authenticate();
                 this.http.token = null;
             }
 
@@ -76,7 +74,7 @@ export class AuthenticateService extends BaseBackendService {
     signout(): void {
         this.get<void>({ Method: 'SignOut' })
             .then(() => {
-                userContext = new Authenticate();
+                this.userContext = new Authenticate();
                 this.http.token = null;
                 this.onUserContextChangedSubject.next();
                 this.router.navigate(['/']);

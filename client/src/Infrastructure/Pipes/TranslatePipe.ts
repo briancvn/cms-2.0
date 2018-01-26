@@ -1,35 +1,36 @@
-import { ChangeDetectorRef, OnDestroy, PipeTransform, WrappedValue, Pipe } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ISubscription } from 'rxjs/Subscription';
+import { ChangeDetectorRef, OnDestroy, Pipe, PipeTransform, WrappedValue } from '@angular/core';
 
-import { ResourceService } from '../Services/ResourceService';
 import { EResource } from '../Enums/EResource';
+import { ResourceService } from '../Services/ResourceService';
 import { Utils } from '../Utils/Utils';
+import { BasePipe } from './BasePipe';
 
 @Pipe({
     name: 'translate',
     pure: false
 })
-export class TranslatePipe implements OnDestroy, PipeTransform {
+export class TranslatePipe extends BasePipe implements OnDestroy, PipeTransform {
     private currentValue : string = null;
     private latestValue: any = null;
     private latestReturnedValue: any = null;
-    private subscription: ISubscription = null;
 
-    constructor(private ref: ChangeDetectorRef, private resourceService: ResourceService) {}
+    constructor(private ref: ChangeDetectorRef, private resourceService: ResourceService) {
+        super();
+    }
 
-    public ngOnDestroy(): void {
+    ngOnDestroy(): void {
+        super.ngOnDestroy();
         this.dispose();
     }
 
-    public transform(value: string, resource: EResource = EResource.Common): any {
+    transform(value: string, resource: EResource = EResource.Common): any {
         if (value !== this.currentValue) {
             this.dispose();
             this.currentValue = value;
             this.latestValue = value;
             var observable = this.resourceService.observe(resource)
                 .map((translate: Iterable<object>) => Utils.getDeepValue(translate, value));
-            this.subscribe(observable);
+            this.subscribe(observable, (translate: string) => this.updateLatestValue(observable, translate));
         }
 
         if (this.latestValue === this.latestReturnedValue) {
@@ -40,17 +41,9 @@ export class TranslatePipe implements OnDestroy, PipeTransform {
         return WrappedValue.wrap(this.latestValue);
     }
 
-    private subscribe(obj: Observable<string>): void {
-        this.subscription = obj.subscribe((translate: string) => this.updateLatestValue(obj, translate));
-    }
-
     private dispose(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
         this.latestValue = null;
         this.latestReturnedValue = null;
-        this.subscription = null;
         this.currentValue = null;
     }
 

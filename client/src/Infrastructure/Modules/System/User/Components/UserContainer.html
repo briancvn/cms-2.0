@@ -1,1 +1,8 @@
-<div>User container {{ subscriptions.length }}</div>
+<div fxLayout="row" fxFlexFill>
+    <module-search fxFlex columns>
+        <ng-template>TEST</ng-template>
+    </module-search>
+    <module-detail fxFlex>
+        <user-detail></user-detail>
+    </module-detail>
+</div>

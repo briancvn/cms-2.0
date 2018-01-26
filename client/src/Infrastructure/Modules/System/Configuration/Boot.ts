@@ -6,7 +6,6 @@ import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
 import { CommonService } from '../../../Services/CommonService';
 import { NavigationService } from '../../../Services/NavigationService';
-import { SubscriptionCollection } from '../../../Services/SubscriptionCollection';
 import { CoreModule } from '../../CoreModule';
 import { COMPONENTS } from './Components';
 import { ROUTES } from './Routes';
@@ -17,8 +16,8 @@ import { ROUTES } from './Routes';
     encapsulation: ViewEncapsulation.None
 })
 export class ConfigurationBoot extends BaseRouterBoot {
-    constructor(subscriptions: SubscriptionCollection, commonService: CommonService, navigationService: NavigationService) {
-        super(subscriptions, commonService, navigationService);
+    constructor(commonService: CommonService, navigationService: NavigationService) {
+        super(commonService, navigationService);
     }
 }
 

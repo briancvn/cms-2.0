@@ -1,7 +1,6 @@
 import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { v4 } from 'uuid';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 import { ISettings } from '../Interfaces/ISettings';
@@ -12,6 +11,7 @@ import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 declare var settings: ISettings;
 declare var userContext: Authenticate;
 
+// tslint:disable:no-empty
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(NgForm) form: NgForm;
 
@@ -19,16 +19,13 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     get userContext(): Authenticate { return userContext; }
 
     readonly EReferenceDataKind = EReferenceDataKind;
-    readonly id = `${this.constructor.name}-${v4()}`;
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;
 
     private subscriptions = new SubscriptionCollection();
 
-    constructor(protected commonService: CommonService, subscriptions?: SubscriptionCollection) {
-        this.subscriptions = subscriptions || this.subscriptions;
-    }
+    constructor(protected commonService: CommonService) {}
 
     ngOnInit(): void {}
 
@@ -39,6 +36,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     protected subscribe<T>(observable: Observable<T>, handler: { (data: T): void }): void {
-        this.subscriptions.subscribe(observable, handler, this.id);
+        this.subscriptions.subscribe(observable, handler);
     }
 }

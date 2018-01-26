@@ -1,0 +1,38 @@
+<div class="example-container mat-elevation-z8">
+    <mat-table #table
+               matSort
+               matSortActive="created"
+               matSortDisableClear
+               matSortDirection="asc"
+               [dataSource]="dataSource">
+
+        <ng-container matColumnDef="number">
+            <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.number }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.state }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="created">
+            <mat-header-cell *matHeaderCellDef
+                            mat-sort-header
+                            disableClear="true">
+            Created
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.created_at | date }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+</div>

@@ -1,6 +1,7 @@
 import { AfterViewInit, OnInit } from '@angular/core';
 
 import { CommonService } from '../Services/CommonService';
+import { SubscriptionCollection } from '../Services/SubscriptionCollection';
 import { BaseComponent } from './BaseComponent';
 
 export class BaseContentComponent extends BaseComponent implements OnInit, AfterViewInit {
@@ -15,7 +16,7 @@ export class BaseContentComponent extends BaseComponent implements OnInit, After
 
     ngOnInit(): void {
         super.ngOnInit();
-        this.loadReferenceData()
+        this.loadReferenceData();
     }
 
     private loadReferenceData(): Promise<any> {

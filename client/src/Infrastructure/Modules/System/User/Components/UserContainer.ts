@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
 
-import { BaseComponent } from '../../../../Components/BaseComponent';
+import { BaseMaterDetailComponent } from '../../../../Components/BaseMaterDetailComponent';
 import { CommonService } from '../../../../Services/CommonService';
-import { SubscriptionCollection } from '../../../../Services/SubscriptionCollection';
+import { User } from '../Models/User';
 
 @Component({
     selector: 'user-container',
     templateUrl: 'UserContainer.html'
 })
-export class UserContainer extends BaseComponent {
-    constructor(commonService: CommonService, subscriptions: SubscriptionCollection) {
-        super(commonService, subscriptions);
+export class UserContainer extends BaseMaterDetailComponent<User> {
+    columns = [
+        { Field: 'created' },
+        { Field: 'state' },
+        { Field: 'number' },
+        { Field: 'title' }
+    ];
+
+    constructor(commonService: CommonService) {
+        super(commonService);
     }
 }

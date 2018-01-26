@@ -7,6 +7,6 @@ export * from './IReferenceDataSubject';
 export * from './IRequestOptions';
 export * from './IResourceDictionary';
 export * from './IResourceSubject';
+export * from './ISearchResult';
 export * from './ISettings';
 export * from './IModuleParameter';
-export * from './ISubscription';
