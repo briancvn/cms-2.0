@@ -5,7 +5,7 @@ export class Collection<T> extends Array<T> {
 
     remove = (item: T) : void => {
         let index = this.findIndex(x => x === item);
-        this.splice(index, 0);
+        this.splice(index, 1);
     }
 
     clean = () : void => {
