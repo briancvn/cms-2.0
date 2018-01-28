@@ -1,0 +1,16 @@
+:host /deep/ {
+    height: 100%;
+    display: block;
+    border-radius: 5px;
+    .mat-table,
+    .mat-paginator {
+        background: transparent;
+    }
+
+    .mat-table .mat-header-row {
+        position: sticky;
+        top: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+}

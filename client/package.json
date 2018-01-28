@@ -1,5 +1,5 @@
 {
-  "name": "Centralized-Management-Solutions",
+  "name": "centralized-management-solutions",
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
@@ -44,7 +44,7 @@
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.3",
+    "@angular/cli": "^1.6.6",
     "@angular/compiler-cli": "^5.2.2",
     "@angular/language-service": "^5.2.2",
     "@types/hammerjs": "^2.0.35",

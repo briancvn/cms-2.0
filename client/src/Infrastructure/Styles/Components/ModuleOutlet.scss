@@ -1,0 +1,15 @@
+:host /deep/ {
+    height: 100%;
+    display: block;
+    module-router-outlet {
+        height: 100%;
+        display: block;
+        .module-container {
+            height: inherit;
+            module-search,
+            module-detail {
+                margin: 5px 10px;
+            }
+        }
+    }
+}

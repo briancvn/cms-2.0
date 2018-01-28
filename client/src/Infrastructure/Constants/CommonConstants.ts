@@ -1,5 +1,6 @@
 export class CommonConstants {
     public static DEFAULT_LANGUAGE = 'vi';
+    public static PAGE_SIZE = 30;
 
     public static SHORT_TIMEOUT = 0;
     public static MEDIUM_TIMEOUT = 500;

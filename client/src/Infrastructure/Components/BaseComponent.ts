@@ -2,6 +2,7 @@ import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
+import { CommonConstants } from '../Constants/CommonConstants';
 import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
@@ -19,6 +20,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     get userContext(): Authenticate { return userContext; }
 
     readonly EReferenceDataKind = EReferenceDataKind;
+    readonly CommonConstants = CommonConstants;
 
     protected isReadOnly: boolean;
     protected isEditable: boolean;

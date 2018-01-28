@@ -32,7 +32,8 @@ import { BaseComponent } from './BaseComponent';
                 <ng-content></ng-content>
                 <module-host></module-host>
             </div>
-        </spinner>`
+        </spinner>`,
+    styleUrls: ['../Styles/Components/ModuleOutlet.scss']
 })
 export class ModuleOutletContainer extends BaseComponent implements OnInit {
     @ViewChild(ModuleHostDirective) moduleHost: ModuleHostDirective;

@@ -10,3 +10,6 @@ export * from './IResourceSubject';
 export * from './ISearchResult';
 export * from './ISettings';
 export * from './IModuleParameter';
+export * from './IGridState';
+export * from './ISortDescriptor';
+export * from './IFilterDescriptor';

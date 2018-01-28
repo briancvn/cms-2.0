@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
+import { BaseSearchService } from '../../../Services/BaseSearchService';
 import { CommonService } from '../../../Services/CommonService';
 import { NavigationService } from '../../../Services/NavigationService';
 import { CoreModule } from '../../CoreModule';
@@ -28,7 +29,10 @@ export class UserBoot extends BaseRouterBoot {
         CoreModule,
         RouterModule.forChild(ROUTES)
     ],
-    providers: [UserService],
+    providers: [
+        UserService,
+        { provide: BaseSearchService, useExisting: UserService }
+    ],
     declarations: [
         UserBoot,
         ...COMPONENTS

@@ -9,13 +9,6 @@ import { User } from '../Models/User';
     templateUrl: 'UserContainer.html'
 })
 export class UserContainer extends BaseMaterDetailComponent<User> {
-    columns = [
-        { Field: 'created' },
-        { Field: 'state' },
-        { Field: 'number' },
-        { Field: 'title' }
-    ];
-
     constructor(commonService: CommonService) {
         super(commonService);
     }

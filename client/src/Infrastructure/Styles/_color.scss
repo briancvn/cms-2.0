@@ -41,3 +41,18 @@ $btn-twitter-icon-background-color: #0099d4 !important;
         background-color: $warning-color;
     }
 }
+
+grid {
+    background: $primary-color-100;
+    .mat-table {
+        .mat-header-row {
+            background: $primary-color-100;
+        }
+        .mat-row {
+            background: $primary-light-color;
+            &:nth-child(odd) {
+                background: $primary-color-50;
+            }
+        }
+    }
+}
