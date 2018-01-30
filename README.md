@@ -12,7 +12,14 @@
 - Underscore: http://anahkiasen.github.io/underscore-php/
 
 **Client:**
-- Hot Module Replacement (HMR): https://github.com/angular/angular-cli/wiki/stories-configure-hmr
+- Angular CLI - Stories: https://github.com/angular/angular-cli/wiki/stories
+- Angular CLI: Hot Module Replacement (HMR): https://github.com/angular/angular-cli/wiki/stories-configure-hmr
+- Angular: Flex-Layout: https://github.com/angular/flex-layout/wiki/API-Documentation
+- Angular: TypeScript component for Google reCaptcha 2: https://github.com/xmaestro/angular2-recaptcha
+- Angular: Perfect Scrollbar: https://github.com/zefoy/ngx-perfect-scrollbar
+- Angular: Password Strength Bar: https://github.com/rnadler/ng2-password-strength-bar
+- Angular: Custom validation: https://github.com/yuyang041060120/ng2-validation
+
 - Moment: https://momentjs.com/
 - Underscore: http://underscorejs.org/
 - Underscore.string: https://epeli.github.io/underscore.string/
