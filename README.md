@@ -12,6 +12,7 @@
 - Underscore: http://anahkiasen.github.io/underscore-php/
 
 **Client:**
+- Hot Module Replacement (HMR): https://github.com/angular/angular-cli/wiki/stories-configure-hmr
 - Moment: https://momentjs.com/
 - Underscore: http://underscorejs.org/
 - Underscore.string: https://epeli.github.io/underscore.string/
