@@ -29,6 +29,7 @@
       "environmentSource": "Environments/Environment.ts",
       "environments": {
         "dev": "Environments/Environment.ts",
+        "hmr": "Environments/Environment.hmr.ts",
         "prod": "Environments/Environment.prod.ts"
       }
     }
@@ -59,9 +60,11 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+    }
   },
   "warnings": {
+    "hmrWarning": false,
     "typescriptMismatch": false
   }
 }
