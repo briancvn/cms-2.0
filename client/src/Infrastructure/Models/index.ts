@@ -3,6 +3,7 @@ export * from './AuthRequest';
 export * from './Authenticate';
 export * from './BaseModel';
 export * from './Collection';
+export * from './DataCollection';
 export * from './Profile';
 export * from './ReferenceData';
 export * from './ReferenceDataCollectionRequest';

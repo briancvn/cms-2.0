@@ -9,6 +9,7 @@ import { CommonService } from '../../../Services/CommonService';
 import { NavigationService } from '../../../Services/NavigationService';
 import { CoreModule } from '../../CoreModule';
 import { COMPONENTS } from './Components';
+import { UserCriteria } from './Models/UserCriteria';
 import { ROUTES } from './Routes';
 import { UserService } from './Services/UserService';
 
@@ -30,8 +31,8 @@ export class UserBoot extends BaseRouterBoot {
         RouterModule.forChild(ROUTES)
     ],
     providers: [
-        UserService,
-        { provide: BaseSearchService, useExisting: UserService }
+        UserCriteria,
+        UserService
     ],
     declarations: [
         UserBoot,
