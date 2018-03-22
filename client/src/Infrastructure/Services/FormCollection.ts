@@ -12,59 +12,55 @@ export class FormCollection extends Collection<NgForm> {
     public onErrorChanged: Subject<void> = new Subject<void>();
     private forceDirty = false;
 
-    registerFormErrorChanged = (forms: NgForm[]): void => {
-        forms.forEach(form => form[CommonConstants.FormErrorChanged] && form[CommonConstants.FormErrorChanged].asObservable().subscribe(status => {
-            this.onErrorChanged.next(status);
-        }));
+    get isEmpty(): boolean {
+        return this.length === 0;
     }
 
-    getByName = (name: string): NgForm => {
-        return this.find(form => form.name === name);
+    get isValid(): boolean {
+        return this.every(form => form.valid);
     }
 
-    add = (...forms: NgForm[]): void => {
+    get isDirty(): boolean {
+        return this.forceDirty || this.some(form => form.dirty);
+    }
+
+    get isInvalid(): boolean {
+        return this.some(form => form.invalid);
+    }
+
+    get isTouched(): boolean {
+        return this.some(form => form.touched);
+    }
+
+    get hasError(): boolean {
+        return this.some(form => {
+            return Object.keys(form.controls).some(ctrlName => form.controls[ctrlName].touched && !isEmpty(form.controls[ctrlName].errors));
+        });
+    }
+
+    add(...forms: NgForm[]): void {
         forms = compact(forms);
         this.registerFormErrorChanged(forms);
         this.push(...forms);
     }
 
-    remove = (removeForm: NgForm): void => {
+    remove(removeForm: NgForm): void {
         this.splice(_.findIndex(this, form => form.name === removeForm.name), 1);
     }
 
-    reset = (): void => {
-        this.splice(0, this.length);
+    reset(): void {
+        super.reset();
         this.forceDirty = false;
     }
 
-    dirty = (): void => {
+    markAsDirty(): void {
+        this.forEach(form => form.control.markAsDirty());
         this.forceDirty = true;
     }
 
-    isEmpty = (): boolean => {
-        return this.length === 0;
-    }
-
-    isValid = (): boolean => {
-        return this.every(form => form.valid);
-    }
-
-    isDirty = (): boolean => {
-        return this.forceDirty || this.some(form => form.dirty);
-    }
-
-    isInvalid = (): boolean => {
-        return this.some(form => form.invalid);
-    }
-
-    isTouched = () : boolean => {
-        return this.some(form => form.touched);
-    }
-
-    hasError = () : boolean => {
-        return this.some(form => {
-            let controls = Object.keys(form.controls);
-            return controls.some(ctrlName => form.controls[ctrlName].touched && !isEmpty(form.controls[ctrlName].errors));
-        });
+    private registerFormErrorChanged(forms: NgForm[]): void {
+        forms.forEach(form => form[CommonConstants.FormErrorChanged] && form[CommonConstants.FormErrorChanged].asObservable().subscribe(status => {
+            this.onErrorChanged.next(status);
+        }));
     }
 }

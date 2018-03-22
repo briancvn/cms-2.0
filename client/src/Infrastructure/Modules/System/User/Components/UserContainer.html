@@ -1,12 +1,10 @@
 <div fxLayout="row" fxFlexFill>
-    <module-search fxFlex columns>
-        <field name="number"></field>
-        <field name="title"></field>
-        <field name="state"></field>
-        <field name="created"></field>
+    <module-search fxFlex #moduleSearch>
+        <column field="Id"></column>
+        <column field="Email"></column>
     </module-search>
 
-    <module-detail fxFlex>
+    <module-detail fxFlex *ngIf="moduleSearch.dataCollection.model">
         <user-detail></user-detail>
     </module-detail>
 </div>

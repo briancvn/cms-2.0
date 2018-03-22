@@ -1,3 +1,6 @@
-import { BaseCriteria } from '../../../../Models/BaseCriteria';
+import { Injectable } from '@angular/core';
 
-export class UserCriteria extends BaseCriteria {}
+import { SearchCriteria } from '../../../../Models/SearchCriteria';
+
+@Injectable()
+export class UserCriteria extends SearchCriteria {}

@@ -1,10 +1,9 @@
 import { CommonConstants } from '../Constants/CommonConstants';
 import { IFilterDescriptor, ISortDescriptor } from '../Interfaces';
 
-export class BaseCriteria {
-    PageIndex = 0;
+export class SearchCriteria {
     Skip = 0;
-    Take = CommonConstants.PAGE_SIZE;
+    Limit = CommonConstants.PAGE_SIZE;
     Sort: ISortDescriptor = <ISortDescriptor>{};
     Filter: IFilterDescriptor = <IFilterDescriptor>{};
 }

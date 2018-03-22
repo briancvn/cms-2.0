@@ -1,6 +1,6 @@
 export class CommonConstants {
     public static DEFAULT_LANGUAGE = 'vi';
-    public static PAGE_SIZE = 30;
+    public static PAGE_SIZE = 2;
 
     public static SHORT_TIMEOUT = 0;
     public static MEDIUM_TIMEOUT = 500;
@@ -17,6 +17,7 @@ export class CommonConstants {
     public static XDEBUG_TYPE = 'PHPSTORM';
     public static API_PREFIX = 'api/';
 
-    public static FormErrorChanged = 'formErrorChanged';
+    public static FormErrorChanged = 'errorChanged';
+    public static FormId = 'id';
 }
 

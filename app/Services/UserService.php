@@ -6,16 +6,14 @@ use CMS\Repositories\UserRepository;
 use CMS\Contracts\AuthRequestDto;
 use CMS\Contracts\AuthenticateDto;
 use CMS\Contracts\ProfileDto;
+use CMS\Contracts\UserDto;
 use CMS\Contracts\SignUpRequestDto;
 use CMS\Domains\User;
 
-class UserService extends BaseService
+class UserService extends GenericService
 {
-    /** @var UserRepository */
-    private $userRepository;
-
     public function __construct(UserRepository $userRepository) {
-        $this->userRepository = $userRepository;
+        parent::__construct($userRepository, UserDto::class);
     }
 
     protected function IsAuthenticated(): ?AuthenticateDto
@@ -26,13 +24,13 @@ class UserService extends BaseService
 
     protected function signIn(AuthRequestDto $requestDto): ?AuthenticateDto
     {
-        $user = $this->userRepository->findOneByAuthRequest($requestDto->Username);
+        $user = $this->repository->findOneByAuthRequest($requestDto->Username);
         return $this->responseAuthenticateDto($this->authManager->signIn($this->mapper->map($user, User::class), $requestDto->Password));
     }
 
     protected function signUp(SignUpRequestDto $requestDto): ?AuthenticateDto
     {
-        $user = $this->userRepository->findOneByAuthRequest($requestDto->Username);
+        $user = $this->repository->findOneByAuthRequest($requestDto->Username);
         return $this->responseAuthenticateDto($this->authManager->signIn($user, $requestDto->Password));
     }
 

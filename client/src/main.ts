@@ -10,9 +10,11 @@ if (environment.production) {
     enableProdMode();
 }
 
+declare var global;
+
 setTimeout(() => {
-    window.top[VariableNameConstants.UserContext] = {};
-    window.top[VariableNameConstants.Settings] = {};
+    global[VariableNameConstants.UserContext] = {};
+    global[VariableNameConstants.Settings] = {};
     //platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err));
     const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
 

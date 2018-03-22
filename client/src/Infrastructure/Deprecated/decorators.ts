@@ -37,7 +37,7 @@ export function makePropDecorator(
       meta[name].unshift(decoratorInstance);
       Reflect.defineMetadata('propMetadata', meta, target.constructor);
     };
-  }471010
+  }
 
   if (parentClass) {
     PropDecoratorFactory.prototype = Object.create(parentClass.prototype);

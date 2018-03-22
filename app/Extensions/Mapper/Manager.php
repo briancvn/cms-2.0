@@ -20,7 +20,10 @@ class Manager extends AutoMapper {
         foreach (Utils::scanNamespaces('CMS\Contracts', CONTRACTS_DIR) as $dtoName) {
             if (Strings::endsWith($dtoName, 'RequestDto')) {
                 $configuration->registerMapping(\stdClass::class, $dtoName);
+            } else if (Strings::endsWith($dtoName, 'CriteriaDto')) {
+                $configuration->registerMapping(\stdClass::class, $dtoName);
             }
+
         }
         return $mapper;
     }

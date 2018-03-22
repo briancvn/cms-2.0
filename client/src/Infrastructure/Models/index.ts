@@ -14,4 +14,6 @@ export * from './Response';
 export * from './ResponseError';
 export * from './ResponseValidation';
 export * from './ResponseWarning';
+export * from './SearchCriteria';
+export * from './SearchResult';
 export * from './SignUpRequest';

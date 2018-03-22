@@ -10,6 +10,8 @@ import { ISearchResult } from '../Interfaces/ISearchResult';
 import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';
 import { GridColumnComponent } from './GridColumnComponent';
+import { DataCollection } from '../Models/DataCollection';
+import { SearchCriteria } from '../Models/SearchCriteria';
 
 @Component({
     selector: 'grid',
@@ -34,7 +36,7 @@ import { GridColumnComponent } from './GridColumnComponent';
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="select.next(row.Id)"></mat-row>
                 </mat-table>
             </perfect-scrollbar>
             <mat-paginator [length]="total" [pageSize]="CommonConstants.PAGE_SIZE"></mat-paginator>
@@ -49,8 +51,9 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
 
     @ContentChildren(GridColumnComponent) columns: QueryList<GridColumnComponent>;
 
-    @Input() dataAsync: Observable<ISearchResult<any>>;
+    @Input() dataAsync: Observable<DataCollection<SearchCriteria, any>>;
     @Output() change: EventEmitter<IGridState> = new EventEmitter<IGridState>();
+    @Output() select: EventEmitter<string> = new EventEmitter<string>();
 
     dataSource = new MatTableDataSource();
     total = 0;
@@ -63,7 +66,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
         return {
             PageIndex: this.paginator.pageIndex,
             Skip: CommonConstants.PAGE_SIZE * this.paginator.pageIndex,
-            Take: CommonConstants.PAGE_SIZE,
+            Limit: CommonConstants.PAGE_SIZE,
             Sort: {
                 Field: this.sort.active,
                 Dir: this.sort.direction
@@ -80,9 +83,9 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
 
         this.subscribe(this.sort.sortChange, () => this.paginator.pageIndex = 0);
         this.subscribe(merge(this.sort.sortChange, this.paginator.page), () => this.change.next(this.gridState));
-        this.subscribe(this.dataAsync, (results: ISearchResult<any>) => {
-            this.total = results.total_count;
-            this.dataSource.data = results.items;
+        this.subscribe(this.dataAsync, (collection: DataCollection<SearchCriteria, any>) => {
+            this.total = collection.total;
+            this.dataSource.data = collection;
         });
         this.change.next(this.gridState);
     }

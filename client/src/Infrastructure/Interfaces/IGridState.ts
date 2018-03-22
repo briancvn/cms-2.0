@@ -4,7 +4,7 @@ import { ISortDescriptor } from './ISortDescriptor';
 export interface IGridState {
     PageIndex?: number;
     Skip?: number;
-    Take?: number;
+    Limit?: number;
     Sort?: ISortDescriptor;
     Filter?: IFilterDescriptor;
 }

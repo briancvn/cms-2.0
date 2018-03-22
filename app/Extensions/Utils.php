@@ -2,6 +2,7 @@
 
 namespace CMS\Extensions;
 
+use Doctrine\ODM\MongoDB\Cursor;
 use Underscore\Types\Arrays;
 
 use CMS\Constants\CommonConstants;
@@ -85,5 +86,13 @@ class Utils
             return Utils.getDeepValue($value, $pathArr);
         }
         return $value;
+    }
+
+    public static function toArray(Cursor $cursor): array
+    {
+        return array_reduce($cursor->toArray(), function($results, $item) {
+            array_push($results, $item);
+            return $results;
+        }, []);
     }
 }

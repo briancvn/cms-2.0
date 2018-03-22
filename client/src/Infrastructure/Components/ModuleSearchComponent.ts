@@ -1,30 +1,31 @@
-import { Component, ContentChildren, QueryList } from '@angular/core';
+import { Component, ContentChildren, EventEmitter, Output, QueryList } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 
 import { IGridState } from '../Interfaces/IGridState';
-import { ISearchResult } from '../Interfaces/ISearchResult';
-import { BaseSearchService } from '../Services/BaseSearchService';
+import { DataCollection } from '../Models/DataCollection';
+import { SearchCriteria } from '../Models/SearchCriteria';
 import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';
-import { SearchFieldComponent } from './SearchFieldComponent';
+import { GridColumnComponent } from './GridColumnComponent';
 
 @Component({
     selector: 'module-search',
     templateUrl: './ModuleSearchComponent.html'
 })
 export class ModuleSearchComponent extends BaseComponent {
-    @ContentChildren(SearchFieldComponent) fields: QueryList<SearchFieldComponent>;
+    @ContentChildren(GridColumnComponent) columns: QueryList<GridColumnComponent>;
+    @Output() select: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(commonService: CommonService, private searchService: BaseSearchService) {
+    constructor(commonService: CommonService, private dataCollection: DataCollection<SearchCriteria, any>) {
         super(commonService);
+        this.subscribe(this.select.asObservable(), id => this.dataCollection.findById(id));
     }
 
-    private dataSearchSubject: Subject<ISearchResult<any>> = new Subject<ISearchResult<any>>();
+    private dataSearchSubject: Subject<DataCollection<SearchCriteria, any>> = new Subject<DataCollection<SearchCriteria, any>>();
     dataSearchAsync = this.dataSearchSubject.asObservable();
 
     onGridChange(state: IGridState): void {
-        this.searchService.search<any>(state)
-            .then(results => this.dataSearchSubject.next(results));
+        this.dataCollection.search(state)
+            .then(() => this.dataSearchSubject.next(this.dataCollection));
     }
-
 }

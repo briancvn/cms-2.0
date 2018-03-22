@@ -11,7 +11,6 @@ use CMS\Constants\ErrorCodes;
 use CMS\Constants\ValidationMessageConstants;
 use CMS\Extensions\Exception\WarningException;
 
-
 abstract class BaseService
 {
     /** @var AuthManager */

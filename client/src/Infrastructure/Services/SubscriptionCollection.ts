@@ -3,15 +3,13 @@ import { Observable, Subscription } from 'rxjs/Rx';
 
 import { Collection } from '../Models/Collection';
 
-@Injectable()
 export class SubscriptionCollection extends Collection<Subscription> {
-
-    subscribe = <T>(observable: Observable<T>, handler: { (data: T): void }): void => {
+    subscribe<T>(observable: Observable<T>, handler: { (data: T): void }): void {
         this.push(observable.subscribe((data) => handler(data)));
     }
 
-    unsubscribe = () : void => {
+    unsubscribe(): void {
         this.forEach(x => x.unsubscribe());
-        this.clean();
+        this.clear();
     }
 }

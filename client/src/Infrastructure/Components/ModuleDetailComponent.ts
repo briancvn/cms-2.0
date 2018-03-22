@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { DataCollection } from '../Models/DataCollection';
+import { SearchCriteria } from '../Models/SearchCriteria';
 import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';
 
@@ -11,8 +13,8 @@ import { BaseComponent } from './BaseComponent';
             <ng-content></ng-content>
         </div>`
 })
-export class ModuleDetailComponent extends BaseComponent {
-    constructor(commonService: CommonService) {
+export class ModuleDetailComponent extends BaseComponent implements OnInit {
+    constructor(commonService: CommonService, public dataCollection: DataCollection<SearchCriteria, any>) {
         super(commonService);
     }
 }

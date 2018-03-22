@@ -4,12 +4,13 @@ import { RouterModule } from '@angular/router';
 import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
-import { BaseSearchService } from '../../../Services/BaseSearchService';
+import { DataCollection } from '../../../Models/DataCollection';
 import { CommonService } from '../../../Services/CommonService';
 import { NavigationService } from '../../../Services/NavigationService';
 import { CoreModule } from '../../CoreModule';
 import { COMPONENTS } from './Components';
 import { UserCriteria } from './Models/UserCriteria';
+import { UserDataCollection } from './Models/UserDataCollection';
 import { ROUTES } from './Routes';
 import { UserService } from './Services/UserService';
 
@@ -32,7 +33,9 @@ export class UserBoot extends BaseRouterBoot {
     ],
     providers: [
         UserCriteria,
-        UserService
+        UserService,
+        UserDataCollection,
+        { provide: DataCollection, useExisting: UserDataCollection }
     ],
     declarations: [
         UserBoot,
