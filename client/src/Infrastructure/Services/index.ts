@@ -50,8 +50,6 @@ export * from './ReferenceDataService';
 export * from './ResourceService';
 export * from './ModuleService';
 export * from './AuthenticateActivate';
-export * from './SubscriptionCollection';
 export * from './ModuleParameter';
 export * from './NavigationService';
-export * from './FormCollection';
 export * from './ModuleInstance';

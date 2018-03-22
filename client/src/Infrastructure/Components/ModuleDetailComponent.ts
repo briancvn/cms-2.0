@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataCollection } from '../Models/DataCollection';
+import { DataCollection } from '../Collections/DataCollection';
 import { SearchCriteria } from '../Models/SearchCriteria';
 import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';

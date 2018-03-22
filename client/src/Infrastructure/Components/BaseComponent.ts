@@ -7,7 +7,7 @@ import { EReferenceDataKind } from '../Enums/EReferenceDataKind';
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
 import { CommonService } from '../Services/CommonService';
-import { SubscriptionCollection } from '../Services/SubscriptionCollection';
+import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
 declare var settings: ISettings;
 declare var userContext: Authenticate;

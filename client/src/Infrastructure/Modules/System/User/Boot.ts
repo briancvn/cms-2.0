@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BaseRouterBoot } from '../../../Components/BaseRouterBoot';
 import { ModuleConstants } from '../../../Constants/ModuleConstants';
 import { InfrastructureCoreModule } from '../../../InfrastructureCoreModule';
-import { DataCollection } from '../../../Models/DataCollection';
+import { DataCollection } from '../../../Collections/DataCollection';
 import { CommonService } from '../../../Services/CommonService';
 import { NavigationService } from '../../../Services/NavigationService';
 import { CoreModule } from '../../CoreModule';

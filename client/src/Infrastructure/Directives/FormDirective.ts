@@ -2,7 +2,7 @@ import { Directive, HostBinding, Injector, OnDestroy, Optional } from '@angular/
 import { NgForm } from '@angular/forms';
 import { v4 } from 'uuid';
 
-import { FormCollection } from '../Services/FormCollection';
+import { FormCollection } from '../Collections/FormCollection';
 import { CommonConstants } from '../Constants/CommonConstants';
 
 @Directive({

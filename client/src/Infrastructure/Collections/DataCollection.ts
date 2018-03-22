@@ -1,10 +1,12 @@
+import { Injectable } from '@angular/core';
 import * as _ from 'underscore';
 
 import { IGridState } from '../Interfaces/IGridState';
+import { SearchCriteria } from '../Models/SearchCriteria';
 import { BaseSearchService } from '../Services/BaseSearchService';
 import { Collection } from './Collection';
-import { SearchCriteria } from './SearchCriteria';
 
+@Injectable()
 export class DataCollection<TCriteria extends SearchCriteria, TResult> extends Collection<TResult> {
     total: number;
     model: TResult;

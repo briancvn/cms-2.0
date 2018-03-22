@@ -1,7 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { SubscriptionCollection } from '../Services/SubscriptionCollection';
+import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
 export abstract class BasePipe implements OnDestroy {
     private subscriptions = new SubscriptionCollection();

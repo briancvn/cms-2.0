@@ -1,5 +1,3 @@
-import './SubArray';
-
 interface SubArray<T> extends Array<T> {}
 interface SubArrayConstructor {
     new<T>(): SubArray<T>;

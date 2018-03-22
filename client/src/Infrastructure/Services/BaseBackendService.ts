@@ -1,7 +1,7 @@
 import { IHttpParam } from '../Interfaces/IHttpParam';
 import { BaseService } from './BaseService';
 import { HttpClientService } from './HttpClientService';
-import { SubscriptionCollection } from './SubscriptionCollection';
+import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
 export abstract class BaseBackendService extends BaseService {
     constructor(protected http: HttpClientService,

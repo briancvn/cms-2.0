@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { ISettings } from '../Interfaces/ISettings';
 import { Authenticate } from '../Models';
-import { SubscriptionCollection } from './SubscriptionCollection';
+import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
 declare var settings: ISettings;
 declare var userContext: Authenticate;

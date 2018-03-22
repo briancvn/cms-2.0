@@ -78,3 +78,4 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 import 'hammerjs';
 import 'underscore';
 import 'rxjs/Rx';
+import './Infrastructure/Collections/SubArray';

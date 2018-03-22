@@ -2,6 +2,7 @@
 export * from './InfrastructureModule';
 export * from './Modules/CoreModule';
 
+export * from './Collections';
 export * from './Components';
 export * from './Constants';
 export * from './Decorators';

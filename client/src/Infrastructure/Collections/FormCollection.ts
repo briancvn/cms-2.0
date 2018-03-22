@@ -5,7 +5,7 @@ import { Subject } from 'rxjs/Rx';
 import * as _ from 'underscore';
 
 import { CommonConstants } from '../Constants/CommonConstants';
-import { Collection } from '../Models/Collection';
+import { Collection } from './Collection';
 
 @Injectable()
 export class FormCollection extends Collection<NgForm> {

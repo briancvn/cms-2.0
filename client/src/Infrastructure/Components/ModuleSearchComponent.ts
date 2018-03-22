@@ -2,7 +2,7 @@ import { Component, ContentChildren, EventEmitter, Output, QueryList } from '@an
 import { Subject } from 'rxjs/Rx';
 
 import { IGridState } from '../Interfaces/IGridState';
-import { DataCollection } from '../Models/DataCollection';
+import { DataCollection } from '../Collections/DataCollection';
 import { SearchCriteria } from '../Models/SearchCriteria';
 import { CommonService } from '../Services/CommonService';
 import { BaseComponent } from './BaseComponent';
