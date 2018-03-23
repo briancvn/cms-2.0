@@ -1,8 +1,8 @@
 # Centralized Management Solutions 2.0
 - PHP 7.2
-- PHP Phalcon 3.3.1
+- PHP Phalcon 3.3.2
 - MongoDB 3.4.7
-- Doctrine 2.6.0
+- Doctrine 2.6.1
 - Angular 5 (lastest version)
 - Angular Material 2 (lastest version)
 
