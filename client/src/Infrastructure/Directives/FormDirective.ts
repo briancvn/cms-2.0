@@ -5,19 +5,14 @@ import { v4 } from 'uuid';
 import { FormCollection } from '../Collections/FormCollection';
 import { CommonConstants } from '../Constants/CommonConstants';
 
-@Directive({
-    selector: 'form'
-})
+@Directive({ selector: 'form'})
 export class FormDirective implements OnDestroy {
     @HostBinding('class') class = 'form-horizontal';
     @HostBinding('attr.novalidate') novalidate = '';
 
-    constructor(injector: Injector,
-        private form: NgForm,
-        @Optional() private formCollection: FormCollection
-    ) {
+    constructor(injector: Injector, private form: NgForm, @Optional() private formCollection: FormCollection) {
         form.name = (<any>injector).view.context.constructor.name;
-        form[CommonConstants.FormId] = v4();
+        form[CommonConstants.IdKey] = v4();
         this.formCollection.add(form);
     }
 

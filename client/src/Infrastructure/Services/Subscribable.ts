@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
 export class Subscribable implements OnDestroy {
-    private subscriptions = new SubscriptionCollection()
+    private subscriptions = new SubscriptionCollection();
 
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();

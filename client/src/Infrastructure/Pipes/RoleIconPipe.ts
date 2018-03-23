@@ -3,9 +3,7 @@ import * as _ from 'underscore';
 
 import { ERoleGroup } from '../Enums/ERoleGroup';
 
-@Pipe({
-    name: 'roleIcon'
-})
+@Pipe({ name: 'roleIcon' })
 export class RoleIconPipe implements PipeTransform {
     transform(roles?: ERoleGroup[]): string {
         if (!_.isEmpty(roles)) {

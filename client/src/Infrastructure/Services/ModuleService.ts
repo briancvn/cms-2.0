@@ -24,13 +24,13 @@ export class ModuleService extends BaseService {
 
     constructor(private authService: AuthenticateService) {
         super();
-        this.authService.onUserContextChanged.subscribe(() => {
+        this.subscribe(this.authService.onUserContextChanged, () => {
             if (this.userContext.Token) {
                 this.init();
             } else {
                 this.reset();
             }
-        })
+        });
     }
 
     init(): void {
@@ -70,11 +70,11 @@ export class ModuleService extends BaseService {
             ModuleConstants.Configuration.Path,
             ModuleConstants.Configuration.Name,
             EModuleGroup.System
-        ), ERoleGroup.ADMINISTRATOR)
+        ), ERoleGroup.ADMINISTRATOR);
         this.register(new Module(
             ModuleConstants.User.Path,
             ModuleConstants.User.Name,
             EModuleGroup.System
-        ), ERoleGroup.ADMINISTRATOR)
+        ), ERoleGroup.ADMINISTRATOR);
     }
 }

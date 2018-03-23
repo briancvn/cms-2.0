@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { compact, isEmpty } from 'lodash';
-import { Subject } from 'rxjs/Rx';
 import * as _ from 'underscore';
 
-import { CommonConstants } from '../Constants/CommonConstants';
 import { Collection } from './Collection';
 
 @Injectable()
 export class FormCollection extends Collection<NgForm> {
-    public onErrorChanged: Subject<void> = new Subject<void>();
     private forceDirty = false;
 
     get isEmpty(): boolean {
@@ -40,7 +37,6 @@ export class FormCollection extends Collection<NgForm> {
 
     add(...forms: NgForm[]): void {
         forms = compact(forms);
-        this.registerFormErrorChanged(forms);
         this.push(...forms);
     }
 
@@ -56,11 +52,5 @@ export class FormCollection extends Collection<NgForm> {
     markAsDirty(): void {
         this.forEach(form => form.control.markAsDirty());
         this.forceDirty = true;
-    }
-
-    private registerFormErrorChanged(forms: NgForm[]): void {
-        forms.forEach(form => form[CommonConstants.FormErrorChanged] && form[CommonConstants.FormErrorChanged].asObservable().subscribe(status => {
-            this.onErrorChanged.next(status);
-        }));
     }
 }

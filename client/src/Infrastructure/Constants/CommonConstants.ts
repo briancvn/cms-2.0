@@ -17,7 +17,7 @@ export class CommonConstants {
     public static XDEBUG_TYPE = 'PHPSTORM';
     public static API_PREFIX = 'api/';
 
-    public static FormErrorChanged = 'errorChanged';
-    public static FormId = 'id';
+    public static ErrorChangesKey = 'errorChanges';
+    public static IdKey = 'id';
 }
 
