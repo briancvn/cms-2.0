@@ -1,9 +1,8 @@
-import { ComponentRef, Injectable, NgModuleRef } from '@angular/core';
+import { ComponentRef, NgModuleRef } from '@angular/core';
 import { v4 } from 'uuid';
 
 import { Module } from '../Models/Module';
 
-@Injectable()
 export class ModuleInstance {
     public Id: string;
     public CorrelationId = v4();

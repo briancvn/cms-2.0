@@ -2,14 +2,11 @@ import { ChangeDetectorRef, OnDestroy, Pipe, PipeTransform, WrappedValue } from 
 
 import { EResource } from '../Enums/EResource';
 import { ResourceService } from '../Services/ResourceService';
+import { Subscribable } from '../Services/Subscribable';
 import { Utils } from '../Utils/Utils';
-import { BasePipe } from './BasePipe';
 
-@Pipe({
-    name: 'translate',
-    pure: false
-})
-export class TranslatePipe extends BasePipe implements OnDestroy, PipeTransform {
+@Pipe({ name: 'translate', pure: false })
+export class TranslatePipe extends Subscribable implements OnDestroy, PipeTransform {
     private currentValue : string = null;
     private latestValue: any = null;
     private latestReturnedValue: any = null;

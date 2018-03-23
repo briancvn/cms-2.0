@@ -53,3 +53,4 @@ export * from './AuthenticateActivate';
 export * from './ModuleParameter';
 export * from './NavigationService';
 export * from './ModuleInstance';
+export * from './Subscribable';

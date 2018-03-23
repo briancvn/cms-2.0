@@ -1,12 +1,12 @@
 import { OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 
 import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
-export abstract class BasePipe implements OnDestroy {
-    private subscriptions = new SubscriptionCollection();
+export class Subscribable implements OnDestroy {
+    private subscriptions = new SubscriptionCollection()
 
-    public ngOnDestroy(): void {
+    ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 

@@ -1,15 +1,10 @@
 import { IHttpParam } from '../Interfaces/IHttpParam';
 import { BaseService } from './BaseService';
 import { HttpClientService } from './HttpClientService';
-import { SubscriptionCollection } from '../Collections/SubscriptionCollection';
 
 export abstract class BaseBackendService extends BaseService {
-    constructor(protected http: HttpClientService,
-        private apiUrl: string,
-        private authenticateService = true,
-        subscriptions?: SubscriptionCollection
-    ) {
-        super(subscriptions);
+    constructor(protected http: HttpClientService, private apiUrl: string, private authenticateService = true) {
+        super();
     }
 
     public modalGet<T>(param: IHttpParam): Promise<T> {
