@@ -26,7 +26,7 @@ import { BaseControl } from './BaseControl';
             </mat-error>
         </mat-form-field>
         <div class="btn-forgot-password">
-            <button *ngIf="!this.focused && showForgotPassword" class="btn-link" (click)="event.stopPropagation() && forgotPasswordClick()">
+            <button *ngIf="!this.focused && showForgotPassword" class="btn-link" (click)="$event.stopPropagation() && forgotPasswordClick()">
                 {{ 'Forgot_Password_Text' | translate }}
             </button>
             <ng2-password-strength-bar *ngIf="!showForgotPassword" [passwordToCheck]="value"></ng2-password-strength-bar>
