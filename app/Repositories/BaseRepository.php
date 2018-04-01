@@ -25,7 +25,7 @@ class BaseRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
         return new SearchResult([
-            Results => Utils::toArray($results),
+            Results => $results->toArray(),
             Total => $total
         ]);
     }

@@ -19,7 +19,11 @@ abstract class GenericService extends BaseService
 
     public function Search(SearchCriteriaDto $criteria): SearchResultDto
     {
-        return $this->mapper->map($this->repository->Search($this->mapper->map($criteria, SearchCriteria::class)), SearchResultDto::class);
+        $searchResult = $this->repository->Search($this->mapper->map($criteria, SearchCriteria::class));
+        return new SearchResultDto([
+            Results => $this->mapper->mapMultiple($searchResult->Results, $this->dtoType),
+            Total => $searchResult->Total
+        ]);
     }
 
     public function FindById(string $id)

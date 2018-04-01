@@ -30,7 +30,8 @@ try {
     define('EReferenceDataKind', include_once ENUMS_DIR.'/EReferenceDataKind.php');
     define('EResource', include_once ENUMS_DIR.'/EResource.php');
 
-    require VENDOR_DIR.'/autoload.php';
+    $autoLoader = require_once VENDOR_DIR.'/autoload.php';
+    Doctrine\Common\Annotations\AnnotationRegistry::registerLoader([$autoLoader, 'loadClass']);
 
     $loader = new \Phalcon\Loader();
     $loader->registerNamespaces(['CMS' => APP_DIR.'/']);

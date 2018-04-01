@@ -6,14 +6,14 @@ use CMS\Repositories\UserRepository;
 use CMS\Contracts\AuthRequestDto;
 use CMS\Contracts\AuthenticateDto;
 use CMS\Contracts\ProfileDto;
-use CMS\Contracts\UserDto;
+use CMS\Contracts\UserSearchResultDto;
 use CMS\Contracts\SignUpRequestDto;
 use CMS\Domains\User;
 
 class UserService extends GenericService
 {
     public function __construct(UserRepository $userRepository) {
-        parent::__construct($userRepository, UserDto::class);
+        parent::__construct($userRepository, UserSearchResultDto::class);
     }
 
     protected function IsAuthenticated(): ?AuthenticateDto
