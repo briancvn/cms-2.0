@@ -8,6 +8,7 @@ use CMS\Services\ReferenceDataService;
 
 class ReferenceDataController extends ApiController
 {
+    /** @var ReferenceDataService */
     private $referenceDataService;
 
     public function __construct(ReferenceDataService $referenceDataService)

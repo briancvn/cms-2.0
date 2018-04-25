@@ -4,6 +4,7 @@ namespace CMS\Controllers;
 
 use Phalcon\Mvc\Dispatcher;
 
+use CMS\Constants\HttpMethods;
 use CMS\Extensions\Mvc\Controller;
 use CMS\Extensions\Cache\Manager as CacheManager;
 use CMS\Extensions\Mapper\Manager as Mapper;
@@ -49,13 +50,20 @@ abstract class ApiController extends Controller
     public function callAction()
     {
         $action = $this->dispatcher->getParam('action');
+        $httpMethods = $this->dispatcher->getParam('httpMethods');
         $param = $this->dispatcher->getParam('param');
 
         $methodRef = new \ReflectionMethod($this, $action);
         $actionCache = $this->cache->getControllerAction($methodRef->getDeclaringClass()->getName(), $action);
 
-        if ($param && $actionCache && $actionCache->paramType) {
-            $param = $this->mapper->map($param, $actionCache->paramType);
+        if ($httpMethods !== HttpMethods::GET) {
+            if ($param && $actionCache && $actionCache->paramType) {
+                $param = $this->mapper->map($param, $actionCache->paramType);
+            }
+        } else {
+            unset($param['_url']);
+            unset($param['XDEBUG_SESSION_START']);
+            $param = array_pop($param);
         }
 
         if (empty($methodRef->getParameters())) {

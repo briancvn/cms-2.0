@@ -14,7 +14,7 @@ import { BaseComponent } from './BaseComponent';
         </div>`
 })
 export class ModuleDetailComponent extends BaseComponent implements OnInit {
-    constructor(commonService: CommonService, public dataCollection: DataCollection<SearchCriteria, any>) {
+    constructor(commonService: CommonService, public dataCollection: DataCollection<SearchCriteria, any, any, any>) {
         super(commonService);
     }
 }

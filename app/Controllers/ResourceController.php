@@ -8,6 +8,7 @@ use CMS\Services\ResourceService;
 
 class ResourceController extends ApiController
 {
+    /** @var ResourceService */
     private $resourceService;
 
     public function __construct(ResourceService $resourceService)

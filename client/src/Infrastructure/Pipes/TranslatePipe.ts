@@ -5,7 +5,7 @@ import { ResourceService } from '../Services/ResourceService';
 import { Subscribable } from '../Services/Subscribable';
 import { Utils } from '../Utils/Utils';
 
-@Pipe({ name: 'translate', pure: false })
+@Pipe({ name: 'translate' })
 export class TranslatePipe extends Subscribable implements OnDestroy, PipeTransform {
     private currentValue : string = null;
     private latestValue: any = null;

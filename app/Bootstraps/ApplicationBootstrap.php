@@ -7,6 +7,7 @@ use Phalcon\DiInterface;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Doctrine\MongoDB\Connection;
 use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
@@ -37,7 +38,10 @@ class ApplicationBootstrap implements BootstrapInterface
             $configuration->setHydratorNamespace('Hydrators');
             $configuration->setDefaultDB($config->dbname);
             $configuration->setMetadataDriverImpl(AnnotationDriver::create([DOMAINS_DIR, REPOSITORIES_DIR]));
-            return DocumentManager::create(new \MongoDB\Client($config->server), $configuration);
+
+            $mongoClient = new \MongoClient($config->server);
+            $connection = new Connection($mongoClient);
+            return DocumentManager::create($connection, $configuration);
         });
 
         $di->set(Services::URL, function () use ($config) {

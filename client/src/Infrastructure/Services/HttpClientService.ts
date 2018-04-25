@@ -68,14 +68,14 @@ export class HttpClientService extends HttpClient {
             let beforeRequest = param.IsModalRequest ? this.beforeModalRequest : this.beforeRequest;
             beforeRequest.asObservable().take(1).last().toPromise()
                 .then(() => {
+                    var params = !environment.production ? {[CommonConstants.XDEBUG_PARAM]: CommonConstants.XDEBUG_TYPE} : {};
+                    _.extend(params, param.Params);
                     resolve({
                         Url: `${CommonConstants.API_PREFIX}${param.Url}`,
                         Body: param.Body,
                         Options: {
-                            headers: param.Authenticate && this.token
-                                ? {[CommonConstants.AUTH_HEADER]: `Bearer ${this.token}` }
-                                : null,
-                            params: !environment.production ? {[CommonConstants.XDEBUG_PARAM]: CommonConstants.XDEBUG_TYPE} : null
+                            headers: param.Authenticate && this.token ? {[CommonConstants.AUTH_HEADER]: `Bearer ${this.token}` } : null,
+                            params: params
                         }
                     });
                 });

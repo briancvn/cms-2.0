@@ -6,7 +6,7 @@ import { User } from './User';
 import { UserCriteria } from './UserCriteria';
 
 @Injectable()
-export class UserDataCollection extends DataCollection<UserCriteria, User> {
+export class UserDataCollection extends DataCollection<UserCriteria, any, User, any> {
     constructor(criteria: UserCriteria, searchService: UserService) {
         super(criteria, searchService);
     }

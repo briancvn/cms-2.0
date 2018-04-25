@@ -9,6 +9,7 @@ use CMS\Services\UserService;
 
 class UserController extends ApiController
 {
+    /** @var UserService */
     private $userService;
 
     public function __construct(UserService $userService)

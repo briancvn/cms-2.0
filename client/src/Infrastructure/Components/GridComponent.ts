@@ -51,7 +51,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
 
     @ContentChildren(GridColumnComponent) columns: QueryList<GridColumnComponent>;
 
-    @Input() dataAsync: Observable<DataCollection<SearchCriteria, any>>;
+    @Input() dataAsync: Observable<DataCollection<SearchCriteria, any, any, any>>;
     @Output() change: EventEmitter<IGridState> = new EventEmitter<IGridState>();
     @Output() select: EventEmitter<string> = new EventEmitter<string>();
 
@@ -83,7 +83,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
 
         this.subscribe(this.sort.sortChange, () => this.paginator.pageIndex = 0);
         this.subscribe(merge(this.sort.sortChange, this.paginator.page), () => this.change.next(this.gridState));
-        this.subscribe(this.dataAsync, (collection: DataCollection<SearchCriteria, any>) => {
+        this.subscribe(this.dataAsync, (collection: DataCollection<SearchCriteria, any, any, any>) => {
             this.total = collection.total;
             this.dataSource.data = collection;
         });

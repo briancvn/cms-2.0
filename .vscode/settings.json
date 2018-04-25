@@ -6,7 +6,6 @@
     "workbench.editor.enablePreview": false,
     "files.exclude": {
         "**/.git":  true,
-        "**/*.php":  true,
         "client/**/*.js.map":  true,
         "**/*.js.map":  true
     },
@@ -19,7 +18,6 @@
     // Relative Path
     "relativePath.ignore": [
         "**/node_modules/**",
-        "**/*.php",
         "**/*.json",
         "**/*.bat",
         "**/*.md",
@@ -29,7 +27,7 @@
     ],
     "relativePath.removeExtension": true,
     "relativePath.excludedExtensions": [
-        ".js", ".php"
+        ".js"
     ],
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
@@ -42,5 +40,7 @@
         "suppressNoRepositoryWarning": false,
         "suppressUpdateNotice": false,
         "suppressWelcomeNotice": true
-    }
+    },
+    "php.validate.executablePath": "C:/xampp/php/php.exe",
+    "php.validate.run": "onType"
 }

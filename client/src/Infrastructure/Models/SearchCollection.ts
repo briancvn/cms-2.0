@@ -1,4 +1,4 @@
-export class SearchResult<T> {
+export class SearchCollection<T> {
     Results: T[];
     Total: number;
 }
