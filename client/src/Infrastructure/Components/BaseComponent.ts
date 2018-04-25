@@ -1,4 +1,4 @@
-import { AfterViewInit, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { CommonConstants } from '../Constants/CommonConstants';
@@ -12,11 +12,11 @@ declare var settings: ISettings;
 declare var userContext: Authenticate;
 
 // tslint:disable:no-empty
-export abstract class BaseComponent extends Subscribable implements OnInit, AfterViewInit, OnDestroy {
+export abstract class BaseComponent extends Subscribable {
     @ViewChild(NgForm) form: NgForm;
 
-    get settings(): ISettings { return settings; }
-    get userContext(): Authenticate { return userContext; }
+    public get settings(): ISettings { return settings; }
+    public get userContext(): Authenticate { return userContext; }
 
     readonly EReferenceDataKind = EReferenceDataKind;
     readonly CommonConstants = CommonConstants;
@@ -26,13 +26,5 @@ export abstract class BaseComponent extends Subscribable implements OnInit, Afte
 
     constructor(protected commonService: CommonService) {
         super();
-    }
-
-    ngOnInit(): void {}
-
-    ngAfterViewInit(): void {}
-
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
     }
 }

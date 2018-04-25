@@ -6,7 +6,7 @@ import { BaseContentComponent, CommonService } from '../../Infrastructure';
     selector: 'app',
     templateUrl: './AppComponent.html'
 })
-export class AppComponent extends BaseContentComponent{
+export class AppComponent extends BaseContentComponent {
     constructor(commonService: CommonService) {
         super(commonService);
     }

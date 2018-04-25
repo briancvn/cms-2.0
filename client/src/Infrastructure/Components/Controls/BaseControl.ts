@@ -19,7 +19,7 @@ import { StringUtils } from '../../Utils/StringUtils';
 
 const noop = () => {};
 
-export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export abstract class BaseControl<TValue> implements ControlValueAccessor {
     readonly EResource = EResource;
 
     @HostBinding('class') class = 'form-control';
@@ -81,18 +81,6 @@ export abstract class BaseControl<TValue> implements OnInit, AfterViewInit, OnDe
             return true;
         }
         return false;
-    }
-
-    ngOnInit(): void {
-        // Virtual method
-    }
-
-    ngAfterViewInit(): void {
-        // Virtual method
-    }
-
-    ngOnDestroy(): void {
-        // Virtual method
     }
 
     writeValue(v: any): void {

@@ -12,10 +12,10 @@ import { BaseControl } from './BaseControl';
 export class BaseListControl<T> extends BaseControl<T> implements OnInit, AfterViewInit {
     @Input() list: any[] = [];
     @Input() protected referenceData: EReferenceDataKind;
-    @Input() protected textField = "Text";
-    @Input() protected valueField = "Code";
+    @Input() protected textField = 'Text';
+    @Input() protected valueField = 'Code';
 
-    listView: Observable<any[]>;
+    public listView: Observable<any[]>;
 
     constructor(ngForm: NgForm,
         element: ElementRef,
@@ -26,25 +26,23 @@ export class BaseListControl<T> extends BaseControl<T> implements OnInit, AfterV
         super(ngForm, element, cdr);
     }
 
-    ngOnInit(): void {
-        super.ngOnInit();
+    public ngOnInit(): void {
         this.listView = this.referenceData
             ? this.referenceDataService.observe(this.referenceData)
             : Observable.of(this.list);
     }
 
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
+    public ngAfterViewInit(): void {
         if (EReferenceDataKind[this.referenceData]) {
             this.resourceService.internalLoad();
         }
     }
 
-    getOptionValue(item: any): any {
+    public getOptionValue(item: any): any {
         return _.isObject(item) ? item[this.valueField] : item;
     }
 
-    getDisplayText(item?: any): string {
+    public getDisplayText(item?: any): string {
         if (!_.isObject(item)) {
             item = this.list.find(i => i[this.valueField] === item);
         }
@@ -58,7 +56,7 @@ export class BaseListControl<T> extends BaseControl<T> implements OnInit, AfterV
             : item[this.textField];
     }
 
-    getDisplayTextResource(): EResource {
+    public getDisplayTextResource(): EResource {
         return EReferenceDataKind[this.referenceData] ? EResource.ReferenceData : EResource.Common;
     }
 }

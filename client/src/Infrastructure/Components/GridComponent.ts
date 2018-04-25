@@ -55,14 +55,14 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
     @Output() change: EventEmitter<IGridState> = new EventEmitter<IGridState>();
     @Output() select: EventEmitter<string> = new EventEmitter<string>();
 
-    dataSource = new MatTableDataSource();
-    total = 0;
+    public dataSource = new MatTableDataSource();
+    public total = 0;
 
-    get displayedColumns(): string[] {
+    public get displayedColumns(): string[] {
         return this.columns.map(column => column.field);
     }
 
-    get gridState(): IGridState {
+    public get gridState(): IGridState {
         return {
             PageIndex: this.paginator.pageIndex,
             Skip: CommonConstants.PAGE_SIZE * this.paginator.pageIndex,
@@ -78,9 +78,7 @@ export class GridComponent extends BaseComponent implements AfterViewInit {
         super(commonService);
     }
 
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-
+    public ngAfterViewInit(): void {
         this.subscribe(this.sort.sortChange, () => this.paginator.pageIndex = 0);
         this.subscribe(merge(this.sort.sortChange, this.paginator.page), () => this.change.next(this.gridState));
         this.subscribe(this.dataAsync, (collection: DataCollection<SearchCriteria, any, any, any>) => {

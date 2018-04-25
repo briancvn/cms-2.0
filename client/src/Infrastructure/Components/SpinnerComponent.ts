@@ -16,14 +16,13 @@ import { BaseComponent } from './BaseComponent';
 export class SpinnerComponent extends BaseComponent implements OnInit {
     @Input() id: string;
 
-    visible = false;
+    public visible = false;
 
     constructor(commonService: CommonService, private spinnerService: SpinnerService) {
         super(commonService);
     }
 
-    ngOnInit(): void {
-        super.ngOnInit();
+    public ngOnInit(): void {
         this.spinnerService.register(this);
     }
 }

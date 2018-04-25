@@ -14,15 +14,15 @@ export abstract class BaseModalComponent<T> extends BaseContentComponent impleme
         super(commonService);
     }
 
-    close(): void {
+    public close(): void {
         this.dialogRef.close();
     }
 
-    updateSize(width: number | EModalSize, height?: number | EModalSize): void {
+    public updateSize(width: number | EModalSize, height?: number | EModalSize): void {
         this.dialogRef.updateSize(width ? `${width}px` : null, height ? `${height}px` : null);
     }
 
-    ngAfterViewInit(): void {
+    public ngAfterViewInit(): void {
         super.ngAfterViewInit();
         if (this.draggable) {
             let containerRef = <ElementRef>(<any>this.dialogRef)._containerInstance._elementRef;

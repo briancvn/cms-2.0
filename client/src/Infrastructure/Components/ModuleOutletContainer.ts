@@ -52,8 +52,7 @@ export class ModuleOutletContainer extends BaseComponent implements OnInit {
         super(commonService);
     }
 
-    ngOnInit(): void {
-        super.ngOnInit();
+    public ngOnInit(): void {
         this.loader.load(this.instance.Module.Path)
             .then(ngModuleFactory => {
                 var moduleInstanceProvider: ValueProvider = { provide: ModuleInstance, useValue: this.instance };

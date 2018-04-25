@@ -65,7 +65,8 @@ export class ResourceService extends BaseBackendService {
             }
 
             var request = new ResourceRequest(this.translateService.language);
-            request.Resources = sources.filter(source => _.includes(resourcesRequestToServer, source.resource)).map(source => EResource[source.resource]);
+            request.Resources = sources.filter(source => _.includes(resourcesRequestToServer, source.resource))
+                .map(source => EResource[source.resource]);
 
             this.getResources(request)
                 .then(result => {

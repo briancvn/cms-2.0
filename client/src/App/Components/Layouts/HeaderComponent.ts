@@ -10,7 +10,7 @@ import { AuthenticateModalComponent } from '../Modals/AuthenticateModalComponent
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent extends BaseComponent {
-    get isAuthenticated(): boolean {
+    public get isAuthenticated(): boolean {
         return this.authService.isAuthenticated;
     }
 
@@ -24,11 +24,11 @@ export class HeaderComponent extends BaseComponent {
         this.subscribe(this.authService.onUserContextChanged, () => this.cdr.markForCheck());
     }
 
-    login(): void {
+    public login(): void {
         this.modalService.show(AuthenticateModalComponent);
     }
 
-    logout(): void {
+    public logout(): void {
         this.authService.signout();
     }
 }

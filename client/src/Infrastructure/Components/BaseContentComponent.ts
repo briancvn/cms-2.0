@@ -8,13 +8,11 @@ export class BaseContentComponent extends BaseComponent implements OnInit, After
         super(commonService);
     }
 
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
+    public ngAfterViewInit(): void {
         this.loadResource();
     }
 
-    ngOnInit(): void {
-        super.ngOnInit();
+    public ngOnInit(): void {
         this.loadReferenceData();
     }
 
